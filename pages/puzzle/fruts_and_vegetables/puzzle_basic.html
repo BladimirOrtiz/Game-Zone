@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Enlace al archivo CSS -->
+    <link rel="stylesheet" href="../../../css/clarification.css">
+    <!-- Favicon -->
+    <link rel="shortcut icon" type="image/x-icon" href="../../../img/logo_sf.png">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <title>Nivel Básico Rompecabezas</title>
+    <style>
+        #puzzle-board {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            width: 400px; /* Ancho total del tablero */
+            height: 400px; /* Altura total del tablero */
+            border: 1px solid #ddd; /* Opcional: para visualizar el borde del tablero */
+        }
+        .puzzle-piece {
+            width: 100px;
+            height: 100px;
+            margin: 1px;
+            cursor: pointer;
+            background-color: #eee; /* Color de fondo en caso de que no se cargue la imagen */
+            background-size: 400px 400px; /* Ajusta el tamaño de la imagen */
+            background-repeat: no-repeat;
+        }
+        .timer {
+            font-size: 24px;
+            margin: 20px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Barra de navegación -->
+    <nav id="navbar" class="navbar navbar-light sticky-top">
+        <ul id="mn" class="nav nav-pills">
+            <div style="display: flex; justify-content: space-between; align-items: center; width: 70%;">
+                <a class="navbar-brand" href="#">
+                    <img src="../../../img/logofcd.png" class="rounded logo" alt="Logo FCD">
+                </a>
+                <a class="navbar-brand" href="../../../index.html">
+                    <img src="../../../img/logo_sf.png" class="rounded logo" alt="Logo SF">
+                </a>
+            </div>
+        </ul>
+    </nav>
+    
+    <div class="container mt-4">
+        <!-- Sección de Frutas -->
+        <blockquote class="blockquote">
+            <p><strong>FRUTAS BÁSICAS</strong></p>
+        </blockquote>
+        <div class="row justify-content-center">
+            <!-- Tarjetas de Frutas -->
+            <div class="col-md-3">
+                <a href="#" data-bs-toggle="modal" data-bs-target="#puzzleModal" onclick="setPuzzleInfo('Manzana', '../../../img/puzzle/fruts_and_vegetables/fruts_basic/apple.jpg')">
+                    <div class="card">
+                        <img class="card-img-top zoom img-fluid" src="../../../img/puzzle/fruts_and_vegetables/fruts_basic/apple.jpg" alt="Manzanas rojas y verdes">
+                        <div class="card-body">
+                            <p class="card-text">MANZANA</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <div class="col-md-3">
+                <a href="#" data-bs-toggle="modal" data-bs-target="#puzzleModal" onclick="setPuzzleInfo('Pera', '../../../img/puzzle/fruts_and_vegetables/fruts_basic/pear.jpg')">
+                    <div class="card">
+                        <img class="card-img-top zoom img-fluid" src="../../../img/puzzle/fruts_and_vegetables/fruts_basic/pear.jpg" alt="Pera">
+                        <div class="card-body">
+                            <p class="card-text">PERA</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <div class="col-md-3">
+                <a href="#" data-bs-toggle="modal" data-bs-target="#puzzleModal" onclick="setPuzzleInfo('Fresa', '../../../img/puzzle/fruts_and_vegetables/fruts_basic/strawberry.jpg')">
+                    <div class="card">
+                        <img class="card-img-top zoom img-fluid" src="../../../img/puzzle/fruts_and_vegetables/fruts_basic/strawberry.jpg" alt="Fresa">
+                        <div class="card-body">
+                            <p class="card-text">FRESA</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <div class="col-md-3">
+                <a href="#" data-bs-toggle="modal" data-bs-target="#puzzleModal" onclick="setPuzzleInfo('Papaya', '../../../img/puzzle/fruts_and_vegetables/fruts_basic/papaya.jpg')">
+                    <div class="card">
+                        <img class="card-img-top zoom img-fluid" src="../../../img/puzzle/fruts_and_vegetables/fruts_basic/papaya.jpg" alt="Papaya">
+                        <div class="card-body">
+                            <p class="card-text">PAPAYA</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <div class="col-md-3">
+                <a href="#" data-bs-toggle="modal" data-bs-target="#puzzleModal" onclick="setPuzzleInfo('Naranja', '../../../img/puzzle/fruts_and_vegetables/fruts_basic/orange.jpg')">
+                    <div class="card">
+                        <img class="card-img-top zoom img-fluid" src="../../../img/puzzle/fruts_and_vegetables/fruts_basic/orange.jpg" alt="Naranja">
+                        <div class="card-body">
+                            <p class="card-text">NARANJA</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <div class="col-md-3">
+                <a href="#" data-bs-toggle="modal" data-bs-target="#puzzleModal" onclick="setPuzzleInfo('Plátano', '../../../img/puzzle/fruts_and_vegetables/fruts_basic/banana.jpg')">
+                    <div class="card">
+                        <img class="card-img-top zoom img-fluid" src="../../../img/puzzle/fruts_and_vegetables/fruts_basic/banana.jpg" alt="Plátano">
+                        <div class="card-body">
+                            <p class="card-text">PLÁTANO</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <div class="col-md-3">
+                <a href="#" data-bs-toggle="modal" data-bs-target="#puzzleModal" onclick="setPuzzleInfo('Durazno', '../../../img/puzzle/fruts_and_vegetables/fruts_basic/PEACH.jpg')">
+                    <div class="card">
+                        <img class="card-img-top zoom img-fluid" src="../../../img/puzzle/fruts_and_vegetables/fruts_basic/PEACH.jpg" alt="Durazno">
+                        <div class="card-body">
+                            <p class="card-text">DURAZNO</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <div class="col-md-3">
+                <a href="#" data-bs-toggle="modal" data-bs-target="#puzzleModal" onclick="setPuzzleInfo('Sandía', '../../../img/puzzle/fruts_and_vegetables/fruts_basic/watermelon.jpg')">
+                    <div class="card">
+                        <img class="card-img-top zoom img-fluid" src="../../../img/puzzle/fruts_and_vegetables/fruts_basic/watermelon.jpg" alt="Sandía">
+                        <div class="card-body">
+                            <p class="card-text">SANDÍA</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal para el rompecabezas -->
+    <div class="modal fade" id="puzzleModal" tabindex="-1" aria-labelledby="puzzleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <!-- Encabezado del modal -->
+                <div class="modal-header">
+                    <h5 class="modal-title" id="puzzleModalLabel">Rompecabezas de Frutas</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                
+                <!-- Cuerpo del modal -->
+                <div class="modal-body text-center">
+                    <img id="puzzleImage" class="img-fluid mb-3" src="" alt="Imagen del rompecabezas">
+                    <div class="d-flex justify-content-center mb-3">
+                        <span class="timer" id="timer">Tiempo: 00:00</span>
+                    </div>
+                    <div id="puzzle-board" class="d-flex justify-content-center"></div>
+                    <div class="d-flex justify-content-center mt-3">
+                        <button class="btn btn-danger" onclick="restartGame()">Reiniciar Juego</button>
+                    </div>
+                    <!-- Botones de nivel de dificultad -->
+                    <div class="d-flex justify-content-center mt-3">
+                        <button class="btn btn-outline-primary mx-2" onclick="setDifficulty(30)">Básico (30 min)</button>
+                        <button class="btn btn-outline-secondary mx-2" onclick="setDifficulty(20)">Intermedio (20 min)</button>
+                        <button class="btn btn-outline-danger mx-2" onclick="setDifficulty(10)">Avanzado (10 min)</button>
+                    </div>
+                </div>
+
+                <!-- Pie del modal -->
+                <div class="modal-footer justify-content-center">
+                    <button type="button" class="btn btn-success d-flex align-items-center justify-content-center mb-3 btn-custom" onclick="startPuzzle()">Play</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Pie de página -->
+    <footer>
+        <div class="container">
+            <div class="row justify-content-center align-items-center">
+                <div class="col-md-6 text-center mb-3">
+                    <img src="../../../img/logofcd.png" class="rounded" alt="Logo FCD" style="width: 40%; height: auto;">
+                </div>
+                <div class="col-md-6 text-center">
+                    <div class="social-icons mb-3">
+                        <!-- Enlaces a redes sociales -->
+                        <a href="https://www.facebook.com/FundacionCorazonDown" class="social-icon">
+                            <img src="../../../img/icons/ficon.png" class="rounded" alt="Facebook Icon" style="width: 70%; height: auto;">
+                        </a>
+                        <a href="https://x.com/mariopmtz" class="social-icon">
+                            <img src="../../../img/icons/xicon.png" class="rounded" alt="X Icon" style="width: 60%; height: auto;">
+                        </a>
+                        <a href="https://www.instagram.com/fundacioncorazondown" class="social-icon">
+                            <img src="../../../img/icons/insicon.png" class="rounded" alt="Instagram Icon" style="width: 70%; height: auto;">
+                        </a>
+                        <a href="https://www.tiktok.com/@corazndown" class="social-icon">
+                            <img src="../../../img/icons/ticon.png" class="rounded" alt="TikTok Icon" style="width: 70%; height: auto;">
+                        </a>
+                    </div>
+                    <div class="location">
+                        <p>XICOTÉNCATL 1017, ZONA FEB 10 2015, BARRIO DE LA NORIA, 68100 OAXACA DE JUÁREZ, OAX.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        let selectedFruit = '';
+        let puzzleImage = '';
+        let timeLimit = 30;
+        let timerElement = document.getElementById('timer');
+        let timerInterval;
+        let timeRemaining;
+
+        function setPuzzleInfo(title, imgSrc) {
+            document.getElementById('puzzleModalLabel').innerText = title;
+            document.getElementById('puzzleImage').src = imgSrc;
+            puzzleImage = imgSrc;
+            selectedFruit = title;
+        }
+
+        function setDifficulty(minutes) {
+            timeLimit = minutes;
+        }
+
+        function startPuzzle() {
+            generatePuzzleBoard();
+            startTimer(timeLimit);
+        }
+
+        function startTimer(minutes) {
+            clearInterval(timerInterval);
+            timeRemaining = minutes * 60;
+            updateTimerDisplay();
+
+            timerInterval = setInterval(function() {
+                timeRemaining--;
+                updateTimerDisplay();
+
+                if (timeRemaining <= 0) {
+                    clearInterval(timerInterval);
+                    alert('¡Se acabó el tiempo!');
+                }
+            }, 1000);
+        }
+
+        function updateTimerDisplay() {
+            let minutes = Math.floor(timeRemaining / 60);
+            let seconds = timeRemaining % 60;
+            timerElement.textContent = `Tiempo: ${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+        }
+
+        function generatePuzzleBoard() {
+            const board = document.getElementById('puzzle-board');
+            board.innerHTML = '';
+
+            const rows = 4; // Número de filas
+            const cols = 4; // Número de columnas
+            const pieceWidth = 100;
+            const pieceHeight = 100;
+
+            for (let i = 0; i < rows * cols; i++) {
+                const piece = document.createElement('div');
+                piece.className = 'puzzle-piece';
+                const row = Math.floor(i / cols);
+                const col = i % cols;
+                piece.style.backgroundImage = `url(${puzzleImage})`;
+                piece.style.backgroundPosition = `-${col * pieceWidth}px -${row * pieceHeight}px`;
+                piece.dataset.index = i;
+                piece.onclick = () => handlePieceClick(piece);
+                board.appendChild(piece);
+            }
+
+            // Shuffle pieces
+            shuffleBoard();
+        }
+
+        function shuffleBoard() {
+            const pieces = Array.from(document.querySelectorAll('.puzzle-piece'));
+            for (let i = pieces.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                pieces[i].style.order = j;
+                pieces[j].style.order = i;
+            }
+        }
+
+        function handlePieceClick(piece) {
+            // Lógica para mover piezas y comprobar si el rompecabezas está completo
+        }
+
+        function restartGame() {
+            clearInterval(timerInterval);
+            document.getElementById('puzzle-board').innerHTML = '';
+            startPuzzle();
+        }
+    </script>
+</body>
+</html>
