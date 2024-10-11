@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,9 +8,10 @@
     <link rel="shortcut icon" type="image/x-icon" href="../../../img/logo_sf.png">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
-    <title>Nivel Básico Rompecabezas</title>
+    <title>Rompecabezas de Transporte </title>
     <style>
-        #puzzle-board, #storage-board {
+        #puzzle-board,
+        #storage-board {
             position: relative;
             margin: 0 auto;
             background-color: #f8f9fa;
@@ -29,7 +31,8 @@
             background-color: #f0f0f0;
         }
 
-        .puzzle-piece, .silueta-piece {
+        .puzzle-piece,
+        .silueta-piece {
             position: relative;
             cursor: pointer;
             background-color: #eee;
@@ -68,6 +71,7 @@
         }
     </style>
 </head>
+
 <body>
     <nav id="navbar" class="navbar navbar-light sticky-top">
         <ul id="mn" class="nav nav-pills">
@@ -80,107 +84,203 @@
                 </a>
             </div>
         </ul>
-    </nav>   
+    </nav>
     <div class="container mt-4">
         <blockquote class="blockquote">
-            <p><strong>FRUTAS BASICAS</strong></p>
+            <p><strong> Medios de Transporte </strong></p>
         </blockquote>
 
         <div class="row justify-content-center">
             <div class="col-md-3">
-                <a href="#" data-bs-toggle="modal" data-bs-target="#puzzleModal" onclick="setPuzzleInfo('Manzana', '../../../img/puzzle/fruts_and_vegetables/fruts_basic/apple.jpg')">
+                <a href="#" data-bs-toggle="modal" data-bs-target="#puzzleModal"
+                    onclick="setPuzzleInfo('Papaya', '../../../img/puzzle/transports/terrestrial_transports/car.jpeg')">
                     <div class="card">
-                        <img class="card-img-top zoom img-fluid" src="../../../img/puzzle/fruts_and_vegetables/fruts_basic/apple.jpg" alt="Manzanas rojas y verdes">
+                        <img class="card-img-top zoom img-fluid"
+                            src="../../../img/puzzle/transports/terrestrial_transports/car.jpeg" alt="Papaya">
                         <div class="card-body">
-                            <p class="card-text">MANZANA</p>
+                            <p class="card-text">carro</p>
                         </div>
                     </div>
                 </a>
             </div>
-    
-            <!-- Tarjeta para la Pera -->
             <div class="col-md-3">
-                <a href="#" data-bs-toggle="modal" data-bs-target="#puzzleModal" onclick="setPuzzleInfo('Pera', '../../../img/puzzle/fruts_and_vegetables/fruts_basic/pear.jpg')">
+                <a href="#" data-bs-toggle="modal" data-bs-target="#puzzleModal"
+                    onclick="setPuzzleInfo('Camión', '../../../img/puzzle/transports/terrestrial_transports/truck.jpg')">
                     <div class="card">
-                        <img class="card-img-top zoom img-fluid" src="../../../img/puzzle/fruts_and_vegetables/fruts_basic/pear.jpg" alt="Pera">
+                        <img class="card-img-top zoom img-fluid"
+                            src="../../../img/puzzle/transports/terrestrial_transports/truck.jpg"
+                            alt="Manzanas rojas y verdes">
                         <div class="card-body">
-                            <p class="card-text">PERA</p>
+                            <p class="card-text">trailer</p>
                         </div>
                     </div>
                 </a>
             </div>
-    
-            <!-- Tarjeta para la Fresa -->
             <div class="col-md-3">
-                <a href="#" data-bs-toggle="modal" data-bs-target="#puzzleModal" onclick="setPuzzleInfo('Fresa', '../../../img/puzzle/fruts_and_vegetables/fruts_basic/strawberry.jpg')">
+                <a href="#" data-bs-toggle="modal" data-bs-target="#puzzleModal"
+                    onclick="setPuzzleInfo('Autobus', '../../../img/puzzle/transports/terrestrial_transports/bus.jpg')">
                     <div class="card">
-                        <img class="card-img-top zoom img-fluid" src="../../../img/puzzle/fruts_and_vegetables/fruts_basic/strawberry.jpg" alt="Fresa">
+                        <img class="card-img-top zoom img-fluid"
+                            src="../../../img/puzzle/transports/terrestrial_transports/bus.jpg" alt="Pera">
                         <div class="card-body">
-                            <p class="card-text">FRESA</p>
+                            <p class="card-text">camión</p>
                         </div>
                     </div>
                 </a>
             </div>
-    
-            <!-- Tarjeta para la Papaya -->
             <div class="col-md-3">
-                <a href="#" data-bs-toggle="modal" data-bs-target="#puzzleModal" onclick="setPuzzleInfo('Papaya', '../../../img/puzzle/fruts_and_vegetables/fruts_basic/papaya.jpg')">
+                <a href="#" data-bs-toggle="modal" data-bs-target="#puzzleModal"
+                    onclick="setPuzzleInfo('Motocicleta', '../../../img/puzzle/transports/terrestrial_transports/motocycle.jpg')">
                     <div class="card">
-                        <img class="card-img-top zoom img-fluid" src="../../../img/puzzle/fruts_and_vegetables/fruts_basic/papaya.jpg" alt="Papaya">
+                        <img class="card-img-top zoom img-fluid"
+                            src="../../../img/puzzle/transports/terrestrial_transports/motocycle.jpg" alt="Fresa">
                         <div class="card-body">
-                            <p class="card-text">PAPAYA</p>
+                            <p class="card-text">motocicleta</p>
                         </div>
                     </div>
                 </a>
             </div>
-    
-            <!-- Tarjeta para la Naranja -->
+
             <div class="col-md-3">
-                <a href="#" data-bs-toggle="modal" data-bs-target="#puzzleModal" onclick="setPuzzleInfo('Naranja', '../../../img/puzzle/fruts_and_vegetables/fruts_basic/orange.jpg')">
+                <a href="#" data-bs-toggle="modal" data-bs-target="#puzzleModal"
+                    onclick="setPuzzleInfo('Papaya', '../../../img/puzzle/transports/flying_transports/plane.jpeg')">
                     <div class="card">
-                        <img class="card-img-top zoom img-fluid" src="../../../img/puzzle/fruts_and_vegetables/fruts_basic/orange.jpg" alt="Naranja">
+                        <img class="card-img-top zoom img-fluid"
+                            src="../../../img/puzzle/transports/flying_transports/plane.jpeg" alt="Papaya">
                         <div class="card-body">
-                            <p class="card-text">NARANJA</p>
+                            <p class="card-text">avión</p>
                         </div>
                     </div>
                 </a>
             </div>
-    
-            <!-- Tarjeta para el Plátano -->
+
             <div class="col-md-3">
-                <a href="#" data-bs-toggle="modal" data-bs-target="#puzzleModal" onclick="setPuzzleInfo('Plátano', '../../../img/puzzle/fruts_and_vegetables/fruts_basic/banana.jpg')">
+                <a href="#" data-bs-toggle="modal" data-bs-target="#puzzleModal" onclick="setPuzzleInfo('Patatineta', '../../../img/puzzle/transports/flying_transports/helicopter.jpg')">
                     <div class="card">
-                        <img class="card-img-top zoom img-fluid" src="../../../img/puzzle/fruts_and_vegetables/fruts_basic/banana.jpg" alt="Plátano">
+                        <img class="card-img-top zoom img-fluid" src="../../../img/puzzle/transports/flying_transports/helicopter.jpg" alt="Durazno">
                         <div class="card-body">
-                            <p class="card-text">PLÁTANO</p>
+                            <p class="card-text">helicoptero</p>
                         </div>
                     </div>
                 </a>
             </div>
-    
-            <!-- Tarjeta para el Durazno -->
+
             <div class="col-md-3">
-                <a href="#" data-bs-toggle="modal" data-bs-target="#puzzleModal" onclick="setPuzzleInfo('Durazno', '../../../img/puzzle/fruts_and_vegetables/fruts_basic/PEACH.jpg')">
+                <a href="#" data-bs-toggle="modal" data-bs-target="#puzzleModal" onclick="setPuzzleInfo('Naranja', '../../../img/puzzle/transports/terrestrial_transports/bicycle.jpg')">
                     <div class="card">
-                        <img class="card-img-top zoom img-fluid" src="../../../img/puzzle/fruts_and_vegetables/fruts_basic/PEACH.jpg" alt="Durazno">
+                        <img class="card-img-top zoom img-fluid" src="../../../img/puzzle/transports/terrestrial_transports/bicycle.jpg" alt="Naranja">
                         <div class="card-body">
-                            <p class="card-text">DURAZNO</p>
+                            <p class="card-text">bicicleta</p>
                         </div>
                     </div>
                 </a>
             </div>
-    
-            <!-- Tarjeta para la Sandía -->
+
             <div class="col-md-3">
-                <a href="#" data-bs-toggle="modal" data-bs-target="#puzzleModal" onclick="setPuzzleInfo('Sandía', '../../../img/puzzle/fruts_and_vegetables/fruts_basic/watermelon.jpg')">
+                <a href="#" data-bs-toggle="modal" data-bs-target="#puzzleModal" onclick="setPuzzleInfo('Naranja', '../../../img/puzzle/transports/terrestrial_transports/bicycle.jpg')">
                     <div class="card">
-                        <img class="card-img-top zoom img-fluid" src="../../../img/puzzle/fruts_and_vegetables/fruts_basic/watermelon.jpg" alt="Sandía">
+                        <img class="card-img-top zoom img-fluid" src="../../../img/puzzle/transports/marine_transports/yate.png" alt="Naranja">
                         <div class="card-body">
-                            <p class="card-text">SANDÍA</p>
+                            <p class="card-text">yate</p>
                         </div>
                     </div>
                 </a>
-            </div>        </div>
+            </div>
+
+            <div class="col-md-3">
+                <a href="#" data-bs-toggle="modal" data-bs-target="#puzzleModal" onclick="setPuzzleInfo('Suburban', '../../../img/puzzle/transports/terrestrial_transports/van.jpg')">
+                    <div class="card">
+                        <img class="card-img-top zoom img-fluid" src="../../../img/puzzle/transports/terrestrial_transports/van.jpg" alt="Sandía">
+                        <div class="card-body">
+                            <p class="card-text">camioneta </p>
+                        </div>
+                    </div>
+                </a>
+            </div> 
+
+            <div class="col-md-3">
+                <a href="#" data-bs-toggle="modal" data-bs-target="#puzzleModal" onclick="setPuzzleInfo('Tren', '../../../img/puzzle/transports/terrestrial_transports/train.jpeg')">
+                    <div class="card">
+                        <img class="card-img-top zoom img-fluid" src="../../../img/puzzle/transports/terrestrial_transports/train.jpeg" alt="Plátano">
+                        <div class="card-body">
+                            <p class="card-text">tren</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <div class="col-md-3">
+                <a href="#" data-bs-toggle="modal" data-bs-target="#puzzleModal" onclick="setPuzzleInfo('Tren', '../../../img/puzzle/transports/marine_transports/boat.jpg')">
+                    <div class="card">
+                        <img class="card-img-top zoom img-fluid" src="../../../img/puzzle/transports/marine_transports/boat.jpg" alt="Plátano">
+                        <div class="card-body">
+                            <p class="card-text">bote</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-md-3">
+                <a href="#" data-bs-toggle="modal" data-bs-target="#puzzleModal" onclick="setPuzzleInfo('Tren', '../../../img/puzzle/transports/terrestrial_transports/ambulance.jpg')">
+                    <div class="card">
+                        <img class="card-img-top zoom img-fluid" src="../../../img/puzzle/transports/terrestrial_transports/ambulance.jpg" alt="Plátano">
+                        <div class="card-body">
+                            <p class="card-text">ambulancia</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-md-3">
+                <a href="#" data-bs-toggle="modal" data-bs-target="#puzzleModal" onclick="setPuzzleInfo('Tren', '../../../img/puzzle/transports/terrestrial_transports/crane.png')">
+                    <div class="card">
+                        <img class="card-img-top zoom img-fluid" src="../../../img/puzzle/transports/terrestrial_transports/crane.png" alt="Plátano">
+                        <div class="card-body">
+                            <p class="card-text">grua</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-md-3">
+                <a href="#" data-bs-toggle="modal" data-bs-target="#puzzleModal" onclick="setPuzzleInfo('Tren', '../../../img/puzzle/transports/terrestrial_transports/taxi.jpg')">
+                    <div class="card">
+                        <img class="card-img-top zoom img-fluid" src="../../../img/puzzle/transports/terrestrial_transports/taxi.jpg" alt="Plátano">
+                        <div class="card-body">
+                            <p class="card-text">taxi</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-md-3">
+                <a href="#" data-bs-toggle="modal" data-bs-target="#puzzleModal" onclick="setPuzzleInfo('Tren', '../../../img/puzzle/transports/terrestrial_transports/mototaxi.jpg')">
+                    <div class="card">
+                        <img class="card-img-top zoom img-fluid" src="../../../img/puzzle/transports/terrestrial_transports/mototaxi.jpg" alt="Plátano">
+                        <div class="card-body">
+                            <p class="card-text">mototaxi</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-md-3">
+                <a href="#" data-bs-toggle="modal" data-bs-target="#puzzleModal" onclick="setPuzzleInfo('Tren', '../../../img/puzzle/transports/terrestrial_transports/traktor.jpeg')">
+                    <div class="card">
+                        <img class="card-img-top zoom img-fluid" src="../../../img/puzzle/transports/terrestrial_transports/traktor.jpeg" alt="Plátano">
+                        <div class="card-body">
+                            <p class="card-text">traktor</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-md-3">
+                <a href="#" data-bs-toggle="modal" data-bs-target="#puzzleModal" onclick="setPuzzleInfo('Tren', '../../../img/puzzle/transports/terrestrial_transports/torton.jpg')">
+                    <div class="card">
+                        <img class="card-img-top zoom img-fluid" src="../../../img/puzzle/transports/terrestrial_transports/torton.jpg" alt="Plátano">
+                        <div class="card-body">
+                            <p class="card-text">camión de carga</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            
+        </div>
 
         <div class="modal fade" id="puzzleModal" tabindex="-1" aria-labelledby="puzzleModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered">
@@ -192,7 +292,8 @@
                     <div class="modal-body">
                         <img id="reference-image" class="reference-img" src="" alt="Imagen de referencia">
                         <div id="puzzle-board"></div>
-                        <div class="message" id="game-message">¡Selecciona la dificultad y luego haz clic en una pieza para comenzar!</div>
+                        <div class="message" id="game-message">¡Selecciona la dificultad y luego haz clic en una pieza
+                            para comenzar!</div>
                         <div class="mb-3">
                             <label for="difficulty" class="form-label">Selecciona la dificultad:</label>
                             <select id="difficulty" class="form-select" onchange="setDifficulty(this.value)">
@@ -208,40 +309,46 @@
             </div>
         </div>
     </div>
- <!-- Pie de página -->
- <footer>
-    <div class="container">
-        <div class="row justify-content-center align-items-center">
-            <div class="col-md-6 text-center mb-3">
-                <!-- Ruta de la imagen del logo en el pie de página -->
-                <img src="../../../img/logofcd.png" class="rounded" alt="Logo FCD" style="width: 40%; height: 70%;">
-            </div>
-            <div class="col-md-6 text-center">
-                <div class="social-icons mb-3">
-                    <!-- Ruta de la imagen del ícono de Facebook -->
-                    <a href="https://www.facebook.com/FundacionCorazonDown" class="social-icon">
-                        <img src="../../../img/icons/ficon.png" class="rounded" alt="Facebook Icon" style="width: 70%; height: 70%;">
-                    </a>
-                    <!-- Ruta de la imagen del ícono de Twitter -->
-                    <a href="https://x.com/mariopmtz" class="social-icon">
-                        <img src="../../../img/icons/xicon.png" class="rounded" alt="Twitter Icon" style="width: 60%; height: 70%;">
-                    </a>
-                    <!-- Ruta de la imagen del ícono de Instagram -->
-                    <a href="https://www.instagram.com/fundacioncorazondown?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" class="social-icon">
-                        <img src="../../../img/icons/insicon.png" class="rounded" alt="Instagram Icon" style="width: 70%; height: 70%;">
-                    </a>
-                    <!-- Ruta de la imagen del ícono de TikTok -->
-                    <a href="https://www.tiktok.com/@corazndown?is_from_webapp=1&sender_device=pc" class="social-icon">
-                        <img src="../../../img/icons/ticon.png" class="rounded" alt="TikTok Icon" style="width: 70%; height: 70%;">
-                    </a>
+    <!-- Pie de página -->
+    <footer>
+        <div class="container">
+            <div class="row justify-content-center align-items-center">
+                <div class="col-md-6 text-center mb-3">
+                    <!-- Ruta de la imagen del logo en el pie de página -->
+                    <img src="../../../img/logofcd.png" class="rounded" alt="Logo FCD" style="width: 40%; height: 70%;">
                 </div>
-                <div class="location">
-                    <p>XICOTÉNCATL 1017, ZONA FEB 10 2015, BARRIO DE LA NORIA, 68100 OAXACA DE JUÁREZ, OAX.</p>
+                <div class="col-md-6 text-center">
+                    <div class="social-icons mb-3">
+                        <!-- Ruta de la imagen del ícono de Facebook -->
+                        <a href="https://www.facebook.com/FundacionCorazonDown" class="social-icon">
+                            <img src="../../../img/icons/ficon.png" class="rounded" alt="Facebook Icon"
+                                style="width: 70%; height: 70%;">
+                        </a>
+                        <!-- Ruta de la imagen del ícono de Twitter -->
+                        <a href="https://x.com/mariopmtz" class="social-icon">
+                            <img src="../../../img/icons/xicon.png" class="rounded" alt="Twitter Icon"
+                                style="width: 60%; height: 70%;">
+                        </a>
+                        <!-- Ruta de la imagen del ícono de Instagram -->
+                        <a href="https://www.instagram.com/fundacioncorazondown?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw=="
+                            class="social-icon">
+                            <img src="../../../img/icons/insicon.png" class="rounded" alt="Instagram Icon"
+                                style="width: 70%; height: 70%;">
+                        </a>
+                        <!-- Ruta de la imagen del ícono de TikTok -->
+                        <a href="https://www.tiktok.com/@corazndown?is_from_webapp=1&sender_device=pc"
+                            class="social-icon">
+                            <img src="../../../img/icons/ticon.png" class="rounded" alt="TikTok Icon"
+                                style="width: 70%; height: 70%;">
+                        </a>
+                    </div>
+                    <div class="location">
+                        <p>XICOTÉNCATL 1017, ZONA FEB 10 2015, BARRIO DE LA NORIA, 68100 OAXACA DE JUÁREZ, OAX.</p>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-</footer>
+    </footer>
     <script>
         let currentPuzzle = {};
         const puzzleBoard = document.getElementById('puzzle-board');
@@ -367,31 +474,32 @@
             const silhouettes = document.querySelectorAll('.silueta-piece');
             return Array.from(siluettes).every(silueta => {
                 const pieceIndex = parseInt(silueta.dataset.index);
-                return silueta.style.backgroundImage && 
-                       (silueta.style.backgroundPosition === 
-                       `-${(pieceIndex % Math.sqrt(puzzleSize)) * defaultPieceSize}px -${Math.floor(pieceIndex / Math.sqrt(puzzleSize)) * defaultPieceSize}px`);
+                return silueta.style.backgroundImage &&
+                    (silueta.style.backgroundPosition ===
+                        `-${(pieceIndex % Math.sqrt(puzzleSize)) * defaultPieceSize}px -${Math.floor(pieceIndex / Math.sqrt(puzzleSize)) * defaultPieceSize}px`);
             });
         }
 
         function restartGame() {
             // Reiniciar el tamaño del rompecabezas a 4 (puedes cambiarlo según tus necesidades)
             puzzleSize = 4;
-            
+
             // Limpiar los tableros
             storageBoard.innerHTML = '';
             puzzleBoard.innerHTML = '';
-            
+
             // Regenerar el tablero y el almacenamiento
             generatePuzzleBoard();
             generateStorageBoard();
-            
+
             // Mostrar mensaje inicial
             gameMessage.textContent = '¡Selecciona la dificultad y luego haz clic en una pieza para comenzar!';
         }
-        
+
         document.addEventListener('DOMContentLoaded', () => {
             setPuzzleInfo('Frutas Básicas', 'ruta/a/la/imagen.jpg'); // Cambia la ruta de la imagen según corresponda
         });
     </script>
 </body>
+
 </html>

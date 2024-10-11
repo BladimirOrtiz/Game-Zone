@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../../css/clarification.css">
+    <link rel="shortcut icon" type="image/x-icon" href="../../../img/logo_sf.png">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+    <title>Rompecabezas de Objetos del Hogar</title>
+    <style>
+        #puzzle-board,
+        #storage-board {
+            position: relative;
+            margin: 0 auto;
+            background-color: #f8f9fa;
+            border: 1px solid #ddd;
+            overflow: hidden;
+            margin-top: 20px;
+            display: grid;
+        }
+
+        #storage-board {
+            min-height: 150px;
+            border: 2px solid #333;
+            padding: 10px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            background-color: #f0f0f0;
+        }
+
+        .puzzle-piece,
+        .silueta-piece {
+            position: relative;
+            cursor: pointer;
+            background-color: #eee;
+            background-size: cover;
+            background-repeat: no-repeat;
+            border: 2px solid transparent;
+            transition: border 0.3s ease;
+            user-select: none;
+        }
+
+        .silueta-piece {
+            background-color: rgba(0, 0, 0, 0.1);
+            border: 2px dashed #000;
+        }
+
+        .message {
+            font-size: 18px;
+            color: #333;
+            margin-top: 10px;
+        }
+
+        .reference-img {
+            width: 100%;
+            height: auto;
+            object-fit: cover;
+            margin-bottom: 20px;
+        }
+
+        .btn-custom {
+            background-color: #28a745;
+            color: white;
+        }
+
+        .btn-custom:hover {
+            background-color: #218838;
+        }
+    </style>
+</head>
+
+<body>
+    <nav id="navbar" class="navbar navbar-light sticky-top">
+        <ul id="mn" class="nav nav-pills">
+            <div style="display: flex; justify-content: space-between; align-items: center; width: 70%;">
+                <a class="navbar-brand" href="#">
+                    <img src="../../../img/logofcd.png" class="rounded logo" alt="Logo FCD">
+                </a>
+                <a class="navbar-brand" href="../../../index.html">
+                    <img src="../../../img/logo_sf.png" class="rounded logo" alt="Logo SF">
+                </a>
+            </div>
+        </ul>
+    </nav>
+    <div class="container mt-4">
+        <blockquote class="blockquote">
+            <p><strong>Objetos del Hogar </strong></p>
+        </blockquote>
+
+        <div class="row justify-content-center">
+            <div class="col-md-3">
+                <a href="#" data-bs-toggle="modal" data-bs-target="#puzzleModal"
+                    onclick="setPuzzleInfo('Papaya', '../../../img/puzzle/objects_home/liggh_lanter.avif')">
+                    <div class="card">
+                        <img class="card-img-top zoom img-fluid"
+                            src="../../../img/puzzle/objects_home/liggh_lanter.avif" alt="Papaya">
+                        <div class="card-body">
+                            <p class="card-text">lampara</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-md-3">
+                <a href="#" data-bs-toggle="modal" data-bs-target="#puzzleModal" onclick="setPuzzleInfo('Camión', '../../../img/puzzle/objects_home/table.jpg')">
+                    <div class="card">
+                        <img class="card-img-top zoom img-fluid"
+                            src="../../../img/puzzle/objects_home/table.jpg"
+                            alt="Manzanas rojas y verdes">
+                        <div class="card-body">
+                            <p class="card-text">mesa</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-md-3">
+                <a href="#" data-bs-toggle="modal" data-bs-target="#puzzleModal"
+                    onclick="setPuzzleInfo('Autobus', '../../../img/puzzle/objects_home/bead.avif')">
+                    <div class="card">
+                        <img class="card-img-top zoom img-fluid"
+                            src="../../../img/puzzle/objects_home/bead.avif" alt="Pera">
+                        <div class="card-body">
+                            <p class="card-text">cama</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-md-3">
+                <a href="#" data-bs-toggle="modal" data-bs-target="#puzzleModal"
+                    onclick="setPuzzleInfo('Motocicleta', '../../../img/puzzle/objects_home/wardrobe.jpg')">
+                    <div class="card">
+                        <img class="card-img-top zoom img-fluid"
+                            src="../../../img/puzzle/objects_home/wardrobe.jpg" alt="Fresa">
+                        <div class="card-body">
+                            <p class="card-text">ropero</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <div class="col-md-3">
+                <a href="#" data-bs-toggle="modal" data-bs-target="#puzzleModal"
+                    onclick="setPuzzleInfo('Papaya', '../../../img/puzzle/objects_home/dining_room.jpg')">
+                    <div class="card">
+                        <img class="card-img-top zoom img-fluid"
+                            src="../../../img/puzzle/objects_home/dining_room.jpg" alt="Papaya">
+                        <div class="card-body">
+                            <p class="card-text">comedor</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <div class="col-md-3">
+                <a href="#" data-bs-toggle="modal" data-bs-target="#puzzleModal" onclick="setPuzzleInfo('Patatineta', '../../../img/puzzle/objects_home/organizer_furniture.jpg')">
+                    <div class="card">
+                        <img class="card-img-top zoom img-fluid" src="../../../img/puzzle/objects_home/organizer_furniture.jpg" alt="Durazno">
+                        <div class="card-body">
+                            <p class="card-text">mueble organizador</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <div class="col-md-3">
+                <a href="#" data-bs-toggle="modal" data-bs-target="#puzzleModal" onclick="setPuzzleInfo('Naranja', '../../../img/puzzle/objects_home/desktop.jpg')">
+                    <div class="card">
+                        <img class="card-img-top zoom img-fluid" src="../../../img/puzzle/objects_home/desktop.jpg" alt="Naranja">
+                        <div class="card-body">
+                            <p class="card-text">escritorio</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <div class="col-md-3">
+                <a href="#" data-bs-toggle="modal" data-bs-target="#puzzleModal" onclick="setPuzzleInfo('Naranja', '../../../img/puzzle/objects_home/chair.avif')">
+                    <div class="card">
+                        <img class="card-img-top zoom img-fluid" src="../../../img/puzzle/objects_home/chair.avif" alt="Naranja">
+                        <div class="card-body">
+                            <p class="card-text">silla</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <div class="col-md-3">
+                <a href="#" data-bs-toggle="modal" data-bs-target="#puzzleModal" onclick="setPuzzleInfo('Suburban', '../../../img/puzzle/objects_home/couch.avif')">
+                    <div class="card">
+                        <img class="card-img-top zoom img-fluid" src="../../../img/puzzle/objects_home/couch.avif" alt="Sandía">
+                        <div class="card-body">
+                            <p class="card-text">sofa </p>
+                        </div>
+                    </div>
+                </a>
+            </div> 
+
+            <div class="col-md-3">
+                <a href="#" data-bs-toggle="modal" data-bs-target="#puzzleModal" onclick="setPuzzleInfo('Tren', '../../../img/puzzle/objects_home/mirror.avif')">
+                    <div class="card">
+                        <img class="card-img-top zoom img-fluid" src="../../../img/puzzle/objects_home/mirror.avif" alt="Plátano">
+                        <div class="card-body">
+                            <p class="card-text">espejo</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <div class="col-md-3">
+                <a href="#" data-bs-toggle="modal" data-bs-target="#puzzleModal" onclick="setPuzzleInfo('Tren', '../../../img/puzzle/objects_home/windows.jpeg')">
+                    <div class="card">
+                        <img class="card-img-top zoom img-fluid" src="../../../img/puzzle/objects_home/windows.jpeg" alt="Plátano">
+                        <div class="card-body">
+                            <p class="card-text">ventana</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-md-3">
+                <a href="#" data-bs-toggle="modal" data-bs-target="#puzzleModal" onclick="setPuzzleInfo('Tren', '../../../img/puzzle/objects_home/pressure_cooker.jpg')">
+                    <div class="card">
+                        <img class="card-img-top zoom img-fluid" src="../../../img/puzzle/objects_home/pressure_cooker.jpg" alt="Plátano">
+                        <div class="card-body">
+                            <p class="card-text">olla exprés </p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-md-3">
+                <a href="#" data-bs-toggle="modal" data-bs-target="#puzzleModal" onclick="setPuzzleInfo('Tren', '../../../img/puzzle/objects_home/chopping_board.png')">
+                    <div class="card">
+                        <img class="card-img-top zoom img-fluid" src="../../../img/puzzle/objects_home/chopping_board.png" alt="Plátano">
+                        <div class="card-body">
+                            <p class="card-text">tabla de picar  </p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-md-3">
+                <a href="#" data-bs-toggle="modal" data-bs-target="#puzzleModal" onclick="setPuzzleInfo('Tren', '../../../img/puzzle/objects_home/cook_globe.jpg')">
+                    <div class="card">
+                        <img class="card-img-top zoom img-fluid" src="../../../img/puzzle/objects_home/cook_globe.jpg" alt="Plátano">
+                        <div class="card-body">
+                            <p class="card-text">guantes de hornear</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-md-3">
+                <a href="#" data-bs-toggle="modal" data-bs-target="#puzzleModal" onclick="setPuzzleInfo('Tren', '../../../img/puzzle/objects_home/frying_pan.jpeg')">
+                    <div class="card">
+                        <img class="card-img-top zoom img-fluid" src="../../../img/puzzle/objects_home/frying_pan.jpeg" alt="Plátano">
+                        <div class="card-body">
+                            <p class="card-text">sarten</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-md-3">
+                <a href="#" data-bs-toggle="modal" data-bs-target="#puzzleModal" onclick="setPuzzleInfo('Tren', '../../../img/puzzle/objects_home/peeler.jpg')">
+                    <div class="card">
+                        <img class="card-img-top zoom img-fluid" src="../../../img/puzzle/objects_home/peeler.jpg" alt="Plátano">
+                        <div class="card-body">
+                            <p class="card-text">pelador</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-md-3">
+                <a href="#" data-bs-toggle="modal" data-bs-target="#puzzleModal" onclick="setPuzzleInfo('Tren', '../../../img/puzzle/objects_home/apron.jpg')">
+                    <div class="card">
+                        <img class="card-img-top zoom img-fluid" src="../../../img/puzzle/objects_home/apron.jpg" alt="Plátano">
+                        <div class="card-body">
+                            <p class="card-text">delantal de cocina</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-md-3">
+                <a href="#" data-bs-toggle="modal" data-bs-target="#puzzleModal" onclick="setPuzzleInfo('Tren', '../../../img/puzzle/objects_home/jag.avif')">
+                    <div class="card">
+                        <img class="card-img-top zoom img-fluid" src="../../../img/puzzle/objects_home/jag.avif" alt="Plátano">
+                        <div class="card-body">
+                            <p class="card-text">jarra</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-md-3">
+                <a href="#" data-bs-toggle="modal" data-bs-target="#puzzleModal" onclick="setPuzzleInfo('Tren', '../../../img/puzzle/objects_home/blender.jpg')">
+                    <div class="card">
+                        <img class="card-img-top zoom img-fluid" src="../../../img/puzzle/objects_home/blender.jpg" alt="Plátano">
+                        <div class="card-body">
+                            <p class="card-text">batidora</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-md-3">
+                <a href="#" data-bs-toggle="modal" data-bs-target="#puzzleModal" onclick="setPuzzleInfo('Tren', '../../../img/puzzle/objects_home/scratcher.jpeg')">
+                    <div class="card">
+                        <img class="card-img-top zoom img-fluid" src="../../../img/puzzle/objects_home/scratcher.jpeg" alt="Plátano">
+                        <div class="card-body">
+                            <p class="card-text">rayador</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-md-3">
+                <a href="#" data-bs-toggle="modal" data-bs-target="#puzzleModal" onclick="setPuzzleInfo('Tren', '../../../img/puzzle/objects_home/strainer.jpg')">
+                    <div class="card">
+                        <img class="card-img-top zoom img-fluid" src="../../../img/puzzle/objects_home/strainer.jpg" alt="Plátano">
+                        <div class="card-body">
+                            <p class="card-text">colador</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-md-3">
+                <a href="#" data-bs-toggle="modal" data-bs-target="#puzzleModal" onclick="setPuzzleInfo('Tren', '../../../img/puzzle/objects_home/cups.jpg')">
+                    <div class="card">
+                        <img class="card-img-top zoom img-fluid" src="../../../img/puzzle/objects_home/cups.jpg" alt="Plátano">
+                        <div class="card-body">
+                            <p class="card-text">taza</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-md-3">
+                <a href="#" data-bs-toggle="modal" data-bs-target="#puzzleModal" onclick="setPuzzleInfo('Tren', '../../../img/puzzle/objects_home/fork.png')">
+                    <div class="card">
+                        <img class="card-img-top zoom img-fluid" src="../../../img/puzzle/objects_home/fork.png" alt="Plátano">
+                        <div class="card-body">
+                            <p class="card-text">tenedor</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-md-3">
+                <a href="#" data-bs-toggle="modal" data-bs-target="#puzzleModal" onclick="setPuzzleInfo('Tren', '../../../img/puzzle/objects_home/spoon.jpeg')">
+                    <div class="card">
+                        <img class="card-img-top zoom img-fluid" src="../../../img/puzzle/objects_home/spoon.jpeg" alt="Plátano">
+                        <div class="card-body">
+                            <p class="card-text">cuchara</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-md-3">
+                <a href="#" data-bs-toggle="modal" data-bs-target="#puzzleModal" onclick="setPuzzleInfo('Tren', '../../../img/puzzle/objects_home/ladlen.jpeg')">
+                    <div class="card">
+                        <img class="card-img-top zoom img-fluid" src="../../../img/puzzle/objects_home/ladlen.jpeg" alt="Plátano">
+                        <div class="card-body">
+                            <p class="card-text">cucharon</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-md-3">
+                <a href="#" data-bs-toggle="modal" data-bs-target="#puzzleModal" onclick="setPuzzleInfo('Tren', '../../../img/puzzle/objects_home/glass.jpg')">
+                    <div class="card">
+                        <img class="card-img-top zoom img-fluid" src="../../../img/puzzle/objects_home/glass.jpg" alt="Plátano">
+                        <div class="card-body">
+                            <p class="card-text">vaso</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-md-3">
+                <a href="#" data-bs-toggle="modal" data-bs-target="#puzzleModal" onclick="setPuzzleInfo('Tren', '../../../img/puzzle/objects_home/refragtory.jpg')">
+                    <div class="card">
+                        <img class="card-img-top zoom img-fluid" src="../../../img/puzzle/objects_home/refragtory.jpg" alt="Plátano">
+                        <div class="card-body">
+                            <p class="card-text">refractario</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-md-3">
+                <a href="#" data-bs-toggle="modal" data-bs-target="#puzzleModal" onclick="setPuzzleInfo('Tren', '../../../img/puzzle/objects_home/kettle.jpg')">
+                    <div class="card">
+                        <img class="card-img-top zoom img-fluid" src="../../../img/puzzle/objects_home/kettle.jpg" alt="Plátano">
+                        <div class="card-body">
+                            <p class="card-text">tetera</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-md-3">
+                <a href="#" data-bs-toggle="modal" data-bs-target="#puzzleModal" onclick="setPuzzleInfo('Tren', '../../../img/puzzle/objects_home/dish.jpg')">
+                    <div class="card">
+                        <img class="card-img-top zoom img-fluid" src="../../../img/puzzle/objects_home/dish.jpg" alt="Plátano">
+                        <div class="card-body">
+                            <p class="card-text">plato</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <div class="modal fade" id="puzzleModal" tabindex="-1" aria-labelledby="puzzleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="puzzleModalLabel">Rompecabezas</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <img id="reference-image" class="reference-img" src="" alt="Imagen de referencia">
+                        <div id="puzzle-board"></div>
+                        <div class="message" id="game-message">¡Selecciona la dificultad y luego haz clic en una pieza
+                            para comenzar!</div>
+                        <div class="mb-3">
+                            <label for="difficulty" class="form-label">Selecciona la dificultad:</label>
+                            <select id="difficulty" class="form-select" onchange="setDifficulty(this.value)">
+                                <option value="4">Fácil (4 piezas)</option>
+                                <option value="8">Intermedio (8 piezas)</option>
+                                <option value="16">Difícil (16 piezas)</option>
+                            </select>
+                        </div>
+                        <div id="storage-board"></div>
+                        <button class="btn btn-custom mt-3" onclick="restartGame()">Reiniciar Juego</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Pie de página -->
+    <footer>
+        <div class="container">
+            <div class="row justify-content-center align-items-center">
+                <div class="col-md-6 text-center mb-3">
+                    <!-- Ruta de la imagen del logo en el pie de página -->
+                    <img src="../../../img/logofcd.png" class="rounded" alt="Logo FCD" style="width: 40%; height: 70%;">
+                </div>
+                <div class="col-md-6 text-center">
+                    <div class="social-icons mb-3">
+                        <!-- Ruta de la imagen del ícono de Facebook -->
+                        <a href="https://www.facebook.com/FundacionCorazonDown" class="social-icon">
+                            <img src="../../../img/icons/ficon.png" class="rounded" alt="Facebook Icon"
+                                style="width: 70%; height: 70%;">
+                        </a>
+                        <!-- Ruta de la imagen del ícono de Twitter -->
+                        <a href="https://x.com/mariopmtz" class="social-icon">
+                            <img src="../../../img/icons/xicon.png" class="rounded" alt="Twitter Icon"
+                                style="width: 60%; height: 70%;">
+                        </a>
+                        <!-- Ruta de la imagen del ícono de Instagram -->
+                        <a href="https://www.instagram.com/fundacioncorazondown?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw=="
+                            class="social-icon">
+                            <img src="../../../img/icons/insicon.png" class="rounded" alt="Instagram Icon"
+                                style="width: 70%; height: 70%;">
+                        </a>
+                        <!-- Ruta de la imagen del ícono de TikTok -->
+                        <a href="https://www.tiktok.com/@corazndown?is_from_webapp=1&sender_device=pc"
+                            class="social-icon">
+                            <img src="../../../img/icons/ticon.png" class="rounded" alt="TikTok Icon"
+                                style="width: 70%; height: 70%;">
+                        </a>
+                    </div>
+                    <div class="location">
+                        <p>XICOTÉNCATL 1017, ZONA FEB 10 2015, BARRIO DE LA NORIA, 68100 OAXACA DE JUÁREZ, OAX.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script>
+        let currentPuzzle = {};
+        const puzzleBoard = document.getElementById('puzzle-board');
+        const storageBoard = document.getElementById('storage-board');
+        const gameMessage = document.getElementById('game-message');
+        let puzzleSize = 4; // Tamaño inicial del rompecabezas
+        const defaultPieceSize = 100; // Tamaño de las piezas en px
+
+        function setPuzzleInfo(name, imageUrl) {
+            currentPuzzle.name = name;
+            currentPuzzle.imageUrl = imageUrl;
+            document.getElementById('reference-image').src = imageUrl;
+            generatePuzzleBoard();
+            generateStorageBoard();
+            gameMessage.textContent = '¡El rompecabezas está listo! Coloca las piezas en la silueta.';
+        }
+
+        function setDifficulty(size) {
+            puzzleSize = parseInt(size);
+            generatePuzzleBoard();
+            generateStorageBoard();
+        }
+
+        function generatePuzzleBoard() {
+            puzzleBoard.innerHTML = '';
+            const piecesPerRow = Math.sqrt(puzzleSize);
+            const pieceSize = defaultPieceSize;
+            const totalWidth = pieceSize * piecesPerRow;
+
+            puzzleBoard.style.gridTemplateColumns = `repeat(${piecesPerRow}, ${pieceSize}px)`;
+            puzzleBoard.style.width = `${totalWidth}px`;
+            puzzleBoard.style.height = `${totalWidth}px`;
+
+            for (let i = 0; i < puzzleSize; i++) {
+                const silueta = document.createElement('div');
+                silueta.className = 'silueta-piece';
+                silueta.style.width = `${pieceSize}px`;
+                silueta.style.height = `${pieceSize}px`;
+                silueta.dataset.index = i;
+                silueta.addEventListener('dragover', dragOver);
+                silueta.addEventListener('drop', drop);
+                puzzleBoard.appendChild(silueta);
+            }
+        }
+
+        function generateStorageBoard() {
+            storageBoard.innerHTML = '';
+            const piecesPerRow = Math.sqrt(puzzleSize);
+            const pieceSize = defaultPieceSize;
+
+            let pieceIndices = Array.from(Array(puzzleSize).keys());
+            pieceIndices = pieceIndices.sort(() => Math.random() - 0.5);
+
+            for (let i = 0; i < puzzleSize; i++) {
+                const piece = document.createElement('div');
+                piece.className = 'puzzle-piece';
+                piece.style.width = `${pieceSize}px`;
+                piece.style.height = `${pieceSize}px`;
+                piece.style.backgroundImage = `url(${currentPuzzle.imageUrl})`;
+                piece.style.backgroundSize = `${pieceSize * piecesPerRow}px ${pieceSize * piecesPerRow}px`;
+                piece.style.backgroundPosition = `-${(pieceIndices[i] % piecesPerRow) * pieceSize}px -${Math.floor(pieceIndices[i] / piecesPerRow) * pieceSize}px`;
+                piece.dataset.index = pieceIndices[i];
+                piece.setAttribute('draggable', true);
+                piece.addEventListener('dragstart', dragStart);
+                storageBoard.appendChild(piece);
+            }
+        }
+
+        function dragStart(event) {
+            event.dataTransfer.setData('text/plain', event.target.dataset.index);
+        }
+
+        function dragOver(event) {
+            event.preventDefault();
+        }
+
+        function drop(event) {
+            event.preventDefault();
+            const droppedIndex = event.dataTransfer.getData('text/plain');
+            const draggedPiece = document.querySelector(`.puzzle-piece[data-index='${droppedIndex}']`);
+
+            if (!event.target.style.backgroundImage) {
+                event.target.style.backgroundImage = draggedPiece.style.backgroundImage;
+                event.target.style.backgroundSize = draggedPiece.style.backgroundSize;
+                event.target.style.backgroundPosition = draggedPiece.style.backgroundPosition;
+
+                draggedPiece.remove();
+
+                const expectedIndex = parseInt(event.target.dataset.index);
+                if (droppedIndex != expectedIndex) {
+                    setTimeout(() => {
+                        returnToStorage(draggedPiece, droppedIndex);
+                        event.target.style.backgroundImage = '';
+                        event.target.style.backgroundSize = '';
+                        event.target.style.backgroundPosition = '';
+                    }, 1000);
+                }
+
+                if (checkIfPuzzleComplete()) {
+                    gameMessage.textContent = '¡Felicidades! Completaste el rompecabezas.';
+                }
+            } else {
+                gameMessage.textContent = '¡Coloca la pieza en un espacio vacío!';
+            }
+        }
+
+        function returnToStorage(piece, index) {
+            const newPiece = document.createElement('div');
+            newPiece.className = 'puzzle-piece';
+            newPiece.style.width = piece.style.width;
+            newPiece.style.height = piece.style.height;
+            newPiece.style.backgroundImage = piece.style.backgroundImage;
+            newPiece.style.backgroundSize = piece.style.backgroundSize;
+            newPiece.style.backgroundPosition = piece.style.backgroundPosition;
+            newPiece.dataset.index = index;
+            newPiece.setAttribute('draggable', true);
+            newPiece.addEventListener('dragstart', dragStart);
+            storageBoard.appendChild(newPiece);
+            gameMessage.textContent = '¡Pieza incorrecta! Se ha devuelto al almacenamiento.';
+        }
+
+        function checkIfPuzzleComplete() {
+            const silhouettes = document.querySelectorAll('.silueta-piece');
+            return Array.from(siluettes).every(silueta => {
+                const pieceIndex = parseInt(silueta.dataset.index);
+                return silueta.style.backgroundImage &&
+                    (silueta.style.backgroundPosition ===
+                        `-${(pieceIndex % Math.sqrt(puzzleSize)) * defaultPieceSize}px -${Math.floor(pieceIndex / Math.sqrt(puzzleSize)) * defaultPieceSize}px`);
+            });
+        }
+
+        function restartGame() {
+            // Reiniciar el tamaño del rompecabezas a 4 (puedes cambiarlo según tus necesidades)
+            puzzleSize = 4;
+
+            // Limpiar los tableros
+            storageBoard.innerHTML = '';
+            puzzleBoard.innerHTML = '';
+
+            // Regenerar el tablero y el almacenamiento
+            generatePuzzleBoard();
+            generateStorageBoard();
+
+            // Mostrar mensaje inicial
+            gameMessage.textContent = '¡Selecciona la dificultad y luego haz clic en una pieza para comenzar!';
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            setPuzzleInfo('Frutas Básicas', 'ruta/a/la/imagen.jpg'); // Cambia la ruta de la imagen según corresponda
+        });
+    </script>
+</body>
+
+</html>
