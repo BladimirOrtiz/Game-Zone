@@ -108,9 +108,10 @@
         <div class="mb-3">
             <label for="pair-count" class="form-label">Selecciona el número de pares:</label>
             <select id="pair-count" class="form-select">
+                <option value="" selected disabled>Selecciona...</option>
                 <option value="5">5 Pares</option>
                 <option value="9">9 Pares</option>
-                <option value="11" selected>11 Pares</option>
+                <option value="11">11 Pares</option>
             </select>
         </div>
 
@@ -175,59 +176,60 @@
         ];
 
         let cards = [];
-
+    
         // Función para iniciar el juego
         function startGame(pairCount) {
             gameBoard.innerHTML = ''; // Limpiar el tablero
             const selectedFruits = fruits.slice(0, pairCount);
             cards = [...selectedFruits, ...selectedFruits]; // Duplicar las frutas para formar parejas
-
+    
             // Mezclar las cartas
             cards = cards.sort(() => 0.5 - Math.random());
-
+    
             // Crear las cartas en el tablero
             cards.forEach(fruit => {
                 const card = document.createElement('div');
                 card.classList.add('card');
                 card.dataset.fruit = fruit.name;
-
+    
                 const img = document.createElement('img');
                 img.src = fruit.img;
                 img.alt = fruit.name;
-
+                img.style.display = 'none'; // Ocultar la imagen inicialmente
+    
                 card.appendChild(img);
                 gameBoard.appendChild(card);
             });
-
-            // Lógica del juego
+    
+            // Agregar eventos a las cartas
             addCardListeners();
         }
-
+    
         // Función para agregar eventos a las cartas
         function addCardListeners() {
             const cardElements = document.querySelectorAll('.card');
             let flippedCards = [];
             let matchedPairs = 0;
-
+    
             cardElements.forEach(card => {
                 card.addEventListener('click', () => {
                     if (flippedCards.length < 2 && !card.classList.contains('flipped')) {
                         card.classList.add('flipped');
                         flippedCards.push(card);
-                        card.querySelector('img').style.display = 'block';
-
+                        card.querySelector('img').style.display = 'block'; // Mostrar imagen al dar clic
+    
                         if (flippedCards.length === 2) {
                             checkMatch(flippedCards);
                         }
                     }
                 });
             });
-
+    
             function checkMatch(flippedCards) {
                 const [firstCard, secondCard] = flippedCards;
                 const firstFruit = firstCard.dataset.fruit;
                 const secondFruit = secondCard.dataset.fruit;
-
+    
                 if (firstFruit === secondFruit) {
                     matchedPairs++;
                     resetCards();
@@ -244,26 +246,24 @@
                     }, 1000);
                 }
             }
-
+    
             function resetCards() {
                 flippedCards = [];
             }
         }
-
-        // Cambiar el número de pares al cambiar el select
+    
+        // Esperar a que el usuario seleccione un número de pares
         pairCountSelect.addEventListener('change', () => {
             const pairCount = parseInt(pairCountSelect.value);
+            restartButton.disabled = false; // Habilitar el botón de reinicio
             startGame(pairCount);
         });
-
-        // Reiniciar el juego
+    
+        // Reiniciar el juego al hacer clic en el botón
         restartButton.addEventListener('click', () => {
             const pairCount = parseInt(pairCountSelect.value);
             startGame(pairCount);
         });
-
-        // Iniciar el juego con 8 pares por defecto
-        startGame(8);
     </script>
 </body>
 </html>

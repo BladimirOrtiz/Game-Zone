@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Estilos integrados -->
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+    
+        /* Estilos para la barra de navegación */
+        #navbar {
+            background-color: #2d2b30;
+            padding: 10px 0;
+        }
+    
+        #navbar ul {
+            padding-left: 0;
+            list-style: none;
+            text-align: center;
+            margin: 0;
+        }
+    
+        #navbar .navbar-brand img {
+            max-width: 100%;
+            height: auto;
+        }
+    
+        .navbar {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+    
+        .logo {
+            width: 40%;
+            height: 40%;
+        }
+    
+        /* Estilos para botones */
+        .btn-custom {
+            text-align: center;
+            width: 100%;
+        }
+    
+        .icon-size {
+            width: 50px;
+            height: 50px;
+        }
+    
+        /* Estilos para el pie de página */
+        footer {
+            max-width: 100%;
+            height: auto;
+            background-color: red;
+            color: #fff;
+        }
+    
+        .social-icons .social-icon {
+            display: inline-block;
+            margin-right: 10px;
+            color: #333;
+            font-size: 24px;
+        }
+    
+        .location p {
+            color: white;
+            font-style: italic;
+            font-size: 14px;
+            font-weight: bold;
+        }
+    
+        .back-button {
+            display: inline-block;
+            margin-bottom: 20px;
+            padding: 10px 20px;
+            font-size: 16px;
+            color: #fff;
+            background-color: #007bff;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+    
+        .back-button:hover {
+            background-color: transparent !important;
+            transform: translateX(-5px);
+        }
+    
+        .container {
+            margin-top: 20px;
+        }
+    
+        .blockquote p {
+            font-size: 24px;
+            font-weight: bold;
+        }
+    
+        .banner {
+            width: 90%;
+            text-align: center;
+            margin: 20px auto;
+            padding: 10px;
+            background-color: #2d2b30;
+            color: white;
+            font-weight: bold;
+            font-size: 20px;
+        }
+    
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+    
+        .card-image {
+            width: 100px;
+            height: 100px;
+            margin: 10px;
+            cursor: pointer;
+        }
+    
+        .image-container {
+            width: 150px;
+            height: 150px;
+            border: 2px dashed #333;
+            margin: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 10px;
+            background-color: #fff;
+            transition: background-color 0.3s;
+            position: relative;
+            flex-direction: column;
+        }
+       
+        .image-container.correct {
+            background-color: #4CAF50;
+        }
+    
+        .image-container.wrong {
+            background-color: #ff4c4c;
+        }
+    
+        /* Estilo para los nombres de los animales */
+        .image-container .name {
+            color: black;
+            font-family: 'Century Gothic', sans-serif;
+            font-weight: bold;
+            font-size: 16px; /* Ajusta el tamaño de la fuente si es necesario */
+            text-align: center;
+            margin-top: 8px;
+        }
+    
+        .btn-play {
+            margin-top: 10px;
+            padding: 5px 15px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+    
+        .btn-play:hover {
+            background-color: #0056b3;
+        }
+    </style>
+    
+    
+
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" type="image/x-icon" href="../../../../img/logo_sf.png">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+
+    <title>Relación de Imagen palabra</title>
+</head>
+
+<body>
+    <!-- Barra de navegación -->
+    <nav id="navbar" class="navbar navbar-light sticky-top">
+        <ul id="mn" class="nav nav-pills">
+            <div style="display: flex; justify-content: space-between; align-items: center; width: 70%;">
+                <a class="navbar-brand" href="../../../../index.html">
+                    <img src="../../../../img/logofcd.png" class="rounded logo" alt="Logo FCD">
+                </a>
+                <a class="navbar-brand" href="../../../../index.html">
+                    <img src="../../../../img/logo_sf.png" class="rounded logo" alt="Logo SF">
+                </a>
+            </div>
+        </ul>
+    </nav>
+
+    <div class="banner">
+        Arrastra la imagen al contenedor correspondiente y haz clic en "Reproducir sonido" para escuchar una pista.
+    </div>
+
+    <!-- Contenedor de imágenes -->
+    <div class="container" id="image-container">
+
+        <div class="container" id="image-container">
+            <div class="image-container">
+                <img src="../../../../img/relation_objets/images_with_sounds/animals/dog.jpg" alt="perro" draggable="true" id="dog" ondragstart="drag(event)" class="card-image">
+                <p class="name">Perro</p>
+            </div>
+            <div class="image-container">
+                <img src="../../../../img/relation_objets/images_with_sounds/animals/cat.jpg" alt="gato" draggable="true" id="cat" ondragstart="drag(event)" class="card-image">
+                <p class="name">Gato</p>
+            </div>
+            <div class="image-container">
+                <img src="../../../../img/relation_objets/images_with_sounds/animals/bird.jpg" alt="pájaro" draggable="true" id="bird" ondragstart="drag(event)" class="card-image">
+                <p class="name">Pájaro</p>
+            </div>
+            <div class="image-container">
+                <img src="../../../../img/relation_objets/images_with_sounds/animals/cow.jpg" alt="vaca" draggable="true" id="cow" ondragstart="drag(event)" class="card-image">
+                <p class="name">Vaca</p>
+            </div>
+            <div class="image-container">
+                <img src="../../../../img/relation_objets/images_with_sounds/animals/bear.jpg" alt="oso" draggable="true" id="bear" ondragstart="drag(event)" class="card-image">
+                <p class="name">Oso</p>
+            </div>
+            <div class="image-container">
+                <img src="../../../../img/relation_objets/images_with_sounds/animals/crow.jpg" alt="cuervo" draggable="true" id="crow" ondragstart="drag(event)" class="card-image">
+                <p class="name">Cuervo</p>
+            </div>
+            <div class="image-container">
+                <img src="../../../../img/relation_objets/images_with_sounds/animals/chick.jpg" alt="pollito" draggable="true" id="chick" ondragstart="drag(event)" class="card-image">
+                <p class="name">Pollito</p>
+            </div>
+            <div class="image-container">
+                <img src="../../../../img/relation_objets/images_with_sounds/animals/dolphin.jpeg" alt="delfín" draggable="true" id="dolphin" ondragstart="drag(event)" class="card-image">
+                <p class="name">Delfín</p>
+            </div>
+            <div class="image-container">
+                <img src="../../../../img/relation_objets/images_with_sounds/animals/duck.jpg" alt="pato" draggable="true" id="duck" ondragstart="drag(event)" class="card-image">
+                <p class="name">Pato</p>
+            </div>
+            <div class="image-container">
+                <img src="../../../../img/relation_objets/images_with_sounds/animals/eagle.jpg" alt="águila" draggable="true" id="eagle" ondragstart="drag(event)" class="card-image">
+                <p class="name">Águila</p>
+            </div>
+            <div class="image-container">
+                <img src="../../../../img/relation_objets/images_with_sounds/animals/elephant.jpg" alt="elefante" draggable="true" id="elephant" ondragstart="drag(event)" class="card-image">
+                <p class="name">Elefante</p>
+            </div>
+            <div class="image-container">
+                <img src="../../../../img/relation_objets/images_with_sounds/animals/frog.jpeg" alt="rana" draggable="true" id="frog" ondragstart="drag(event)" class="card-image">
+                <p class="name">Rana</p>
+            </div>
+            <div class="image-container">
+                <img src="../../../../img/relation_objets/images_with_sounds/animals/goose.jpeg" alt="ganso" draggable="true" id="goose" ondragstart="drag(event)" class="card-image">
+                <p class="name">Ganso</p>
+            </div>
+            <div class="image-container">
+                <img src="../../../../img/relation_objets/images_with_sounds/animals/horse.jpeg" alt="caballo" draggable="true" id="horse" ondragstart="drag(event)" class="card-image">
+                <p class="name">Caballo</p>
+            </div>
+            <div class="image-container">
+                <img src="../../../../img/relation_objets/images_with_sounds/animals/ken.jpg" alt="gallina" draggable="true" id="ken" ondragstart="drag(event)" class="card-image">
+                <p class="name">Gallina</p>
+            </div>
+            <div class="image-container">
+                <img src="../../../../img/relation_objets/images_with_sounds/animals/killer_whale.jpg" alt="orca" draggable="true" id="killer_whale" ondragstart="drag(event)" class="card-image">
+                <p class="name">Orca</p>
+            </div>
+            <div class="image-container">
+                <img src="../../../../img/relation_objets/images_with_sounds/animals/lion.jpg" alt="león" draggable="true" id="lion" ondragstart="drag(event)" class="card-image">
+                <p class="name">León</p>
+            </div>
+            <div class="image-container">
+                <img src="../../../../img/relation_objets/images_with_sounds/animals/monkey.jpg" alt="mono" draggable="true" id="monkey" ondragstart="drag(event)" class="card-image">
+                <p class="name">Mono</p>
+            </div>
+            <div class="image-container">
+                <img src="../../../../img/relation_objets/images_with_sounds/animals/owl.jpeg" alt="búho" draggable="true" id="owl" ondragstart="drag(event)" class="card-image">
+                <p class="name">Búho</p>
+            </div>
+            <div class="image-container">
+                <img src="../../../../img/relation_objets/images_with_sounds/animals/panter.jpg" alt="pantera" draggable="true" id="panter" ondragstart="drag(event)" class="card-image">
+                <p class="name">Pantera</p>
+            </div>
+            <div class="image-container">
+                <img src="../../../../img/relation_objets/images_with_sounds/animals/penguin.jpeg" alt="pingüino" draggable="true" id="penguin" ondragstart="drag(event)" class="card-image">
+                <p class="name">Pingüino</p>
+            </div>
+            <div class="image-container">
+                <img src="../../../../img/relation_objets/images_with_sounds/animals/pig.jpg" alt="cerdo" draggable="true" id="pig" ondragstart="drag(event)" class="card-image">
+                <p class="name">Cerdo</p>
+            </div>
+            <div class="image-container">
+                <img src="../../../../img/relation_objets/images_with_sounds/animals/sheep.jpg" alt="oveja" draggable="true" id="sheep" ondragstart="drag(event)" class="card-image">
+                <p class="name">Oveja</p>
+            </div>
+            <div class="image-container">
+                <img src="../../../../img/relation_objets/images_with_sounds/animals/tiger.jpg" alt="tigre" draggable="true" id="tiger" ondragstart="drag(event)" class="card-image">
+                <p class="name">Tigre</p>
+            </div>
+            <div class="image-container">
+                <img src="../../../../img/relation_objets/images_with_sounds/animals/whale.jpg" alt="ballena" draggable="true" id="whale" ondragstart="drag(event)" class="card-image">
+                <p class="name">Ballena</p>
+            </div>
+            <div class="image-container">
+                <img src="../../../../img/relation_objets/images_with_sounds/animals/wolf.jpg" alt="lobo" draggable="true" id="wolf" ondragstart="drag(event)" class="card-image">
+                <p class="name">Lobo</p>
+            </div>
+        </div>
+        
+    </div>
+    
+    
+
+    <!-- Contenedores de suelta con botones de reproducción -->
+    <div class="container">
+        <div class="image-container" data-sound="dog" ondrop="drop(event)" ondragover="allowDrop(event)">
+            <p>Suelta aquí</p>
+            <button onclick="playSoundForContainer(this)" class="btn-play">Reproducir sonido</button>
+        </div>
+        
+        <div class="image-container" data-sound="cat" ondrop="drop(event)" ondragover="allowDrop(event)">
+            <p>Suelta aquí</p>
+            <button onclick="playSoundForContainer(this)" class="btn-play">Reproducir sonido</button>
+        </div>
+        <div class="image-container" data-sound="bird" ondrop="drop(event)" ondragover="allowDrop(event)">
+            <p>Suelta aquí</p>
+            <button onclick="playSoundForContainer(this)" class="btn-play">Reproducir sonido</button>
+        </div>
+        <div class="image-container" data-sound="cow" ondrop="drop(event)" ondragover="allowDrop(event)">
+            <p>Suelta aquí</p>
+            <button onclick="playSoundForContainer(this)" class="btn-play">Reproducir sonido</button>
+        </div>
+        <div class="image-container" data-sound="bear" ondrop="drop(event)" ondragover="allowDrop(event)">
+            <p>Suelta aquí</p>
+            <button onclick="playSoundForContainer(this)" class="btn-play">Reproducir sonido</button>
+        </div>
+        <div class="image-container" data-sound="crow" ondrop="drop(event)" ondragover="allowDrop(event)">
+            <p>Suelta aquí</p>
+            <button onclick="playSoundForContainer(this)" class="btn-play">Reproducir sonido</button>
+        </div>
+        <div class="image-container" data-sound="chick" ondrop="drop(event)" ondragover="allowDrop(event)">
+            <p>Suelta aquí</p>
+            <button onclick="playSoundForContainer(this)" class="btn-play">Reproducir sonido</button>
+        </div>
+        <div class="image-container" data-sound="dolphin" ondrop="drop(event)" ondragover="allowDrop(event)">
+            <p>Suelta aquí</p>
+            <button onclick="playSoundForContainer(this)" class="btn-play">Reproducir sonido</button>
+        </div>
+
+        <div class="image-container" data-sound="duck" ondrop="drop(event)" ondragover="allowDrop(event)">
+            <p>Suelta aquí</p>
+            <button onclick="playSoundForContainer(this)" class="btn-play">Reproducir sonido</button>
+        </div>
+        <div class="image-container" data-sound="eagle" ondrop="drop(event)" ondragover="allowDrop(event)">
+            <p>Suelta aquí</p>
+            <button onclick="playSoundForContainer(this)" class="btn-play">Reproducir sonido</button>
+        </div>
+        <div class="image-container" data-sound="elephat" ondrop="drop(event)" ondragover="allowDrop(event)">
+            <p>Suelta aquí</p>
+            <button onclick="playSoundForContainer(this)" class="btn-play">Reproducir sonido</button>
+        </div>
+        <div class="image-container" data-sound="frog" ondrop="drop(event)" ondragover="allowDrop(event)">
+            <p>Suelta aquí</p>
+            <button onclick="playSoundForContainer(this)" class="btn-play">Reproducir sonido</button>
+        </div>
+        <div class="image-container" data-sound="goose" ondrop="drop(event)" ondragover="allowDrop(event)">
+            <p>Suelta aquí</p>
+            <button onclick="playSoundForContainer(this)" class="btn-play">Reproducir sonido</button>
+        </div>
+
+        <div class="image-container" data-sound="horse" ondrop="drop(event)" ondragover="allowDrop(event)">
+            <p>Suelta aquí</p>
+            <button onclick="playSoundForContainer(this)" class="btn-play">Reproducir sonido</button>
+        </div>
+        <div class="image-container" data-sound="ken" ondrop="drop(event)" ondragover="allowDrop(event)">
+            <p>Suelta aquí</p>
+            <button onclick="playSoundForContainer(this)" class="btn-play">Reproducir sonido</button>
+        </div>
+
+        <div class="image-container" data-sound="killer_whale" ondrop="drop(event)" ondragover="allowDrop(event)">
+            <p>Suelta aquí</p>
+            <button onclick="playSoundForContainer(this)" class="btn-play">Reproducir sonido</button>
+        </div>
+        <div class="image-container" data-sound="lion" ondrop="drop(event)" ondragover="allowDrop(event)">
+            <p>Suelta aquí</p>
+            <button onclick="playSoundForContainer(this)" class="btn-play">Reproducir sonido</button>
+        </div>
+
+        <div class="image-container" data-sound="monkey" ondrop="drop(event)" ondragover="allowDrop(event)">
+            <p>Suelta aquí</p>
+            <button onclick="playSoundForContainer(this)" class="btn-play">Reproducir sonido</button>
+        </div>
+        <div class="image-container" data-sound="owl" ondrop="drop(event)" ondragover="allowDrop(event)">
+            <p>Suelta aquí</p>
+            <button onclick="playSoundForContainer(this)" class="btn-play">Reproducir sonido</button>
+        </div>
+
+        <div class="image-container" data-sound="panter" ondrop="drop(event)" ondragover="allowDrop(event)">
+            <p>Suelta aquí</p>
+            <button onclick="playSoundForContainer(this)" class="btn-play">Reproducir sonido</button>
+        </div>
+        <div class="image-container" data-sound="penguin" ondrop="drop(event)" ondragover="allowDrop(event)">
+            <p>Suelta aquí</p>
+            <button onclick="playSoundForContainer(this)" class="btn-play">Reproducir sonido</button>
+        </div>
+
+        <div class="image-container" data-sound="pig" ondrop="drop(event)" ondragover="allowDrop(event)">
+            <p>Suelta aquí</p>
+            <button onclick="playSoundForContainer(this)" class="btn-play">Reproducir sonido</button>
+        </div>
+        <div class="image-container" data-sound="sheep" ondrop="drop(event)" ondragover="allowDrop(event)">
+            <p>Suelta aquí</p>
+            <button onclick="playSoundForContainer(this)" class="btn-play">Reproducir sonido</button>
+        </div>
+
+        <div class="image-container" data-sound="tiger" ondrop="drop(event)" ondragover="allowDrop(event)">
+            <p>Suelta aquí</p>
+            <button onclick="playSoundForContainer(this)" class="btn-play">Reproducir sonido</button>
+        </div>
+        <div class="image-container" data-sound="whale" ondrop="drop(event)" ondragover="allowDrop(event)">
+            <p>Suelta aquí</p>
+            <button onclick="playSoundForContainer(this)" class="btn-play">Reproducir sonido</button>
+        </div>
+       
+        <div class="image-container" data-sound="wolf" ondrop="drop(event)" ondragover="allowDrop(event)">
+            <p>Suelta aquí</p>
+            <button onclick="playSoundForContainer(this)" class="btn-play">Reproducir sonido</button>
+        </div>
+
+   </div>
+
+   <  <script>
+    // Definir sonidos
+    const sounds = {
+        dog: new Audio('../../../../src/sounds//animals/dog.mp3'),
+        cat: new Audio('../../../../src/sounds//animals/cat.mp3'),
+        bird: new Audio('../../../../src/sounds//animals/bird.mp3'),
+        cow: new Audio('../../../../src/sounds//animals/cow.mp3'),
+        bear: new Audio('../../../../src/sounds//animals/bear.mp3'),
+        crow: new Audio('../../../../src/sounds//animals/crow.mp3'),
+        chick: new Audio('../../../../src/sounds//animals/chick.mp3'),
+        dolphin: new Audio('../../../../src/sounds//animals/dolphin.mp3'),
+        duck: new Audio('../../../../src/sounds//animals/duck.mp3'),
+        eagle: new Audio('../../../../src/sounds//animals/eagle.mp3'),
+        elephat: new Audio('../../../../src/sounds//animals/elephant.mp3'),
+        frog: new Audio('../../../../src/sounds//animals/frog.mp3'),
+        goose: new Audio('../../../../src/sounds//animals/goose.mp3'),
+        horse: new Audio('../../../../src/sounds//animals/horse.mp3'),
+        ken: new Audio('../../../../src/sounds//animals/ken.mp3'),
+        killer_whale: new Audio('../../../../src/sounds//animals/lion.mp3'),
+        lion: new Audio('../../../../src/sounds//animals/killer_whale.mp3'),
+        monkey: new Audio('../../../../src/sounds//animals/monkey.mp3'),
+        owl: new Audio('../../../../src/sounds//animals/owl.mp3'),
+        panter: new Audio('../../../../src/sounds//animals/panter.mp3'),
+        penguin: new Audio('../../../../src/sounds//animals/penguin.mp3'),
+        pig: new Audio('../../../../src/sounds//animals/pig.mp3'),
+        sheep: new Audio('../../../../src/sounds//animals/sheep.mp3'),
+        tiger: new Audio('../../../../src/sounds//animals/tiger.mp3'),
+        whale: new Audio('../../../../src/sounds//animals/whale.mp3'),
+        wolf: new Audio('../../../../src/sounds//animals/wolf.mp3')
+    };
+
+    // Permitir soltar elementos
+    function allowDrop(event) {
+        event.preventDefault();
+    }
+
+    // Al arrastrar una imagen
+    function drag(event) {
+        event.dataTransfer.setData('text', event.target.id);
+    }
+
+    // Reproducir sonido específico para el contenedor al hacer clic en el botón de "Reproducir sonido"
+    function playSoundForContainer(button) {
+        const container = button.parentElement;
+        const soundId = container.getAttribute("data-sound");
+    
+        if (soundId && sounds[soundId]) {
+            // Reiniciar el sonido si ya se estaba reproduciendo
+            sounds[soundId].currentTime = 0;
+            sounds[soundId].play();
+    
+            // Detener el sonido después de 5 segundos
+            setTimeout(() => {
+                sounds[soundId].pause();
+                sounds[soundId].currentTime = 0; // Reiniciar el sonido al principio
+            }, 5000); // 5000 milisegundos = 5 segundos
+        } else {
+            alert("No hay sonido asignado a este contenedor.");
+        }
+    }
+    
+
+    // Al soltar la imagen en un contenedor
+    function drop(event) {
+        event.preventDefault();
+        const draggedImageId = event.dataTransfer.getData('text');
+        const container = event.target.closest(".image-container");
+        const expectedSound = container.getAttribute("data-sound");
+    
+        if (draggedImageId === expectedSound) {
+            container.classList.add('correct');
+    
+            // Obtener la imagen arrastrada y crear un clon para mostrarla en el contenedor de destino
+            const draggedImage = document.getElementById(draggedImageId);
+            const clonedImage = draggedImage.cloneNode(true);
+            clonedImage.classList.add("card-image");
+    
+            // Obtener el nombre del animal desde el atributo "alt"
+            const imageName = draggedImage.alt;
+            const nameTag = document.createElement("p");
+            nameTag.textContent = imageName;
+            nameTag.classList.add("image-name");
+    
+            // Limpiar el contenedor y agregar la imagen clonada y el nombre
+            container.innerHTML = '';
+            container.appendChild(clonedImage);
+            container.appendChild(nameTag);
+    
+            // Eliminar la imagen del área de imágenes inicial
+            draggedImage.style.display = 'none';
+    
+            alert('¡Correcto! Imagen emparejada con el sonido.');
+        } else {
+            container.classList.add('wrong');
+            setTimeout(() => {
+                container.classList.remove('wrong');
+                container.innerHTML = '<p>Suelta aquí</p><button onclick="playSoundForContainer(this)" class="btn-play">Reproducir sonido</button>';
+            }, 1000);
+            alert('Incorrecto. Inténtalo de nuevo.');
+        }
+    }
+    
+    
+</script>
+
+    <footer>
+        <div class="container">
+            <div class="row justify-content-center align-items-center">
+                <div class="col-md-6 text-center mb-3">
+                    <!-- Ruta de la imagen del logo en el pie de página -->
+                    <img src="../../../../img/logofcd.png" class="rounded" alt="Logo FCD"
+                        style="width: 40%; height: 70%;">
+                </div>
+                <div class="col-md-6 text-center">
+                    <div class="social-icons mb-3">
+                        <!-- Ruta de la imagen del ícono de Facebook -->
+                        <a href="https://www.facebook.com/FundacionCorazonDown" class="social-icon">
+                            <img src="../../../../img/icons/ficon.png" class="rounded" alt="Facebook Icon"
+                                style="width: 70%; height: 70%;">
+                        </a>
+                        <!-- Ruta de la imagen del ícono de Twitter -->
+                        <a href="https://x.com/mariopmtz" class="social-icon">
+                            <img src="../../../../img/icons/xicon.png" class="rounded" alt="Twitter Icon"
+                                style="width: 60%; height: 70%;">
+                        </a>
+                        <!-- Ruta de la imagen del ícono de Instagram -->
+                        <a href="https://www.instagram.com/fundacioncorazondown?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw=="
+                            class="social-icon">
+                            <img src="../../../../img/icons/insicon.png" class="rounded" alt="Instagram Icon"
+                                style="width: 70%; height: 70%;">
+                        </a>
+                        <!-- Ruta de la imagen del ícono de TikTok -->
+                        <a href="https://www.tiktok.com/@corazndown?is_from_webapp=1&sender_device=pc"
+                            class="social-icon">
+                            <img src="../../../../img/icons/ticon.png" class="rounded" alt="TikTok Icon"
+                                style="width: 70%; height: 70%;">
+                        </a>
+                    </div>
+                    <div class="location">
+                        <p>XICOTÉNCATL 1017, ZONA FEB 10 2015, BARRIO DE LA NORIA, 68100 OAXACA DE JUÁREZ, OAX.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+
+</body>
+
+</html>

@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Estilos integrados -->
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        /* Estilos para la barra de navegación */
+        #navbar {
+            background-color: #2d2b30;
+            padding: 10px 0;
+        }
+
+        #navbar ul {
+            padding-left: 0;
+            list-style: none;
+            text-align: center;
+            margin: 0;
+        }
+
+        #navbar .navbar-brand img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .navbar {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo {
+            width: 40%;
+            height: 40%;
+        }
+
+        /* Estilos para botones */
+        .btn-custom {
+            text-align: center;
+            width: 100%;
+        }
+
+        .icon-size {
+            width: 50px;
+            height: 50px;
+        }
+
+        /* Estilos para el pie de página */
+        footer {
+            max-width: 100%;
+            height: auto;
+            background-color: red;
+            color: #fff;
+        }
+
+        .social-icons .social-icon {
+            display: inline-block;
+            margin-right: 10px;
+            color: #333;
+            font-size: 24px;
+        }
+
+        .location p {
+            color: white;
+            font-style: italic;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        .back-button {
+            display: inline-block;
+            margin-bottom: 20px;
+            padding: 10px 20px;
+            font-size: 16px;
+            color: #fff;
+            background-color: #007bff;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        .back-button:hover {
+            background-color: transparent !important;
+            transform: translateX(-5px);
+        }
+
+        .container {
+            margin-top: 20px;
+        }
+
+        .blockquote p {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+           
+        .fruit-card {
+            border: 2px solid #ccc;
+            margin-bottom: 20px;
+            transition: transform 0.2s;
+            
+        }
+        .fruit-card img {
+            width: 100%; /* Asegura que la imagen ocupe todo el ancho de la tarjeta */
+            height: 200px; /* Altura fija para mantener uniformidad */
+            object-fit: cover; /* Escala la imagen sin distorsión */
+            border-radius: 10px; /* Opcional: esquinas redondeadas */
+        }
+        
+
+        .fruit-card:hover {
+            transform: scale(1.05);
+        }
+
+        .drop-zone {
+            height: 60px;
+            line-height: 60px;
+            background-color: #f5f5f5;
+            border: 1px dashed #aaa;
+            margin-top: 10px;
+            text-align: center;
+        }
+
+        .fruit-label {
+            display: inline-block;
+            background-color: #007bff;
+            color: white;
+            padding: 8px 12px;
+            border-radius: 20px;
+            margin: 5px;
+            cursor: grab;
+            font-family: "Century Gothic", sans-serif;
+        }
+
+        .fruit-label:active {
+            cursor: grabbing;
+        }
+
+        .banner {
+            background-color: #eee;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .correct {
+            font-family: "Century Gothic", sans-serif;
+            font-weight: bold;
+            font-size: large;
+            color: red;
+        }
+
+        .incorrect {
+            font-family: "Century Gothic", sans-serif;
+            font-weight: bold;
+            color: red;
+        }
+    </style>
+
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" type="image/x-icon" href="../../../../img/logo_sf.png">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+
+    <title>Relación de Imagen palabra</title>
+</head>
+
+<body>
+
+    <!-- Barra de navegación -->
+    <nav id="navbar" class="navbar navbar-light sticky-top">
+        <ul id="mn" class="nav nav-pills">
+            <div style="display: flex; justify-content: space-between; align-items: center; width: 70%;">
+                <a class="navbar-brand" href="../../../../index.html">
+                    <img src="../../../../img/logofcd.png" class="rounded logo" alt="Logo FCD">
+                </a>
+                <a class="navbar-brand" href="../../../../index.html">
+                    <img src="../../../../img/logo_sf.png" class="rounded logo" alt="Logo SF">
+                </a>
+            </div>
+        </ul>
+    </nav>
+    <div class="container mt-4">
+        <h2 class="text-center mb-4">Medios de Transporte</h2>
+    
+        <!-- Banner con las etiquetas de transporte -->
+        <div class="banner" id="fruit-banner">
+            <span class="fruit-label" draggable="true" data-fruit="carro">Carro</span>
+            <span class="fruit-label" draggable="true" data-fruit="trailer">Trailer</span>
+            <span class="fruit-label" draggable="true" data-fruit="camión">Camión</span>
+            <span class="fruit-label" draggable="true" data-fruit="motocicleta">Motocicleta</span>
+            <span class="fruit-label" draggable="true" data-fruit="avión">Avión</span>
+            <span class="fruit-label" draggable="true" data-fruit="helicoptero">Helicóptero</span>
+            <span class="fruit-label" draggable="true" data-fruit="bicicleta">Bicicleta</span>
+            <span class="fruit-label" draggable="true" data-fruit="yate">Yate</span>
+            <span class="fruit-label" draggable="true" data-fruit="camioneta">Camioneta</span>
+            <span class="fruit-label" draggable="true" data-fruit="tren">Tren</span>
+            <span class="fruit-label" draggable="true" data-fruit="bote">Bote</span>
+            <span class="fruit-label" draggable="true" data-fruit="ambulancia">Ambulancia</span>
+            <span class="fruit-label" draggable="true" data-fruit="grua">Grua</span>
+            <span class="fruit-label" draggable="true" data-fruit="taxi">Taxi</span>
+            <span class="fruit-label" draggable="true" data-fruit="mototaxi">Mototaxi</span>
+            <span class="fruit-label" draggable="true" data-fruit="traktor">Traktor</span>
+            <span class="fruit-label" draggable="true" data-fruit="camion de carga">Camión de Carga</span>
+        </div>
+    
+        <div class="banner mt-4">
+            <div class="row justify-content-center">
+                <!-- Tarjetas con zonas de suelta -->
+                <div class="col-md-3 text-center">
+                    <div class="card fruit-card">
+                        <img class="card-img-top" src="../../../../img/puzzle/transports/terrestrial_transports/car.jpeg" alt="Carro">
+                        <div class="card-body drop-zone" data-fruit="carro">Suelta aquí</div>
+                    </div>
+                </div>
+    
+                <div class="col-md-3 text-center">
+                    <div class="card fruit-card">
+                        <img class="card-img-top" src="../../../../img/puzzle/transports/terrestrial_transports/truck.jpg" alt="Camión">
+                        <div class="card-body drop-zone" data-fruit="trailer">Suelta aquí</div>
+                    </div>
+                </div>
+                <div class="col-md-3 text-center">
+                    <div class="card fruit-card">
+                        <img class="card-img-top" src="../../../../img/puzzle/transports/terrestrial_transports/bus.jpg" alt="Camión">
+                        <div class="card-body drop-zone" data-fruit="camión">Suelta aquí</div>
+                    </div>
+                </div>
+    
+                <div class="col-md-3 text-center">
+                    <div class="card fruit-card">
+                        <img class="card-img-top" src="../../../../img/puzzle/transports/terrestrial_transports/motocycle.jpg" alt="Motocicleta">
+                        <div class="card-body drop-zone" data-fruit="motocicleta">Suelta aquí</div>
+                    </div>
+                </div>
+    
+                <div class="col-md-3 text-center">
+                    <div class="card fruit-card">
+                        <img class="card-img-top" src="../../../../img/puzzle/transports/flying_transports/plane.jpeg" alt="Avión">
+                        <div class="card-body drop-zone" data-fruit="avión">Suelta aquí</div>
+                    </div>
+                </div>
+    
+                <div class="col-md-3 text-center">
+                    <div class="card fruit-card">
+                        <img class="card-img-top" src="../../../../img/puzzle/transports/flying_transports/helicopter.jpg" alt="Helicóptero">
+                        <div class="card-body drop-zone" data-fruit="helicoptero">Suelta aquí</div>
+                    </div>
+                </div>
+    
+                <div class="col-md-3 text-center">
+                    <div class="card fruit-card">
+                        <img class="card-img-top" src="../../../../img/puzzle/transports/terrestrial_transports/bicycle.jpg" alt="Bicicleta">
+                        <div class="card-body drop-zone" data-fruit="bicicleta">Suelta aquí</div>
+                    </div>
+                </div>
+    
+                <div class="col-md-3 text-center">
+                    <div class="card fruit-card">
+                        <img class="card-img-top" src="../../../../img/puzzle/transports/marine_transports/yate.png" alt="Yate">
+                        <div class="card-body drop-zone" data-fruit="yate">Suelta aquí</div>
+                    </div>
+                </div>
+
+                <div class="col-md-3 text-center">
+                    <div class="card fruit-card">
+                        <img class="card-img-top" src="../../../../img/puzzle/transports/terrestrial_transports/van.jpg" alt="Yate">
+                        <div class="card-body drop-zone" data-fruit="camioneta">Suelta aquí</div>
+                    </div>
+                </div>
+
+                <div class="col-md-3 text-center">
+                    <div class="card fruit-card">
+                        <img class="card-img-top" src="../../../../img/puzzle/transports/terrestrial_transports/train.jpeg" alt="Yate">
+                        <div class="card-body drop-zone" data-fruit="tren">Suelta aquí</div>
+                    </div>
+                </div>
+
+                <div class="col-md-3 text-center">
+                    <div class="card fruit-card">
+                        <img class="card-img-top" src="../../../../img/puzzle/transports/marine_transports/boat.jpg" alt="Yate">
+                        <div class="card-body drop-zone" data-fruit="bote">Suelta aquí</div>
+                    </div>
+                </div>
+                <div class="col-md-3 text-center">
+                    <div class="card fruit-card">
+                        <img class="card-img-top" src="../../../../img/puzzle/transports/terrestrial_transports/ambulance.jpg" alt="Yate">
+                        <div class="card-body drop-zone" data-fruit="ambulancia">Suelta aquí</div>
+                    </div>
+                </div>
+                <div class="col-md-3 text-center">
+                    <div class="card fruit-card">
+                        <img class="card-img-top" src="../../../../img/puzzle/transports/terrestrial_transports/crane.png" alt="Yate">
+                        <div class="card-body drop-zone" data-fruit="grua">Suelta aquí</div>
+                    </div>
+                </div>
+                <div class="col-md-3 text-center">
+                    <div class="card fruit-card">
+                        <img class="card-img-top" src="../../../../img/puzzle/transports/terrestrial_transports/taxi.jpg" alt="Yate">
+                        <div class="card-body drop-zone" data-fruit="taxi">Suelta aquí</div>
+                    </div>
+                </div>
+                <div class="col-md-3 text-center">
+                    <div class="card fruit-card">
+                        <img class="card-img-top" src="../../../../img/puzzle/transports/terrestrial_transports/mototaxi.jpg" alt="Yate">
+                        <div class="card-body drop-zone" data-fruit="mototaxi">Suelta aquí</div>
+                    </div>
+                </div>
+                <div class="col-md-3 text-center">
+                    <div class="card fruit-card">
+                        <img class="card-img-top" src="../../../../img/puzzle/transports/terrestrial_transports/traktor.jpeg" alt="Yate">
+                        <div class="card-body drop-zone" data-fruit="traktor">Suelta aquí</div>
+                    </div>
+                </div>
+                <div class="col-md-3 text-center">
+                    <div class="card fruit-card">
+                        <img class="card-img-top" src="../../../../img/puzzle/transports/terrestrial_transports/torton.jpg" alt="Yate">
+                        <div class="card-body drop-zone" data-fruit="camión de carga">Suelta aquí</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Configurar etiquetas arrastrables
+        document.querySelectorAll('.fruit-label').forEach(label => {
+            label.addEventListener('dragstart', event => {
+                event.dataTransfer.setData('text', event.target.dataset.fruit);
+                event.target.classList.add('dragging');
+            });
+    
+            label.addEventListener('dragend', () => {
+                label.classList.remove('dragging');
+            });
+        });
+    
+        // Configurar zonas de suelta
+        document.querySelectorAll('.drop-zone').forEach(zone => {
+            zone.addEventListener('dragover', event => {
+                event.preventDefault(); // Permitir el drop
+            });
+    
+            zone.addEventListener('drop', event => {
+                event.preventDefault();
+                const fruit = event.dataTransfer.getData('text');
+                const expectedFruit = zone.dataset.fruit;
+                const draggedLabel = document.querySelector(`[data-fruit="${fruit}"]`);
+    
+                if (fruit === expectedFruit) {
+                    zone.innerHTML = `<span class="correct">${capitalize(fruit)}</span>`;
+                    draggedLabel.remove();
+                } else {
+                    alert('Transporte incorrecto. Inténtalo de nuevo.');
+                }
+            });
+        });
+    
+        // Función para capitalizar la primera letra
+        function capitalize(string) {
+            return string.charAt(0).toUpperCase() + string.slice(1);
+        }
+    </script>
+    
+
+    <footer>
+        <div class="container">
+            <div class="row justify-content-center align-items-center">
+                <div class="col-md-6 text-center mb-3">
+                    <!-- Ruta de la imagen del logo en el pie de página -->
+                    <img src="../../../../img/logofcd.png" class="rounded" alt="Logo FCD"
+                        style="width: 40%; height: 70%;">
+                </div>
+                <div class="col-md-6 text-center">
+                    <div class="social-icons mb-3">
+                        <!-- Ruta de la imagen del ícono de Facebook -->
+                        <a href="https://www.facebook.com/FundacionCorazonDown" class="social-icon">
+                            <img src="../../../../img/icons/ficon.png" class="rounded" alt="Facebook Icon"
+                                style="width: 70%; height: 70%;">
+                        </a>
+                        <!-- Ruta de la imagen del ícono de Twitter -->
+                        <a href="https://x.com/mariopmtz" class="social-icon">
+                            <img src="../../../../img/icons/xicon.png" class="rounded" alt="Twitter Icon"
+                                style="width: 60%; height: 70%;">
+                        </a>
+                        <!-- Ruta de la imagen del ícono de Instagram -->
+                        <a href="https://www.instagram.com/fundacioncorazondown?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw=="
+                            class="social-icon">
+                            <img src="../../../../img/icons/insicon.png" class="rounded" alt="Instagram Icon"
+                                style="width: 70%; height: 70%;">
+                        </a>
+                        <!-- Ruta de la imagen del ícono de TikTok -->
+                        <a href="https://www.tiktok.com/@corazndown?is_from_webapp=1&sender_device=pc"
+                            class="social-icon">
+                            <img src="../../../../img/icons/ticon.png" class="rounded" alt="TikTok Icon"
+                                style="width: 70%; height: 70%;">
+                        </a>
+                    </div>
+                    <div class="location">
+                        <p>XICOTÉNCATL 1017, ZONA FEB 10 2015, BARRIO DE LA NORIA, 68100 OAXACA DE JUÁREZ, OAX.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+
+</body>
+
+</html>

@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../../css/clarification.css">
+    <link rel="shortcut icon" type="image/x-icon" href="../../../img/logo_sf.png">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+    <title>Juego de Memorama</title>
+    <style>
+        /* Estructura para las columnas */
+        .game-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+
+        /* Columna de la imagen lateral */
+        .side-image {
+            flex: 1;
+            max-width: 30%;
+            text-align: center;
+        }
+
+        .side-image img {
+            width: 100%;
+            height: auto;
+        }
+
+        /* Columna para el juego de memorama */
+        .game-board {
+            flex: 2;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .card {
+            width: 150px;
+            height: 150px;
+            margin: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            background-image: url('../../../img/memories/side.png'); /* Imagen de respaldo para las cartas no volteadas */
+            background-size: cover;
+        }
+
+        .card img {
+            max-width: 80%;
+            display: none; /* Las imágenes están ocultas al principio */
+        }
+
+        .flipped {
+            background: none; /* Remover la imagen de respaldo cuando la carta se voltea */
+        }
+
+        .flipped img {
+            display: block; /* Mostrar imagen cuando la tarjeta está volteada */
+        }
+
+        /* Ajustes para asegurar la responsividad */
+        @media (max-width: 768px) {
+            .game-container {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .side-image {
+                max-width: 100%;
+            }
+
+            .game-board {
+                max-width: 100%;
+            }
+
+            .card {
+                width: 100px;
+                height: 100px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav id="navbar" class="navbar navbar-light sticky-top">
+        <ul id="mn" class="nav nav-pills">
+            <div style="display: flex; justify-content: space-between; align-items: center; width: 70%;">
+                <a class="navbar-brand" href="#">
+                    <img src="../../../img/logofcd.png" class="rounded logo" alt="Logo FCD">
+                </a>
+                <a class="navbar-brand" href="../../../index.html">
+                    <img src="../../../img/logo_sf.png" class="rounded logo" alt="Logo SF">
+                </a>
+            </div>
+        </ul>
+    </nav>
+
+    <div class="container mt-4">
+        <blockquote class="blockquote">
+            <p><strong>MEMORAMA DE VEGETLES BÁSICOS</strong></p>
+        </blockquote>
+
+          <!-- Filtro para seleccionar el número de pares -->
+          <div class="mb-3">
+            <label for="pair-count" class="form-label">Selecciona el número de pares:</label>
+            <select id="pair-count" class="form-select">
+                <option value="" selected disabled>Selecciona...</option>
+                <option value="2">2 Pares</option>
+                <option value="4">4 Pares</option>
+                <option value="6">6 Pares</option>
+            </select>
+        </div>
+
+        <!-- Botón para reiniciar el juego -->
+        <div class="mb-3">
+            <button id="restart-btn" class="btn btn-primary">Reiniciar Juego</button>
+        </div>
+
+        <!-- Tablero del juego de memorama -->
+        <div class="game-board" id="game-board">
+            <!-- Las tarjetas de frutas se generan dinámicamente por JavaScript -->
+        </div>
+    </div>
+
+    <!-- Pie de página -->
+    <footer>
+        <div class="container">
+            <div class="row justify-content-center align-items-center">
+                <div class="col-md-6 text-center mb-3">
+                    <img src="../../../img/logofcd.png" class="rounded" alt="Logo FCD" style="width: 40%; height: 70%;">
+                </div>
+                <div class="col-md-6 text-center">
+                    <div class="social-icons mb-3">
+                        <a href="https://www.facebook.com/FundacionCorazonDown" class="social-icon">
+                            <img src="../../../img/icons/ficon.png" class="rounded" alt="Facebook Icon" style="width: 70%; height: 70%;">
+                        </a>
+                        <a href="https://x.com/mariopmtz" class="social-icon">
+                            <img src="../../../img/icons/xicon.png" class="rounded" alt="Twitter Icon" style="width: 60%; height: 70%;">
+                        </a>
+                        <a href="https://www.instagram.com/fundacioncorazondown?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" class="social-icon">
+                            <img src="../../../img/icons/insicon.png" class="rounded" alt="Instagram Icon" style="width: 70%; height: 70%;">
+                        </a>
+                        <a href="https://www.tiktok.com/@corazndown?is_from_webapp=1&sender_device=pc" class="social-icon">
+                            <img src="../../../img/icons/ticon.png" class="rounded" alt="TikTok Icon" style="width: 70%; height: 70%;">
+                        </a>
+                    </div>
+                    <div class="location">
+                        <p>XICOTÉNCATL 1017, ZONA FEB 10 2015, BARRIO DE LA NORIA, 68100 OAXACA DE JUÁREZ, OAX.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const gameBoard = document.getElementById('game-board');
+        const pairCountSelect = document.getElementById('pair-count');
+        const restartButton = document.getElementById('restart-btn');
+
+        const fruits = [
+            {name: 'coliflor', img: '../../../img/puzzle/fruts_and_vegetables/vegetables_basic/coliflor.jpg'},
+            {name: 'zanahoria', img: '../../../img/puzzle/fruts_and_vegetables/vegetables_basic/carrot.jpg'},
+            {name: 'pimientos', img: '../../../img/puzzle/fruts_and_vegetables/vegetables_basic/peppers.jpg'},
+            {name: 'brocoli', img: '../../../img/puzzle/fruts_and_vegetables/vegetables_basic/broccoli.jpg'},
+            {name: 'cebolla morada', img: '../../../img/puzzle/fruts_and_vegetables/vegetables_basic/purpleonion.jpg'},
+            {name: 'apio', img: '../../../img/puzzle/fruts_and_vegetables/vegetables_basic/apio.png'}
+        ];
+
+        let cards = [];
+    
+        // Función para iniciar el juego
+        function startGame(pairCount) {
+            gameBoard.innerHTML = ''; // Limpiar el tablero
+            const selectedFruits = fruits.slice(0, pairCount);
+            cards = [...selectedFruits, ...selectedFruits]; // Duplicar las frutas para formar parejas
+    
+            // Mezclar las cartas
+            cards = cards.sort(() => 0.5 - Math.random());
+    
+            // Crear las cartas en el tablero
+            cards.forEach(fruit => {
+                const card = document.createElement('div');
+                card.classList.add('card');
+                card.dataset.fruit = fruit.name;
+    
+                const img = document.createElement('img');
+                img.src = fruit.img;
+                img.alt = fruit.name;
+                img.style.display = 'none'; // Ocultar la imagen inicialmente
+    
+                card.appendChild(img);
+                gameBoard.appendChild(card);
+            });
+    
+            // Agregar eventos a las cartas
+            addCardListeners();
+        }
+    
+        // Función para agregar eventos a las cartas
+        function addCardListeners() {
+            const cardElements = document.querySelectorAll('.card');
+            let flippedCards = [];
+            let matchedPairs = 0;
+    
+            cardElements.forEach(card => {
+                card.addEventListener('click', () => {
+                    if (flippedCards.length < 2 && !card.classList.contains('flipped')) {
+                        card.classList.add('flipped');
+                        flippedCards.push(card);
+                        card.querySelector('img').style.display = 'block'; // Mostrar imagen al dar clic
+    
+                        if (flippedCards.length === 2) {
+                            checkMatch(flippedCards);
+                        }
+                    }
+                });
+            });
+    
+            function checkMatch(flippedCards) {
+                const [firstCard, secondCard] = flippedCards;
+                const firstFruit = firstCard.dataset.fruit;
+                const secondFruit = secondCard.dataset.fruit;
+    
+                if (firstFruit === secondFruit) {
+                    matchedPairs++;
+                    resetCards();
+                    if (matchedPairs === cards.length / 2) {
+                        alert('¡Felicidades! Has encontrado todas las parejas.');
+                    }
+                } else {
+                    setTimeout(() => {
+                        firstCard.classList.remove('flipped');
+                        secondCard.classList.remove('flipped');
+                        firstCard.querySelector('img').style.display = 'none';
+                        secondCard.querySelector('img').style.display = 'none';
+                        resetCards();
+                    }, 1000);
+                }
+            }
+    
+            function resetCards() {
+                flippedCards = [];
+            }
+        }
+    
+        // Esperar a que el usuario seleccione un número de pares
+        pairCountSelect.addEventListener('change', () => {
+            const pairCount = parseInt(pairCountSelect.value);
+            restartButton.disabled = false; // Habilitar el botón de reinicio
+            startGame(pairCount);
+        });
+    
+        // Reiniciar el juego al hacer clic en el botón
+        restartButton.addEventListener('click', () => {
+            const pairCount = parseInt(pairCountSelect.value);
+            startGame(pairCount);
+        });
+    </script>
+</body>
+</html>
