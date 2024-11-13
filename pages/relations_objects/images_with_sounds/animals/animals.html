@@ -228,7 +228,6 @@
 
 <!-- Contenedores de suelta con botones de reproducción -->
 <div class="container" id="drop-container"></div>
-
 <script>
     // Definir sonidos
     const sounds = {
@@ -260,7 +259,6 @@
         wolf: new Audio('../../../../src/sounds/animals/wolf.mp3')
     };
 
-    // Diccionario de nombres en inglés y sus traducciones en español
     const animalNamesEs = {
         dog: "Perro", cat: "Gato", bird: "Pájaro", cow: "Vaca", bear: "Oso", crow: "Cuervo", chick: "Pollito",
         dolphin: "Delfín", duck: "Pato", eagle: "Águila", elephant: "Elefante", frog: "Rana", goose: "Ganso",
@@ -268,36 +266,46 @@
         panter: "Pantera", penguin: "Pingüino", pig: "Cerdo", sheep: "Oveja", tiger: "Tigre", whale: "Ballena", wolf: "Lobo"
     };
 
-    // Variables para almacenar imágenes
     const images = [
         "dog", "cat", "bird", "cow", "bear", "crow", "chick", "dolphin", "duck", "eagle", 
         "elephant", "frog", "goose", "horse", "ken", "killer_whale", "lion", "monkey", 
         "owl", "panter", "penguin", "pig", "sheep", "tiger", "whale", "wolf"
     ];
 
-    // Inicializa el juego según la selección
+    function shuffleArray(array) {
+        for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]];
+        }
+    }
+
     function initializeGame() {
         const pairCount = parseInt(document.getElementById("pairCount").value);
-        const selectedImages = images.slice(0, pairCount);
-        
+        const selectedImages = getUniqueRandomSelection(images, pairCount);
+
         displayImages(selectedImages);
         displayDropContainers(selectedImages);
     }
 
-     // Función para obtener el path de la imagen considerando ambas extensiones
-     function getImagePath(imageId) {
+    // Selecciona una lista aleatoria única de `n` elementos sin duplicados
+    function getUniqueRandomSelection(array, n) {
+        const copy = [...array];
+        shuffleArray(copy);
+        return copy.slice(0, n);
+    }
+
+    function getImagePath(imageId) {
         return `../../../../img/relation_objets/images_with_sounds/animals/${imageId}.jpg`;
     }
 
     function handleImageError(img) {
-        img.onerror = null; // Evitar ciclo infinito de errores
+        img.onerror = null; 
         img.src = `../../../../img/relation_objets/images_with_sounds/animals/${img.id}.jpeg`;
     }
 
-    // Muestra solo las imágenes seleccionadas
     function displayImages(selectedImages) {
         const imageContainer = document.getElementById("image-container");
-        imageContainer.innerHTML = ""; // Vacía el contenedor
+        imageContainer.innerHTML = "";
 
         selectedImages.forEach(imageId => {
             const imageDiv = document.createElement("div");
@@ -310,60 +318,50 @@
             imageContainer.appendChild(imageDiv);
         });
     }
-    // Muestra los contenedores de suelta para las imágenes seleccionadas
-// Muestra los contenedores de suelta para las imágenes seleccionadas
-function displayDropContainers(selectedImages) {
-    const dropContainer = document.getElementById("drop-container");
-    dropContainer.innerHTML = ""; // Vacía el contenedor de sueltas
 
-    selectedImages.forEach(imageId => {
-        const dropDiv = document.createElement("div");
-        dropDiv.className = "image-container";
-        dropDiv.setAttribute("data-sound", imageId);
-        dropDiv.setAttribute("ondrop", "drop(event)");
-        dropDiv.setAttribute("ondragover", "allowDrop(event)");
-        dropDiv.innerHTML = `
-            <p>Suelta aquí</p>
-            <button onclick="playSoundForContainerLimited(this)" class="btn-play">Reproducir sonido</button>
-        `;
-        dropContainer.appendChild(dropDiv);
-    });
-}
+    function displayDropContainers(selectedImages) {
+        const dropContainer = document.getElementById("drop-container");
+        dropContainer.innerHTML = "";
 
-// Función de reproducción del sonido limitada a 3 segundos
-function playSoundForContainerLimited(button) {
-    const container = button.parentElement;
-    const soundId = container.getAttribute("data-sound");
-    const sound = sounds[soundId];
-    
-    if (sound) {
-        sound.currentTime = 0; // Reinicia el sonido al inicio para que comience desde el principio cada vez
-        sound.play();          // Inicia la reproducción del sonido
+        // Aleatorizar el orden de los sonidos seleccionados para los contenedores
+        const shuffledSounds = [...selectedImages];
+        shuffleArray(shuffledSounds);
 
-        // Detiene el sonido después de 3 segundos
-        setTimeout(() => {
-            sound.pause();
-            sound.currentTime = 0; // Restablece el sonido al inicio para la próxima reproducción
-        }, 3000);
-    }
-}
-
-    
-
-    // Reinicia el juego
-    function resetGame() {
-        document.getElementById("pairCount").value = "8"; // Restablece la selección a 8
-        initializeGame(); // Vuelve a iniciar el juego con la configuración predeterminada
+        selectedImages.forEach((imageId, index) => {
+            const dropDiv = document.createElement("div");
+            dropDiv.className = "image-container";
+            dropDiv.setAttribute("data-sound", shuffledSounds[index]); // Asignar un sonido único a cada contenedor
+            dropDiv.setAttribute("ondrop", "drop(event)");
+            dropDiv.setAttribute("ondragover", "allowDrop(event)");
+            dropDiv.innerHTML = `
+                <p>Suelta aquí</p>
+                <button onclick="playSoundForContainerLimited(this)" class="btn-play">Reproducir sonido</button>
+            `;
+            dropContainer.appendChild(dropDiv);
+        });
     }
 
-    // Función de reproducción del sonido
-    function playSoundForContainer(button) {
+    function playSoundForContainerLimited(button) {
         const container = button.parentElement;
         const soundId = container.getAttribute("data-sound");
-        sounds[soundId]?.play();
+        const sound = sounds[soundId];
+        
+        if (sound) {
+            sound.currentTime = 0;
+            sound.play();
+
+            setTimeout(() => {
+                sound.pause();
+                sound.currentTime = 0;
+            }, 3000);
+        }
     }
 
-    // Funciones de arrastrar y soltar
+    function resetGame() {
+        document.getElementById("pairCount").value = "8";
+        initializeGame(); 
+    }
+
     function allowDrop(event) {
         event.preventDefault();
     }
@@ -378,13 +376,13 @@ function playSoundForContainerLimited(button) {
         const dropContainer = event.target.closest(".image-container");
         if (dropContainer.getAttribute("data-sound") === imageId) {
             event.target.appendChild(document.getElementById(imageId));
-            // Opcional: Añadir un mensaje de éxito
         } else {
             alert("¡Este no es el contenedor correcto!");
         }
     }
-</script>
 
+    document.getElementById("pairCount").addEventListener("change", initializeGame);
+</script>
 
 
     <footer>
