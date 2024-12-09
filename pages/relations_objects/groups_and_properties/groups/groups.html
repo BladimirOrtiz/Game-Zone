@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Estilos integrados -->
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        /* Estilos para la barra de navegación */
+        #navbar {
+            background-color: #2d2b30;
+            padding: 10px 0;
+        }
+
+        #navbar ul {
+            padding-left: 0;
+            list-style: none;
+            text-align: center;
+            margin: 0;
+        }
+
+        #navbar .navbar-brand img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .navbar {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo {
+            width: 40%;
+            height: 40%;
+        }
+
+        /* Estilos para el contenedor principal */
+        .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            padding: 20px;
+        }
+
+        /* Zona de juego */
+        .game-area {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            width: 100%;
+            margin: 20px 0;
+        }
+
+        .dropzone {
+            width: 45%;
+            height: 300px;
+            border: 2px dashed #007bff;
+            border-radius: 10px;
+            text-align: center;
+            line-height: 300px;
+            font-size: 18px;
+            font-weight: bold;
+            color: #007bff;
+        }
+
+        .dropzone img {
+            max-width: 100px;
+            max-height: 100px;
+        }
+
+        /* Objetos para arrastrar */
+        .draggable {
+            cursor: grab;
+            margin: 10px;
+        }
+
+        /* Estilos para el pie de página */
+        footer {
+            max-width: 100%;
+            height: auto;
+            background-color: red;
+            color: #fff;
+        }
+
+        .social-icons .social-icon {
+            display: inline-block;
+            margin-right: 10px;
+            color: #333;
+            font-size: 24px;
+        }
+
+        .location p {
+            color: white;
+            font-style: italic;
+            font-size: 14px;
+            font-weight: bold;
+        }
+        .container {
+            width: 80%;
+            margin: auto;
+        }
+    
+        .text-center {
+            text-align: center;
+        }
+    
+        .game-area {
+            display: flex;
+            justify-content: space-around;
+            margin: 20px 0;
+        }
+    
+        .dropzone {
+            border: 2px dashed #ccc;
+            width: 45%;
+            height: 200px;
+            text-align: center;
+            line-height: 200px;
+            font-size: 18px;
+            color: #666;
+        }
+    
+        .objects-row {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap; /* Permite ajustar filas si no caben todos los objetos */
+            gap: 10px; /* Espaciado entre las imágenes */
+            margin-top: 20px;
+        }
+    
+        .objects-row img {
+            width: 100px; /* Ancho uniforme */
+            height: 100px; /* Alto uniforme */
+            object-fit: cover; /* Ajuste de la imagen dentro del contenedor */
+            cursor: grab;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+        }
+    </style>
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" type="image/x-icon" href="../../../../img/logo_sf.png">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+    <title>Juego: Coloca el Objeto Correcto</title>
+</head>
+
+<body>
+    <!-- Barra de navegación -->
+    <nav id="navbar" class="navbar navbar-light sticky-top">
+        <ul id="mn" class="nav nav-pills">
+            <div style="display: flex; justify-content: space-between; align-items: center; width: 70%;">
+                <a class="navbar-brand" href="../../../../index.html">
+                    <img src="../../../../img/logofcd.png" class="rounded logo" alt="Logo FCD">
+                </a>
+                <a class="navbar-brand" href="../../../../index.html">
+                    <img src="../../../../img/logo_sf.png" class="rounded logo" alt="Logo SF">
+                </a>
+            </div>
+        </ul>
+    </nav>
+
+<!-- Contenido principal -->
+<div class="container">
+    <h1 class="text-center">Coloca los objetos en el escenario correcto</h1>
+    <p class="text-center">Arrastra los objetos al área correspondiente.</p>
+
+    <!-- Zona de juego -->
+    <div class="game-area">
+        <!-- Zona de Cocina -->
+        <div id="kitchen" class="dropzone">
+            <h2>Cocina</h2>
+        </div>
+        <!-- Zona de Cuarto -->
+        <div id="bedroom" class="dropzone">
+            <h2>Cuarto</h2>
+        </div>
+    </div>
+
+    <!-- Objetos para arrastrar -->
+    <div class="objects-row">
+        <img src="../../../../img/puzzle/objects_home/apron.jpg" id="apron" class="draggable" draggable="true" alt="Delantal" data-zone="kitchen">
+        <img src="../../../../img/puzzle/objects_home/bead.avif" id="bead" class="draggable" draggable="true" alt="Cuentas" data-zone="bedroom">
+        <img src="../../../../img/puzzle/objects_home/blender.jpg" id="blender" class="draggable" draggable="true" alt="Licuadora" data-zone="kitchen">
+        <img src="../../../../img/puzzle/objects_home/chair.avif" id="chair" class="draggable" draggable="true" alt="Silla" data-zone="bedroom">
+        <img src="../../../../img/puzzle/objects_home/chopping_board.png" id="chopping_board" class="draggable" draggable="true" alt="Tabla de picar" data-zone="kitchen">
+        <img src="../../../../img/puzzle/objects_home/cook_globe.jpg" id="cook_globe" class="draggable" draggable="true" alt="Globo de cocina" data-zone="kitchen">
+        <img src="../../../../img/puzzle/objects_home/couch.avif" id="couch" class="draggable" draggable="true" alt="Sofá" data-zone="bedroom">
+        <img src="../../../../img/puzzle/objects_home/cups.jpg" id="cups" class="draggable" draggable="true" alt="Tazas" data-zone="kitchen">
+        <img src="../../../../img/puzzle/objects_home/desktop.jpg" id="desktop" class="draggable" draggable="true" alt="Escritorio" data-zone="bedroom">
+        <img src="../../../../img/puzzle/objects_home/fork.png" id="fork" class="draggable" draggable="true" alt="Tenedor" data-zone="kitchen">
+        <img src="../../../../img/puzzle/objects_home/frying_pan.jpg" id="frying_pan" class="draggable" draggable="true" alt="Sartén" data-zone="kitchen">
+        <img src="../../../../img/puzzle/objects_home/kettle.jpg" id="kettle" class="draggable" draggable="true" alt="Hervidor" data-zone="kitchen">
+        <img src="../../../../img/puzzle/objects_home/knife.jpeg" id="knife" class="draggable" draggable="true" alt="Cuchillo" data-zone="kitchen">
+        <img src="../../../../img/puzzle/objects_home/wardrobe.jpg" id="wardrobe" class="draggable" draggable="true" alt="Armario" data-zone="bedroom">
+        <img src="../../../../img/puzzle/objects_home/mirror.avif" id="mirror" class="draggable" draggable="true" alt="Espejo" data-zone="bedroom">
+        <img src="../../../../img/puzzle/objects_home/table.jpg" id="table" class="draggable" draggable="true" alt="Mesa" data-zone="bedroom">
+    </div>
+</div>
+
+
+    <!-- Pie de página -->
+    <footer>
+        <div class="container">
+            <div class="row justify-content-center align-items-center">
+                <div class="col-md-6 text-center mb-3">
+                    <img src="../../../../img/logofcd.png" class="rounded" alt="Logo FCD" style="width: 40%; height: 70%;">
+                </div>
+                <div class="col-md-6 text-center">
+                    <div class="social-icons mb-3">
+                        <a href="https://www.facebook.com/FundacionCorazonDown" class="social-icon">
+                            <img src="../../../../img/icons/ficon.png" class="rounded" alt="Facebook Icon"
+                                style="width: 70%; height: 70%;">
+                        </a>
+                        <a href="https://x.com/mariopmtz" class="social-icon">
+                            <img src="../../../../img/icons/xicon.png" class="rounded" alt="Twitter Icon"
+                                style="width: 60%; height: 70%;">
+                        </a>
+                        <a href="https://www.instagram.com/fundacioncorazondown?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw=="
+                            class="social-icon">
+                            <img src="../../../../img/icons/insicon.png" class="rounded" alt="Instagram Icon"
+                                style="width: 70%; height: 70%;">
+                        </a>
+                        <a href="https://www.tiktok.com/@corazndown?is_from_webapp=1&sender_device=pc"
+                            class="social-icon">
+                            <img src="../../../../img/icons/ticon.png" class="rounded" alt="TikTok Icon"
+                                style="width: 70%; height: 70%;">
+                        </a>
+                    </div>
+                    <div class="location">
+                        <p>XICOTÉNCATL 1017, ZONA FEB 10 2015, BARRIO DE LA NORIA, 68100 OAXACA DE JUÁREZ, OAX.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Script para funcionalidad de arrastrar y soltar -->
+    <script>
+        const draggables = document.querySelectorAll('.draggable');
+    const dropzones = document.querySelectorAll('.dropzone');
+
+    // Añade los eventos a los objetos
+    draggables.forEach(draggable => {
+        draggable.addEventListener('dragstart', () => {
+            draggable.classList.add('dragging');
+        });
+
+        draggable.addEventListener('dragend', () => {
+            draggable.classList.remove('dragging');
+        });
+    });
+
+    // Añade los eventos a las zonas
+    dropzones.forEach(dropzone => {
+        dropzone.addEventListener('dragover', e => {
+            e.preventDefault();
+            const dragging = document.querySelector('.dragging');
+            const correctZone = dragging.getAttribute('data-zone'); // Zona correcta del objeto
+
+            if (dropzone.id === correctZone) {
+                dropzone.appendChild(dragging); // Coloca en la zona
+                dropzone.style.borderColor = 'green'; // Destaca como correcta
+            } else {
+                dropzone.style.borderColor = 'red'; // Destaca como incorrecta
+                setTimeout(() => {
+                    dropzone.style.borderColor = ''; // Resetea el borde
+                }, 500);
+            }
+        });
+    });
+        
+    </script>
+</body>
+
+</html>

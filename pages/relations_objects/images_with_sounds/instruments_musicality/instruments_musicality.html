@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Estilos integrados -->
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        /* Estilos para la barra de navegación */
+        #navbar {
+            background-color: #2d2b30;
+            padding: 10px 0;
+        }
+
+        #navbar ul {
+            padding-left: 0;
+            list-style: none;
+            text-align: center;
+            margin: 0;
+        }
+
+        #navbar .navbar-brand img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .navbar {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo {
+            width: 40%;
+            height: 40%;
+        }
+
+        /* Estilos para botones */
+        .btn-custom {
+            text-align: center;
+            width: 100%;
+        }
+
+        .icon-size {
+            width: 50px;
+            height: 50px;
+        }
+
+        /* Estilos para el pie de página */
+        footer {
+            max-width: 100%;
+            height: auto;
+            background-color: red;
+            color: #fff;
+        }
+
+        .social-icons .social-icon {
+            display: inline-block;
+            margin-right: 10px;
+            color: #333;
+            font-size: 24px;
+        }
+
+        .location p {
+            color: white;
+            font-style: italic;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        .back-button {
+            display: inline-block;
+            margin-bottom: 20px;
+            padding: 10px 20px;
+            font-size: 16px;
+            color: #fff;
+            background-color: #007bff;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        .back-button:hover {
+            background-color: transparent !important;
+            transform: translateX(-5px);
+        }
+
+        .container {
+            margin-top: 20px;
+        }
+
+        .blockquote p {
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+
+        /* Banner Styles */
+        .banner {
+            width: 90%;
+            text-align: center;
+            margin: 20px auto;
+            padding: 15px;
+            background-color: #007bff;
+            color: white;
+            font-weight: bold;
+            font-size: 18px;
+            border-radius: 8px;
+            box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Image and Drop Container Styles */
+        .image-container {
+            width: 150px;
+            height: 150px;
+            border: 2px dashed #aaa;
+            margin: 15px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 10px;
+            background-color: #fff;
+            transition: background-color 0.3s, border-color 0.3s;
+            position: relative;
+            flex-direction: column;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Correct/Wrong Feedback */
+        .image-container.correct {
+            background-color: #4CAF50;
+            border-color: #3e8e41;
+            color: white;
+            box-shadow: 0px 4px 12px rgba(0, 128, 0, 0.3);
+        }
+
+        .image-container.wrong {
+            background-color: #ff4c4c;
+            border-color: #d43f3f;
+            color: white;
+            box-shadow: 0px 4px 12px rgba(255, 0, 0, 0.3);
+        }
+
+        /* Animal Name Styles */
+        .image-container .name {
+            color: #333;
+            font-family: 'Century Gothic', sans-serif;
+            font-weight: bold;
+            font-size: 14px;
+            text-align: center;
+            margin-top: 8px;
+        }
+
+        /* Card Image Styles */
+        .card-image {
+            width: 100px;
+            height: 100px;
+            margin: 10px;
+            cursor: pointer;
+            border-radius: 50%;
+            transition: transform 0.3s;
+        }
+
+        .card-image:hover {
+            transform: scale(1.1);
+        }
+
+        /* Button Styles */
+        .btn-play {
+            margin-top: 10px;
+            padding: 5px 15px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-play:hover {
+            background-color: #218838;
+        }
+
+        .reset-button {
+            padding: 10px 20px;
+            background-color: #dc3545;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: background-color 0.3s;
+        }
+
+        .reset-button:hover {
+            background-color: #c82333;
+        }
+    </style>
+
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" type="image/x-icon" href="../../../../img/logo_sf.png">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+
+    <title>Relación de Imagen Sonido</title>
+</head>
+
+<body>
+    <!-- Barra de navegación -->
+    <nav id="navbar" class="navbar navbar-light sticky-top">
+        <ul id="mn" class="nav nav-pills">
+            <div style="display: flex; justify-content: space-between; align-items: center; width: 70%;">
+                <a class="navbar-brand" href="../../../../index.html">
+                    <img src="../../../../img/logofcd.png" class="rounded logo" alt="Logo FCD">
+                </a>
+                <a class="navbar-brand" href="../../../../index.html">
+                    <img src="../../../../img/logo_sf.png" class="rounded logo" alt="Logo SF">
+                </a>
+            </div>
+        </ul>
+    </nav>
+<!-- Contenedor de imágenes -->
+<div class="banner">
+    <label for="pairCount">Selecciona el número de pares:</label>
+    <select id="pairCount" onchange="initializeGame()">
+        <option value="" selected disabled>Selecciona...</option>
+        <option value="6">6 pares</option>
+        <option value="12">12 pares</option>
+        <option value="18">18 pares</option>
+    </select>
+    <button onclick="resetGame()">Reiniciar juego</button>
+    <p>Arrastra la imagen al contenedor correspondiente y haz clic en "Reproducir sonido" para escuchar una pista.</p>
+</div>
+
+<!-- Contenedor de imágenes -->
+<div class="container" id="image-container"></div>
+
+<!-- Contenedores de suelta con botones de reproducción -->
+<div class="container" id="drop-container"></div>
+<script>
+    // Definir sonidos
+    const sounds = {
+        accordion: new Audio('../../../../src/sounds/instruments_musicality/acordion.mp3'),
+        bagpipes: new Audio('../../../../src/sounds/instruments_musicality/bagpipes.mp3'),
+        battery: new Audio('../../../../src/sounds/instruments_musicality/battery.mp3'),
+        bongo: new Audio('../../../../src/sounds/instruments_musicality/bongo.mp3'),
+        clarinet: new Audio('../../../../src/sounds/instruments_musicality/clarinet.mp3'),
+        drum: new Audio('../../../../src/sounds/instruments_musicality/drum.mp3'),
+        flute: new Audio('../../../../src/sounds/instruments_musicality/flute.mp3'),
+        guitar: new Audio('../../../../src/sounds/instruments_musicality/guitar.mp3'),
+        harp: new Audio('../../../../src/sounds/instruments_musicality/harp.mp3'),
+        maraques: new Audio('../../../../src/sounds/instruments_musicality/maraques.mp3'),
+        piane: new Audio('../../../../src/sounds/instruments_musicality/piane.mp3'),
+        tambourine: new Audio('../../../../src/sounds/instruments_musicality/tambourine.mp3'),
+        triangle: new Audio('../../../../src/sounds/instruments_musicality/triangle.mp3'),
+        trompet: new Audio('../../../../src/sounds/instruments_musicality/trompet.mp3'),
+        tuba: new Audio('../../../../src/sounds/instruments_musicality/tuba.mp3'),
+        ukelele: new Audio('../../../../src/sounds/instruments_musicality/ukelele.mp3'),
+        violin: new Audio('../../../../src/sounds/instruments_musicality/violin.mp3'),
+        xylophone: new Audio('../../../../src/sounds/instruments_musicality/xilophone.mp3')      
+     
+    };
+
+    const animalNamesEs = {
+        accordion: "acordión", bagpipes: "gaita", battery: "batería", bongo: "bongo", clarinet: "clarinete", drum: "tambor", flute: "flauta",
+        guitar: "guitarra", harp: "arpa", maraques: "maracas", piane: "piano", tambourine: "pandero", triangle: "triángulo",
+        trompet: "trompeta", tuba: "tuba", ukelele: "ukulele", violin: "violín", xylophone: "xilófono"
+    };
+
+    const images = [
+        "accordion", "bagpipes", "battery", "bongo", "clarinet", "drum", "flute", "guitar", "harp", "maraques", 
+        "piane", "tambourine", "triangle", "trompet", "tuba", "ukelele", "violin", "xylophone"
+    ];
+
+    function shuffleArray(array) {
+        for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]];
+        }
+    }
+
+    function initializeGame() {
+        const pairCount = parseInt(document.getElementById("pairCount").value);
+        const selectedImages = getUniqueRandomSelection(images, pairCount);
+
+        displayImages(selectedImages);
+        displayDropContainers(selectedImages);
+    }
+
+    // Selecciona una lista aleatoria única de `n` elementos sin duplicados
+    function getUniqueRandomSelection(array, n) {
+        const copy = [...array];
+        shuffleArray(copy);
+        return copy.slice(0, n);
+    }
+
+    function getImagePath(imageId) {
+        return `../../../../img/relation_objets/images_with_sounds/instruments_of_music/${imageId}.jpg`;
+    }
+
+    function handleImageError(img) {
+        img.onerror = null; 
+        img.src = `../../../../img/relation_objets/images_with_sounds/instruments_of_music/${img.id}.jpeg`;
+    }
+
+    function displayImages(selectedImages) {
+        const imageContainer = document.getElementById("image-container");
+        imageContainer.innerHTML = "";
+
+        selectedImages.forEach(imageId => {
+            const imageDiv = document.createElement("div");
+            imageDiv.className = "image-container";
+            imageDiv.innerHTML = `
+                <img src="${getImagePath(imageId)}" alt="${imageId}" draggable="true" id="${imageId}" 
+                     ondragstart="drag(event)" class="card-image" onerror="handleImageError(this)">
+                <p class="name">${animalNamesEs[imageId]}</p>
+            `;
+            imageContainer.appendChild(imageDiv);
+        });
+    }
+
+    function displayDropContainers(selectedImages) {
+        const dropContainer = document.getElementById("drop-container");
+        dropContainer.innerHTML = "";
+
+        // Aleatorizar el orden de los sonidos seleccionados para los contenedores
+        const shuffledSounds = [...selectedImages];
+        shuffleArray(shuffledSounds);
+
+        selectedImages.forEach((imageId, index) => {
+            const dropDiv = document.createElement("div");
+            dropDiv.className = "image-container";
+            dropDiv.setAttribute("data-sound", shuffledSounds[index]); // Asignar un sonido único a cada contenedor
+            dropDiv.setAttribute("ondrop", "drop(event)");
+            dropDiv.setAttribute("ondragover", "allowDrop(event)");
+            dropDiv.innerHTML = `
+                <p>Suelta aquí</p>
+                <button onclick="playSoundForContainerLimited(this)" class="btn-play">Reproducir sonido</button>
+            `;
+            dropContainer.appendChild(dropDiv);
+        });
+    }
+
+    function playSoundForContainerLimited(button) {
+        const container = button.parentElement;
+        const soundId = container.getAttribute("data-sound");
+        const sound = sounds[soundId];
+        
+        if (sound) {
+            sound.currentTime = 0;
+            sound.play();
+
+            setTimeout(() => {
+                sound.pause();
+                sound.currentTime = 0;
+            }, 3000);
+        }
+    }
+
+    function resetGame() {
+        document.getElementById("pairCount").value = "8";
+        initializeGame(); 
+    }
+
+    function allowDrop(event) {
+        event.preventDefault();
+    }
+
+    function drag(event) {
+        event.dataTransfer.setData("text", event.target.id);
+    }
+
+    function drop(event) {
+        event.preventDefault();
+        const imageId = event.dataTransfer.getData("text");
+        const dropContainer = event.target.closest(".image-container");
+        if (dropContainer.getAttribute("data-sound") === imageId) {
+            event.target.appendChild(document.getElementById(imageId));
+        } else {
+            alert("¡Este no es el contenedor correcto!");
+        }
+    }
+
+    document.getElementById("pairCount").addEventListener("change", initializeGame);
+</script>
+
+
+    <footer>
+        <div class="container">
+            <div class="row justify-content-center align-items-center">
+                <div class="col-md-6 text-center mb-3">
+                    <!-- Ruta de la imagen del logo en el pie de página -->
+                    <img src="../../../../img/logofcd.png" class="rounded" alt="Logo FCD"
+                        style="width: 40%; height: 70%;">
+                </div>
+                <div class="col-md-6 text-center">
+                    <div class="social-icons mb-3">
+                        <!-- Ruta de la imagen del ícono de Facebook -->
+                        <a href="https://www.facebook.com/FundacionCorazonDown" class="social-icon">
+                            <img src="../../../../img/icons/ficon.png" class="rounded" alt="Facebook Icon"
+                                style="width: 70%; height: 70%;">
+                        </a>
+                        <!-- Ruta de la imagen del ícono de Twitter -->
+                        <a href="https://x.com/mariopmtz" class="social-icon">
+                            <img src="../../../../img/icons/xicon.png" class="rounded" alt="Twitter Icon"
+                                style="width: 60%; height: 70%;">
+                        </a>
+                        <!-- Ruta de la imagen del ícono de Instagram -->
+                        <a href="https://www.instagram.com/fundacioncorazondown?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw=="
+                            class="social-icon">
+                            <img src="../../../../img/icons/insicon.png" class="rounded" alt="Instagram Icon"
+                                style="width: 70%; height: 70%;">
+                        </a>
+                        <!-- Ruta de la imagen del ícono de TikTok -->
+                        <a href="https://www.tiktok.com/@corazndown?is_from_webapp=1&sender_device=pc"
+                            class="social-icon">
+                            <img src="../../../../img/icons/ticon.png" class="rounded" alt="TikTok Icon"
+                                style="width: 70%; height: 70%;">
+                        </a>
+                    </div>
+                    <div class="location">
+                        <p>XICOTÉNCATL 1017, ZONA FEB 10 2015, BARRIO DE LA NORIA, 68100 OAXACA DE JUÁREZ, OAX.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+
+</body>
+
+</html>
