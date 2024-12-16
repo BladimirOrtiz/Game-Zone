@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Estilos integrados -->
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        /* Estilos para la barra de navegación */
+        #navbar {
+            background-color: #2d2b30;
+            padding: 10px 0;
+        }
+
+        #navbar ul {
+            padding-left: 0;
+            list-style: none;
+            text-align: center;
+            margin: 0;
+        }
+
+        #navbar .navbar-brand img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .navbar {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo {
+            width: 40%;
+            height: 40%;
+        }
+
+        /* Estilos para botones */
+        .btn-custom {
+            text-align: center;
+            width: 100%;
+        }
+
+        .icon-size {
+            width: 50px;
+            height: 50px;
+        }
+
+        /* Estilos para el pie de página */
+        footer {
+            max-width: 100%;
+            height: auto;
+            background-color: red;
+            color: #fff;
+        }
+
+        .social-icons .social-icon {
+            display: inline-block;
+            margin-right: 10px;
+            color: #333;
+            font-size: 24px;
+        }
+
+        .location p {
+            color: white;
+            font-style: italic;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        .back-button {
+            display: inline-block;
+            margin-bottom: 20px;
+            padding: 10px 20px;
+            font-size: 16px;
+            color: #fff;
+            background-color: #007bff;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        .back-button:hover {
+            background-color: transparent !important;
+            transform: translateX(-5px);
+        }
+
+        .container {
+            margin-top: 20px;
+        }
+
+        .blockquote p {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+           
+        .fruit-card {
+            border: 2px solid #ccc;
+            margin-bottom: 20px;
+            transition: transform 0.2s;
+        }
+        .fruit-card img {
+            width: 100%; /* Asegura que la imagen ocupe todo el ancho de la tarjeta */
+            height: 200px; /* Altura fija para mantener uniformidad */
+            object-fit: cover; /* Escala la imagen sin distorsión */
+            border-radius: 10px; /* Opcional: esquinas redondeadas */
+        }
+        
+        .fruit-card:hover {
+            transform: scale(1.05);
+        }
+
+        .drop-zone {
+            height: 60px;
+            line-height: 60px;
+            background-color: #f5f5f5;
+            border: 1px dashed #aaa;
+            margin-top: 10px;
+            text-align: center;
+        }
+
+        .fruit-label {
+            display: inline-block;
+            background-color: #007bff;
+            color: white;
+            padding: 8px 12px;
+            border-radius: 20px;
+            margin: 5px;
+            cursor: grab;
+            font-family: "Century Gothic", sans-serif;
+        }
+
+        .fruit-label:active {
+            cursor: grabbing;
+        }
+
+        .banner {
+            background-color: #eee;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .correct {
+            font-family: "Century Gothic", sans-serif;
+            font-weight: bold;
+            color: red;
+        }
+
+        .incorrect {
+            font-family: "Century Gothic", sans-serif;
+            font-weight: bold;
+            color: red;
+        }
+    </style>
+
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" type="image/x-icon" href="../../../../img/logo_sf.png">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+
+    <title>Relación de Imagen palabra</title>
+</head>
+
+<body>
+
+    <!-- Barra de navegación -->
+    <nav id="navbar" class="navbar navbar-light sticky-top">
+        <ul id="mn" class="nav nav-pills">
+            <div style="display: flex; justify-content: space-between; align-items: center; width: 70%;">
+                <a class="navbar-brand" href="../../../../index.html">
+                    <img src="../../../../img/logofcd.png" class="rounded logo" alt="Logo FCD">
+                </a>
+                <a class="navbar-brand" href="../../../../index.html">
+                    <img src="../../../../img/logo_sf.png" class="rounded logo" alt="Logo SF">
+                </a>
+            </div>
+        </ul>
+    </nav>
+    <div class="container mt-4">
+        <h2 class="text-center mb-4">Persona</h2>
+
+        <!-- Banner con las etiquetas de frutas -->
+        <div class="banner" id="fruit-banner">
+            <span class="fruit-label" draggable="true" data-fruit="mamá">Mamá</span>
+            <span class="fruit-label" draggable="true" data-fruit="papá">Papá</span>
+            <span class="fruit-label" draggable="true" data-fruit="abuelo">Abuelo</span>
+            <span class="fruit-label" draggable="true" data-fruit="abuela">Abuela</span>
+            <span class="fruit-label" draggable="true" data-fruit="amigo">Amigo</span>
+            <span class="fruit-label" draggable="true" data-fruit="amiga">Amiga</span>
+            <span class="fruit-label" draggable="true" data-fruit="amigos">Amigos</span>
+            <span class="fruit-label" draggable="true" data-fruit="vecino">Vecino</span>
+            <span class="fruit-label" draggable="true" data-fruit="hermana">Hermana</span>
+            <span class="fruit-label" draggable="true" data-fruit="hermano">Hermano</span>
+            <span class="fruit-label" draggable="true" data-fruit="primos">Primos</span>
+            <span class="fruit-label" draggable="true" data-fruit="maestra">Maestra</span>
+        </div>
+
+        <div class="banner">
+            <div class="row justify-content-center">
+                <!-- Tarjetas de frutas -->
+                <div class="col-md-3 text-center">
+                    <div class="card fruit-card">
+                        <img class="card-img-top" src="../../../../img/pictograms/person/mom.jpg" alt="mom">
+                        <div class="card-body drop-zone" data-fruit="mamá">Suelta aquí</div>
+                    </div>
+                </div>
+
+                <div class="col-md-3 text-center">
+                    <div class="card fruit-card">
+                        <img class="card-img-top" src="../../../../img/pictograms/person/dad.jpg" alt="Pera">
+                        <div class="card-body drop-zone" data-fruit="papá">Suelta aquí</div>
+                    </div>
+                </div>
+
+                <div class="col-md-3 text-center">
+                    <div class="card fruit-card">
+                        <img class="card-img-top" src="../../../../img/pictograms/person/grandfather.jpg" alt="Fresa">
+                        <div class="card-body drop-zone" data-fruit="abuelo">Suelta aquí</div>
+                    </div>
+                </div>
+
+                <div class="col-md-3 text-center">
+                    <div class="card fruit-card">
+                        <img class="card-img-top" src="../../../../img/pictograms/person/grandmother.jpg" alt="Papaya">
+                        <div class="card-body drop-zone" data-fruit="abuela">Suelta aquí</div>
+                    </div>
+                </div>
+
+                <!-- Más frutas -->
+                <div class="col-md-3 text-center">
+                    <div class="card fruit-card">
+                        <img class="card-img-top" src="../../../../img/pictograms/person/friend_m.jpg" alt="Naranja">
+                        <div class="card-body drop-zone" data-fruit="amigo">Suelta aquí</div>
+                    </div>
+                </div>
+
+                <div class="col-md-3 text-center">
+                    <div class="card fruit-card">
+                        <img class="card-img-top" src="../../../../img/pictograms/person/friend_f.jpg" alt="Banana">
+                        <div class="card-body drop-zone" data-fruit="amiga">Suelta aquí</div>
+                    </div>
+                </div>
+
+                <div class="col-md-3 text-center">
+                    <div class="card fruit-card">
+                        <img class="card-img-top" src="../../../../img/pictograms/person/friends.jpg" alt="Durazno">
+                        <div class="card-body drop-zone" data-fruit="amigos">Suelta aquí</div>
+                    </div>
+                </div>
+
+                <div class="col-md-3 text-center">
+                    <div class="card fruit-card">
+                        <img class="card-img-top" src="../../../../img/pictograms/person/neighbor.jpg" alt="Sandía">
+                        <div class="card-body drop-zone" data-fruit="vecino">Suelta aquí</div>
+                    </div>
+                </div>
+                <div class="col-md-3 text-center">
+                    <div class="card fruit-card">
+                        <img class="card-img-top" src="../../../../img/pictograms/person/brorher.jpg" alt="Sandía">
+                        <div class="card-body drop-zone" data-fruit="hermano">Suelta aquí</div>
+                    </div>
+                </div>
+                <div class="col-md-3 text-center">
+                    <div class="card fruit-card">
+                        <img class="card-img-top" src="../../../../img/pictograms/person/sister.jpg" alt="Sandía">
+                        <div class="card-body drop-zone" data-fruit="hermana">Suelta aquí</div>
+                    </div>
+                </div>
+
+                <div class="col-md-3 text-center">
+                    <div class="card fruit-card">
+                        <img class="card-img-top" src="../../../../img/pictograms/person/cousin.jpg" alt="Sandía">
+                        <div class="card-body drop-zone" data-fruit="primos">Suelta aquí</div>
+                    </div>
+                </div>
+                <div class="col-md-3 text-center">
+                    <div class="card fruit-card">
+                        <img class="card-img-top" src="../../../../img/pictograms/person/teacher.jpg" alt="Sandía">
+                        <div class="card-body drop-zone" data-fruit="maestra">Suelta aquí</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const banner = document.getElementById('fruit-banner');
+
+        // Hacer las etiquetas arrastrables
+        document.querySelectorAll('.fruit-label').forEach(label => {
+            label.addEventListener('dragstart', event => {
+                event.dataTransfer.setData('text', event.target.dataset.fruit);
+                event.target.classList.add('dragging');
+            });
+
+            label.addEventListener('dragend', event => {
+                event.target.classList.remove('dragging');
+            });
+        });
+
+        // Configurar las zonas de drop
+        document.querySelectorAll('.drop-zone').forEach(zone => {
+            zone.addEventListener('dragover', event => {
+                event.preventDefault(); // Permitir el drop
+            });
+
+            zone.addEventListener('drop', event => {
+                event.preventDefault();
+                const fruit = event.dataTransfer.getData('text'); // Obtener la fruta arrastrada
+                const expectedFruit = zone.dataset.fruit; // Fruta esperada
+
+                const draggedLabel = document.querySelector(`[data-fruit="${fruit}"]`);
+
+                if (fruit === expectedFruit) {
+                    zone.innerHTML = `<span class="correct">${capitalize(fruit)}</span>`;
+                    draggedLabel.remove(); // Eliminar del banner si es correcto
+                } else {
+                    alert('Fruta incorrecta. Devuelta al banner.');
+                    banner.appendChild(draggedLabel); // Devolver al banner si es incorrecto
+                }
+            });
+        });
+
+        // Capitalizar la primera letra
+        function capitalize(word) {
+            return word.charAt(0).toUpperCase() + word.slice(1);
+        }
+    </script>
+
+
+    <footer>
+        <div class="container">
+            <div class="row justify-content-center align-items-center">
+                <div class="col-md-6 text-center mb-3">
+                    <!-- Ruta de la imagen del logo en el pie de página -->
+                    <img src="../../../../img/logofcd.png" class="rounded" alt="Logo FCD"
+                        style="width: 40%; height: 70%;">
+                </div>
+                <div class="col-md-6 text-center">
+                    <div class="social-icons mb-3">
+                        <!-- Ruta de la imagen del ícono de Facebook -->
+                        <a href="https://www.facebook.com/FundacionCorazonDown" class="social-icon">
+                            <img src="../../../../img/icons/ficon.png" class="rounded" alt="Facebook Icon"
+                                style="width: 70%; height: 70%;">
+                        </a>
+                        <!-- Ruta de la imagen del ícono de Twitter -->
+                        <a href="https://x.com/mariopmtz" class="social-icon">
+                            <img src="../../../../img/icons/xicon.png" class="rounded" alt="Twitter Icon"
+                                style="width: 60%; height: 70%;">
+                        </a>
+                        <!-- Ruta de la imagen del ícono de Instagram -->
+                        <a href="https://www.instagram.com/fundacioncorazondown?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw=="
+                            class="social-icon">
+                            <img src="../../../../img/icons/insicon.png" class="rounded" alt="Instagram Icon"
+                                style="width: 70%; height: 70%;">
+                        </a>
+                        <!-- Ruta de la imagen del ícono de TikTok -->
+                        <a href="https://www.tiktok.com/@corazndown?is_from_webapp=1&sender_device=pc"
+                            class="social-icon">
+                            <img src="../../../../img/icons/ticon.png" class="rounded" alt="TikTok Icon"
+                                style="width: 70%; height: 70%;">
+                        </a>
+                    </div>
+                    <div class="location">
+                        <p>XICOTÉNCATL 1017, ZONA FEB 10 2015, BARRIO DE LA NORIA, 68100 OAXACA DE JUÁREZ, OAX.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+
+</body>
+
+</html>
