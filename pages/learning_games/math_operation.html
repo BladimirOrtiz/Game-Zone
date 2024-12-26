@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Enlace al archivo CSS -->
+    <link rel="stylesheet" href="../../css/category.css">
+    <link rel="stylesheet" href="../../css/color.css">
+    <!-- Favicon -->
+    <link rel="shortcut icon" type="image/x-icon" href="../../img/logo_sf.png">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <title>Operaciones Matemáticas</title>
+</head>
+<body>
+    <!-- Barra de navegación -->
+    <nav id="navbar" class="navbar navbar-light sticky-top">
+        <ul id="mn" class="nav nav-pills">
+            <div style="display: flex; justify-content: space-between; align-items: center; width: 70%;">
+                <!-- Ruta de la imagen del logo -->
+                <a class="navbar-brand" href="">
+                    <img src="../../img/logofcd.png" class="rounded logo" alt="Logo FCD">
+                </a>
+                <a class="navbar-brand" href="../../index.html">
+                    <img src="../../img/logo_sf.png" class="rounded logo" alt="Logo SF">
+                </a>
+            </div>
+        </ul>
+    </nav>   
+    <br>
+    <br>
+    <div class="container text-center mt-5">
+        <h2>Calculadora Interactiva</h2>
+        <p>Selecciona una operación y elige la cantidad de números:</p>
+    
+        <!-- Selector para elegir la operación -->
+        <div class="mb-3">
+            <label for="operationSelector" class="form-label">Operación</label>
+            <select id="operationSelector" class="form-select w-50 mx-auto">
+                <option value="">--- Selecciona una operación ---</option>
+                <option value="suma">Suma</option>
+                <option value="resta">Resta</option>
+                <option value="multiplicacion">Multiplicación</option>
+                <option value="division">División</option>
+            </select>
+        </div>
+    
+        <!-- Selector para elegir la cantidad de números -->
+        <div class="mb-3">
+            <label for="quantitySelector" class="form-label">Cantidad de números</label>
+            <select id="quantitySelector" class="form-select w-50 mx-auto">
+                <option value="">--- Selecciona la cantidad ---</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+            </select>
+        </div>
+    
+        <!-- Contenedor para los campos de entrada -->
+        <div id="numberInputs" class="mb-3">
+            <!-- Campos de entrada generados dinámicamente -->
+        </div>
+    
+        <!-- Botón para calcular -->
+        <button id="calculateButton" class="btn btn-primary mb-3">Calcular</button>
+    
+        <!-- Campo de resultado -->
+        <div class="mt-3">
+            <h4>Resultado:</h4>
+            <p id="result" class="fw-bold"></p>
+        </div>
+    </div>
+    
+    <script>
+        const operationSelector = document.getElementById('operationSelector');
+        const quantitySelector = document.getElementById('quantitySelector');
+        const numberInputs = document.getElementById('numberInputs');
+        const calculateButton = document.getElementById('calculateButton');
+        const resultField = document.getElementById('result');
+    
+        // Escucha cambios en el selector de cantidad
+        quantitySelector.addEventListener('change', () => {
+            const quantity = parseInt(quantitySelector.value);
+            numberInputs.innerHTML = '';
+    
+            // Genera campos de entrada según la cantidad seleccionada
+            for (let i = 1; i <= quantity; i++) {
+                const inputField = document.createElement('input');
+                inputField.type = 'number';
+                inputField.className = 'form-control mb-2 w-50 mx-auto';
+                inputField.placeholder = `Ingresa el número ${i}`;
+                inputField.id = `number${i}`;
+                numberInputs.appendChild(inputField);
+            }
+        });
+    
+        // Calcula el resultado
+        calculateButton.addEventListener('click', () => {
+            const operation = operationSelector.value;
+            const quantity = parseInt(quantitySelector.value);
+            let numbers = [];
+    
+            // Obtiene los valores de los campos generados dinámicamente
+            for (let i = 1; i <= quantity; i++) {
+                const number = parseFloat(document.getElementById(`number${i}`).value);
+                if (isNaN(number)) {
+                    resultField.textContent = 'Por favor, ingresa todos los números correctamente';
+                    return;
+                }
+                numbers.push(number);
+            }
+    
+            let result;
+    
+            // Realiza la operación seleccionada
+            switch (operation) {
+                case 'suma':
+                    result = numbers.reduce((a, b) => a + b, 0);
+                    break;
+                case 'resta':
+                    result = numbers.reduce((a, b) => a - b);
+                    break;
+                case 'multiplicacion':
+                    result = numbers.reduce((a, b) => a * b, 1);
+                    break;
+                case 'division':
+                    result = numbers.reduce((a, b) => a / b);
+                    break;
+                default:
+                    resultField.textContent = 'Por favor, selecciona una operación';
+                    return;
+            }
+    
+            // Muestra el resultado
+            resultField.textContent = `El resultado es: ${result}`;
+        });
+    </script>
+    
+       
+    <br>
+    <br>
+    <!-- Pie de página -->
+    <footer>
+        <div class="container">
+            <div class="row justify-content-center align-items-center">
+                <div class="col-md-6 text-center mb-3">
+                    <!-- Ruta de la imagen del logo en el pie de página -->
+                    <img src="../../img/logofcd.png" class="rounded" alt="Logo FCD" style="width: 40%; height: 70%;">
+                </div>
+                <div class="col-md-6 text-center">
+                    <div class="social-icons mb-3">
+                        <!-- Ruta de la imagen del ícono de Facebook -->
+                        <a href="https://www.facebook.com/FundacionCorazonDown" class="social-icon">
+                            <img src="../../img/icons/ficon.png" class="rounded" alt="Facebook Icon" style="width: 70%; height: 70%;">
+                        </a>
+                        <!-- Ruta de la imagen del ícono de Twitter -->
+                        <a href="https://x.com/mariopmtz" class="social-icon">
+                            <img src="../../img/icons/xicon.png" class="rounded" alt="Twitter Icon" style="width: 60%; height: 70%;">
+                        </a>
+                        <!-- Ruta de la imagen del ícono de Instagram -->
+                        <a href="https://www.instagram.com/fundacioncorazondown?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" class="social-icon">
+                            <img src="../../img/icons/insicon.png" class="rounded" alt="Instagram Icon" style="width: 70%; height: 70%;">
+                        </a>
+                        <!-- Ruta de la imagen del ícono de TikTok -->
+                        <a href="https://www.tiktok.com/@corazndown?is_from_webapp=1&sender_device=pc" class="social-icon">
+                            <img src="../../img/icons/ticon.png" class="rounded" alt="TikTok Icon" style="width: 70%; height: 70%;">
+                        </a>
+                    </div>
+                    <div class="location">
+                        <p>XICOTÉNCATL 1017, ZONA FEB 10 2015, BARRIO DE LA NORIA, 68100 OAXACA DE JUÁREZ, OAX.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
+ 

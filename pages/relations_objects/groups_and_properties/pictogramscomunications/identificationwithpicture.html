@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Estilos integrados -->
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+            background-color: #f0f0f0;
+        }
+        
+
+        /* Estilos para la barra de navegación */
+        #navbar {
+            background-color: #2d2b30;
+            padding: 10px 0;
+        }
+
+        #navbar ul {
+            padding-left: 0;
+            list-style: none;
+            text-align: center;
+            margin: 0;
+        }
+
+        #navbar .navbar-brand img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .navbar {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo {
+            width: 40%;
+            height: 40%;
+        }
+
+        /* Estilos para botones */
+        .btn-custom {
+            text-align: center;
+            width: 100%;
+        }
+
+        .icon-size {
+            width: 50px;
+            height: 50px;
+        }
+
+        /* Estilos para el pie de página */
+        footer {
+            max-width: 100%;
+            height: auto;
+            background-color: red;
+            color: #fff;
+        }
+
+        .social-icons .social-icon {
+            display: inline-block;
+            margin-right: 10px;
+            color: #333;
+            font-size: 24px;
+        }
+
+        .location p {
+            color: white;
+            font-style: italic;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        .back-button {
+            display: inline-block;
+            margin-bottom: 20px;
+            padding: 10px 20px;
+            font-size: 16px;
+            color: #fff;
+            background-color: #007bff;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        .back-button:hover {
+            background-color: transparent !important;
+            transform: translateX(-5px);
+        }
+
+        .game-container {
+            max-width: 900px;
+            margin: 30px auto;
+            padding: 20px;
+            background: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 6px 10px rgba(0, 0, 0, 0.1);
+        }
+        .main-image {
+            width: 100%;
+            max-height: 400px;
+            object-fit: contain;
+            margin-bottom: 20px;
+        }
+        .option {
+            display: block;
+            margin: 10px 0;
+            padding: 12px;
+            background-color: #007bff;
+            color: #ffffff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            text-align: center;
+        }
+        .option:hover {
+            background-color: #0056b3;
+        }
+        .play-again {
+            margin-top: 20px;
+            padding: 12px 24px;
+            font-size: 18px;
+            background-color: #28a745;
+            color: #ffffff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .play-again:hover {
+            background-color: #218838;
+        }
+     </style>
+
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" type="image/x-icon" href="../../../../img/logo_sf.png">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+
+    <title>Relación de Imagen palabra</title>
+</head>
+
+<body>
+
+    <!-- Barra de navegación -->
+    <nav id="navbar" class="navbar navbar-light sticky-top">
+        <ul id="mn" class="nav nav-pills">
+            <div style="display: flex; justify-content: space-between; align-items: center; width: 70%;">
+                <a class="navbar-brand" href="../../../../index.html">
+                    <img src="../../../../img/logofcd.png" class="rounded logo" alt="Logo FCD">
+                </a>
+                <a class="navbar-brand" href="../../../../index.html">
+                    <img src="../../../../img/logo_sf.png" class="rounded logo" alt="Logo SF">
+                </a>
+            </div>
+        </ul>
+    </nav>
+     <!-- Contenedor principal del juego -->
+     <div class="game-container">
+        <h1 class="text-center">Desglosa la Imagen Compuesta</h1>
+        <p class="text-center">Observa la imagen y responde las preguntas para desglosarla correctamente.</p>
+
+        <!-- Imagen principal -->
+        <img id="mainImage" class="main-image" src="" alt="Imagen principal del juego">
+
+        <!-- Pregunta -->
+        <div class="question mt-3" id="question"></div>
+
+        <!-- Opciones -->
+        <div class="options" id="options"></div>
+
+        <!-- Resultado -->
+        <div class="result text-center mt-3" id="result"></div>
+
+        <!-- Botón para jugar de nuevo -->
+        <div class="text-center">
+            <button class="play-again" id="playAgain" style="display: none;">Jugar de Nuevo</button>
+        </div>
+    </div>
+
+    <script>
+        // Arreglo de imágenes y preguntas basadas en pictogramas
+        const images = [
+            {
+                composite: "https://static.arasaac.org/pictograms/12345/12345_300.png",
+                questions: [
+                    {
+                        text: "¿Qué puedes ver en la imagen?",
+                        options: ["Niño", "Papalote", "Parque"],
+                        answer: "Niño"
+                    },
+                    {
+                        text: "¿Qué está haciendo?",
+                        options: ["Jugando", "Volando un papalote", "Corriendo"],
+                        answer: "Volando un papalote"
+                    },
+                    {
+                        text: "¿Dónde ocurre esto?",
+                        options: ["Casa", "Parque", "Montaña"],
+                        answer: "Parque"
+                    }
+                ]
+            },
+            {
+                composite: "https://static.arasaac.org/pictograms/67890/67890_300.png",
+                questions: [
+                    {
+                        text: "¿Qué aparece en la imagen?",
+                        options: ["Perro", "Carro", "Persona"],
+                        answer: "Perro"
+                    },
+                    {
+                        text: "¿Qué está haciendo el perro?",
+                        options: ["Durmiendo", "Paseando", "Comiendo"],
+                        answer: "Paseando"
+                    },
+                    {
+                        text: "¿Dónde está el perro?",
+                        options: ["Calle", "Parque", "Casa"],
+                        answer: "Calle"
+                    }
+                ]
+            }
+        ];
+
+        let currentGame = {};
+        let currentQuestionIndex = 0;
+        const mainImage = document.getElementById("mainImage");
+        const question = document.getElementById("question");
+        const optionsContainer = document.getElementById("options");
+        const result = document.getElementById("result");
+        const playAgainButton = document.getElementById("playAgain");
+
+        function startGame() {
+            currentGame = images[Math.floor(Math.random() * images.length)];
+            currentQuestionIndex = 0;
+            mainImage.src = currentGame.composite;
+            mainImage.alt = "Imagen del juego actual";
+            result.textContent = "";
+            playAgainButton.style.display = "none";
+            showQuestion();
+        }
+
+        function showQuestion() {
+            const currentQuestion = currentGame.questions[currentQuestionIndex];
+            question.textContent = currentQuestion.text;
+            optionsContainer.innerHTML = "";
+
+            currentQuestion.options.forEach(option => {
+                const button = document.createElement("button");
+                button.textContent = option;
+                button.classList.add("option");
+                button.onclick = () => checkAnswer(option);
+                optionsContainer.appendChild(button);
+            });
+        }
+
+        function checkAnswer(selectedOption) {
+            const currentQuestion = currentGame.questions[currentQuestionIndex];
+            if (selectedOption === currentQuestion.answer) {
+                result.textContent = "¡Correcto!";
+                result.style.color = "green";
+                currentQuestionIndex++;
+
+                if (currentQuestionIndex < currentGame.questions.length) {
+                    setTimeout(showQuestion, 1000);
+                } else {
+                    result.textContent = "¡Has completado el juego!";
+                    playAgainButton.style.display = "block";
+                }
+            } else {
+                result.textContent = "Incorrecto. Intenta nuevamente.";
+                result.style.color = "red";
+            }
+        }
+
+        playAgainButton.onclick = startGame;
+
+        // Iniciar el juego al cargar la página
+        startGame();
+    </script>
+    <footer>
+        <div class="container">
+            <div class="row justify-content-center align-items-center">
+                <div class="col-md-6 text-center mb-3">
+                    <!-- Ruta de la imagen del logo en el pie de página -->
+                    <img src="../../../../img/logofcd.png" class="rounded" alt="Logo FCD"
+                        style="width: 40%; height: 70%;">
+                </div>
+                <div class="col-md-6 text-center">
+                    <div class="social-icons mb-3">
+                        <!-- Ruta de la imagen del ícono de Facebook -->
+                        <a href="https://www.facebook.com/FundacionCorazonDown" class="social-icon">
+                            <img src="../../../../img/icons/ficon.png" class="rounded" alt="Facebook Icon"
+                                style="width: 70%; height: 70%;">
+                        </a>
+                        <!-- Ruta de la imagen del ícono de Twitter -->
+                        <a href="https://x.com/mariopmtz" class="social-icon">
+                            <img src="../../../../img/icons/xicon.png" class="rounded" alt="Twitter Icon"
+                                style="width: 60%; height: 70%;">
+                        </a>
+                        <!-- Ruta de la imagen del ícono de Instagram -->
+                        <a href="https://www.instagram.com/fundacioncorazondown?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw=="
+                            class="social-icon">
+                            <img src="../../../../img/icons/insicon.png" class="rounded" alt="Instagram Icon"
+                                style="width: 70%; height: 70%;">
+                        </a>
+                        <!-- Ruta de la imagen del ícono de TikTok -->
+                        <a href="https://www.tiktok.com/@corazndown?is_from_webapp=1&sender_device=pc"
+                            class="social-icon">
+                            <img src="../../../../img/icons/ticon.png" class="rounded" alt="TikTok Icon"
+                                style="width: 70%; height: 70%;">
+                        </a>
+                    </div>
+                    <div class="location">
+                        <p>XICOTÉNCATL 1017, ZONA FEB 10 2015, BARRIO DE LA NORIA, 68100 OAXACA DE JUÁREZ, OAX.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+
+</body>
+
+</html>

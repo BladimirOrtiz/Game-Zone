@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Enlace al archivo CSS -->
+    <link rel="stylesheet" href="../../css/category.css">
+    <link rel="stylesheet" href="../../css/distribution.css">
+    <!-- Favicon -->
+    <link rel="shortcut icon" type="image/x-icon" href="../../img/logo_sf.png">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <title>Repartir</title>
+</head>
+<body>
+    <!-- Barra de navegación -->
+    <nav id="navbar" class="navbar navbar-light sticky-top">
+        <ul id="mn" class="nav nav-pills">
+            <div style="display: flex; justify-content: space-between; align-items: center; width: 70%;">
+                <!-- Ruta de la imagen del logo -->
+                <a class="navbar-brand" href="">
+                    <img src="../../img/logofcd.png" class="rounded logo" alt="Logo FCD">
+                </a>
+                <a class="navbar-brand" href="../../index.html">
+                    <img src="../../img/logo_sf.png" class="rounded logo" alt="Logo SF">
+                </a>
+            </div>
+        </ul>
+    </nav>   
+    <br>
+    <br>
+   
+    <h1>Juego: Repartir Dulces</h1>
+    <p>Selecciona cuántos niños participan y reparte los dulces arrastrándolos a cada uno.</p>
+
+    <!-- Controles -->
+    <div id="controls">
+        <label for="children-count">Cantidad de niños:</label>
+        <select id="children-count">
+            <option value="2">2</option>
+            <option value="4">4</option>
+            <option value="6">6</option>
+            <option value="8">8</option>
+            <option value="10">10</option>
+        </select>
+        <button id="reset-button">Reiniciar</button>
+    </div>
+
+    <!-- Contenedor del juego -->
+    <div id="game-container"></div>
+
+    <!-- Contenedor de dulces -->
+    <h3>Contenedor de Dulces</h3>
+    <div id="candy-container"></div>
+
+    <!-- Script -->
+    <script>
+        const gameContainer = document.getElementById("game-container");
+        const candyContainer = document.getElementById("candy-container");
+        const childrenSelect = document.getElementById("children-count");
+        const resetButton = document.getElementById("reset-button");
+
+        const CANDY_COUNT = 20; // Número total de dulces
+        let candies = []; // Array para almacenar los dulces
+
+        // Crear dulces
+        function createCandies() {
+            candyContainer.innerHTML = ""; // Limpiar contenedor de dulces
+            candies = [];
+            for (let i = 0; i < CANDY_COUNT; i++) {
+                const candy = document.createElement("div");
+                candy.classList.add("candy");
+                candy.draggable = true;
+                candy.addEventListener("dragstart", (e) => {
+                    e.dataTransfer.setData("text/plain", "candy");
+                    e.target.classList.add("dragging");
+                });
+                candy.addEventListener("dragend", (e) => {
+                    e.target.classList.remove("dragging");
+                });
+                candyContainer.appendChild(candy);
+                candies.push(candy);
+            }
+        }
+
+        // Crear contenedor de niños con imagen
+        function createChildren(count) {
+            gameContainer.innerHTML = ""; // Limpiar niños anteriores
+            for (let i = 1; i <= count; i++) {
+                const childContainer = document.createElement("div");
+                childContainer.classList.add("child-container");
+
+                const childImg = document.createElement("img");
+                childImg.src = "../../img/relation_objets/distribution/boy.avif"; // Imagen de niño
+                childImg.alt = `Niño ${i}`;
+
+                const dropZone = document.createElement("div");
+                dropZone.classList.add("drop-zone");
+                dropZone.textContent = "Arrastra aquí";
+
+                dropZone.addEventListener("dragover", (e) => e.preventDefault());
+                dropZone.addEventListener("drop", (e) => {
+                    e.preventDefault();
+                    const candy = document.querySelector(".dragging");
+                    if (candy) {
+                        dropZone.appendChild(candy);
+                    }
+                });
+
+                childContainer.appendChild(childImg);
+                childContainer.appendChild(dropZone);
+                gameContainer.appendChild(childContainer);
+            }
+        }
+
+        // Inicializar el juego
+        function initGame() {
+            const count = parseInt(childrenSelect.value);
+            createCandies();
+            createChildren(count);
+        }
+
+        // Evento para cambiar cantidad de niños
+        childrenSelect.addEventListener("change", initGame);
+
+        // Evento para reiniciar el juego
+        resetButton.addEventListener("click", initGame);
+
+        // Iniciar juego al cargar la página
+        window.onload = initGame;
+    </script>
+    
+    <br>
+    <br>
+    <!-- Pie de página -->
+    <footer>
+        <div class="container">
+            <div class="row justify-content-center align-items-center">
+                <div class="col-md-6 text-center mb-3">
+                    <!-- Ruta de la imagen del logo en el pie de página -->
+                    <img src="../../img/logofcd.png" class="rounded" alt="Logo FCD" style="width: 40%; height: 70%;">
+                </div>
+                <div class="col-md-6 text-center">
+                    <div class="social-icons mb-3">
+                        <!-- Ruta de la imagen del ícono de Facebook -->
+                        <a href="https://www.facebook.com/FundacionCorazonDown" class="social-icon">
+                            <img src="../../img/icons/ficon.png" class="rounded" alt="Facebook Icon" style="width: 70%; height: 70%;">
+                        </a>
+                        <!-- Ruta de la imagen del ícono de Twitter -->
+                        <a href="https://x.com/mariopmtz" class="social-icon">
+                            <img src="../../img/icons/xicon.png" class="rounded" alt="Twitter Icon" style="width: 60%; height: 70%;">
+                        </a>
+                        <!-- Ruta de la imagen del ícono de Instagram -->
+                        <a href="https://www.instagram.com/fundacioncorazondown?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" class="social-icon">
+                            <img src="../../img/icons/insicon.png" class="rounded" alt="Instagram Icon" style="width: 70%; height: 70%;">
+                        </a>
+                        <!-- Ruta de la imagen del ícono de TikTok -->
+                        <a href="https://www.tiktok.com/@corazndown?is_from_webapp=1&sender_device=pc" class="social-icon">
+                            <img src="../../img/icons/ticon.png" class="rounded" alt="TikTok Icon" style="width: 70%; height: 70%;">
+                        </a>
+                    </div>
+                    <div class="location">
+                        <p>XICOTÉNCATL 1017, ZONA FEB 10 2015, BARRIO DE LA NORIA, 68100 OAXACA DE JUÁREZ, OAX.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
