@@ -31,18 +31,23 @@ body {
 
 .logo {
     width: 40%;
-    height: 40%;
+    height: auto; /* Mantiene proporciones */
+    max-width: 200px; /* Limita el tamaño máximo */
 }
 
 /* Estilos para los botones */
 .btn-custom {
     text-align: center;
     width: 100%;
+    max-width: 300px; /* Ancho máximo */
+    margin: 10px auto; /* Centrado automático */
+    padding: 10px;
 }
 
 .icon-size {
     width: 50px;
     height: 50px;
+    max-width: 100%; /* Evita desbordes */
 }
 
 /* Estilos para el pie de página */
@@ -50,13 +55,15 @@ footer {
     max-width: 100%;
     height: auto;
     background-color: red;
+    padding: 20px; /* Espaciado interno */
+    text-align: center;
 }
 
 .social-icons .social-icon {
     display: inline-block;
     margin-right: 10px;
     color: #333;
-    font-size: 24px;
+    font-size: 24px; /* Tamaño base */
 }
 
 .location p {
@@ -65,6 +72,7 @@ footer {
     font-size: 14px;
     font-weight: bold;
 }
+
 .back-button {
     display: inline-block;
     margin-bottom: 20px;
@@ -79,7 +87,7 @@ footer {
 }
 
 .back-button:hover {
-    background-color: transparent !important;;
+    background-color: transparent !important;
     transform: translateX(-5px);
 }
 
@@ -90,4 +98,63 @@ footer {
 .blockquote p {
     font-size: 24px;
     font-weight: bold;
+}
+
+/* Media queries para adaptabilidad */
+@media (max-width: 1024px) {
+    .logo {
+        width: 50%;
+        max-width: 150px; /* Ajusta el tamaño máximo del logo */
+    }
+
+    .btn-custom {
+        max-width: 250px; /* Ajusta el ancho máximo de los botones */
+    }
+
+    .blockquote p {
+        font-size: 20px; /* Reduce el tamaño del texto de citas */
+    }
+}
+
+@media (max-width: 768px) {
+    .logo {
+        width: 60%;
+        max-width: 120px; /* Reduce el tamaño del logo */
+    }
+
+    .btn-custom {
+        max-width: 200px; /* Ajusta el tamaño de los botones */
+    }
+
+    .social-icons .social-icon {
+        font-size: 20px; /* Reduce el tamaño de los íconos */
+    }
+
+    .location p {
+        font-size: 12px; /* Ajusta el tamaño del texto de ubicación */
+    }
+}
+
+@media (max-width: 480px) {
+    footer {
+        padding: 10px; /* Reduce el espaciado interno */
+    }
+
+    .btn-custom {
+        padding: 8px;
+        max-width: 90%; /* Botones ocupan casi todo el ancho */
+    }
+
+    .social-icons .social-icon {
+        font-size: 18px; /* Ajusta el tamaño de los íconos */
+    }
+
+    .logo {
+        width: 70%;
+        max-width: 100px; /* Ajusta el tamaño máximo del logo */
+    }
+
+    .blockquote p {
+        font-size: 18px; /* Ajusta el tamaño del texto de las citas */
+    }
 }

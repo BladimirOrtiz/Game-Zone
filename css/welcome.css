@@ -33,28 +33,31 @@ body {
     width: 40%;
     height: 40%;
 }
-footer{
+
+footer {
     max-width: 100%;
     height: auto;
     background-color: red;
-
 }
+
 .social-icons .social-icon {
     display: inline-block;
     margin-right: 10px;
     color: #333; /* Cambia el color de los iconos de redes sociales según lo necesites */
     font-size: 24px;
 }
+
 .location p {
     color: white;
     font-style: italic;
     font-size: 14px;
     font-weight: bold;
 }
+
 /* Estilos para la sección de botones */
 .icon-size {
     width: 300px; /* Tamaño uniforme para todos los íconos */
-    height: 30o0px;
+    height: auto; /* Corrección del error en el valor */
 }
 
 #mn {
@@ -75,4 +78,66 @@ footer{
 
 .btn-custom:hover {
     transform: scale(1.05); /* Efecto de zoom al hacer hover */
+}
+
+/* Media queries para adaptabilidad */
+@media (max-width: 1024px) {
+    .logo {
+        width: 50%;
+        height: auto; /* Ajuste proporcional para mantener relación */
+    }
+
+    #navbar ul {
+        flex-wrap: wrap; /* Permitir que los elementos se ajusten automáticamente */
+    }
+
+    .icon-size {
+        width: 250px; /* Ajuste para pantallas medianas */
+    }
+}
+
+@media (max-width: 768px) {
+    #navbar ul {
+        flex-direction: column; /* Cambia la disposición a una columna */
+    }
+
+    .btn-custom {
+        width: 90%; /* Aumenta el ancho en pantallas más pequeñas */
+        padding: 8px; /* Reduce el relleno interno */
+    }
+
+    .logo {
+        width: 60%; /* Ajusta el tamaño del logo */
+    }
+
+    .social-icons .social-icon {
+        font-size: 20px; /* Ajusta el tamaño de los íconos */
+    }
+
+    .location p {
+        font-size: 12px; /* Reduce el tamaño del texto */
+    }
+}
+
+@media (max-width: 480px) {
+    footer {
+        padding: 10px; /* Reduce el espacio interno */
+    }
+
+    .icon-size {
+        width: 200px; /* Ajusta el tamaño de los íconos */
+    }
+
+    .btn-custom {
+        padding: 6px; /* Reduce aún más el relleno en pantallas muy pequeñas */
+    }
+
+    .logo {
+        width: 70%; /* Reduce el logo para pantallas pequeñas */
+        height: auto;
+    }
+
+    .social-icons .social-icon {
+        font-size: 18px; /* Ajusta aún más el tamaño de los íconos */
+    }
 }

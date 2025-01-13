@@ -105,39 +105,47 @@
             box-shadow: 0 6px 10px rgba(0, 0, 0, 0.1);
         }
         .main-image {
-            width: 100%;
-            max-height: 400px;
-            object-fit: contain;
+            width: 200px;
+            height: 200px;
+            margin-bottom: 20px;
+            border: 2px solid #007bff;
+            border-radius: 10px;
+        }
+        .question {
+            font-size: 18px;
             margin-bottom: 20px;
         }
         .option {
-            display: block;
-            margin: 10px 0;
-            padding: 12px;
-            background-color: #007bff;
-            color: #ffffff;
+            padding: 10px;
+            font-size: 16px;
+            background: #007bff;
+            color: #fff;
             border: none;
             border-radius: 5px;
             cursor: pointer;
-            font-size: 16px;
-            text-align: center;
+            margin-bottom: 10px;
+            width: 100%;
         }
         .option:hover {
-            background-color: #0056b3;
+            background: #0056b3;
+        }
+        .result {
+            font-size: 18px;
+            margin-top: 20px;
         }
         .play-again {
             margin-top: 20px;
-            padding: 12px 24px;
-            font-size: 18px;
-            background-color: #28a745;
-            color: #ffffff;
+            padding: 10px 20px;
+            font-size: 16px;
+            background: #28a745;
+            color: #fff;
             border: none;
             border-radius: 5px;
             cursor: pointer;
         }
         .play-again:hover {
-            background-color: #218838;
-        }
+            background: #218838;
+        } 
      </style>
 
 
@@ -171,97 +179,111 @@
             </div>
         </ul>
     </nav>
-     <!-- Contenedor principal del juego -->
-     <div class="game-container">
-        <h1 class="text-center">Desglosa la Imagen Compuesta</h1>
-        <p class="text-center">Observa la imagen y responde las preguntas para desglosarla correctamente.</p>
-
+    <div class="game-container">
+        <h1>Juego de Preguntas</h1>
+        <p>Responde correctamente las preguntas relacionadas con la imagen.</p>
+    
         <!-- Imagen principal -->
-        <img id="mainImage" class="main-image" src="" alt="Imagen principal del juego">
-
+        <img id="mainImage" class="main-image" src="" alt="Imagen del juego" style="max-width: 100%; height: auto;">
+    
         <!-- Pregunta -->
-        <div class="question mt-3" id="question"></div>
-
+        <h2 id="question"></h2>
+    
         <!-- Opciones -->
-        <div class="options" id="options"></div>
-
-        <!-- Resultado -->
-        <div class="result text-center mt-3" id="result"></div>
-
-        <!-- Botón para jugar de nuevo -->
-        <div class="text-center">
-            <button class="play-again" id="playAgain" style="display: none;">Jugar de Nuevo</button>
-        </div>
+        <div id="options"></div>
     </div>
-
+    
     <script>
-        // Arreglo de imágenes y preguntas basadas en pictogramas
-        const images = [
+        const games = [
             {
-                composite: "https://static.arasaac.org/pictograms/12345/12345_300.png",
+                image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-iqF8HqMuF6tst1s7QkpXkltVdD_H9UBGQUDHPq8PXUS-E98DlFVIMQrgzg5Dx27G2fNdMBmMWp82wCz88AVstFqE1oIzOM98NFPQgg", // Imagen de un arcoíris
                 questions: [
                     {
-                        text: "¿Qué puedes ver en la imagen?",
-                        options: ["Niño", "Papalote", "Parque"],
-                        answer: "Niño"
+                        text: "¿Qué aparece en la imagen?",
+                        options: ["Un arcoíris", "Una tormenta", "Un atardecer"],
+                        answer: "Un arcoíris"
                     },
                     {
-                        text: "¿Qué está haciendo?",
-                        options: ["Jugando", "Volando un papalote", "Corriendo"],
-                        answer: "Volando un papalote"
-                    },
-                    {
-                        text: "¿Dónde ocurre esto?",
-                        options: ["Casa", "Parque", "Montaña"],
-                        answer: "Parque"
+                        text: "¿Cuántos colores tiene el arcoíris?",
+                        options: ["7", "5", "3"],
+                        answer: "7"
                     }
                 ]
             },
             {
-                composite: "https://static.arasaac.org/pictograms/67890/67890_300.png",
+                image: "https://images.pexels.com/photos/3036372/pexels-photo-3036372.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500", // Imagen de una persona caminando
                 questions: [
                     {
                         text: "¿Qué aparece en la imagen?",
-                        options: ["Perro", "Carro", "Persona"],
-                        answer: "Perro"
+                        options: ["Una persona", "Un animal", "Un paisaje"],
+                        answer: "Una persona"
                     },
                     {
-                        text: "¿Qué está haciendo el perro?",
-                        options: ["Durmiendo", "Paseando", "Comiendo"],
-                        answer: "Paseando"
+                        text: "¿Qué está haciendo la persona?",
+                        options: ["Caminando", "Durmiendo", "Leyendo"],
+                        answer: "Caminando"
+                    }
+                ]
+            },
+            {
+                image: "https://upload.wikimedia.org/wikipedia/commons/0/07/%D0%A4%D0%9A_%22%D0%9A%D0%BE%D0%BB%D0%BE%D1%81%22_%28%D0%97%D0%B0%D1%87%D0%B5%D0%BF%D0%B8%D0%BB%D0%BE%D0%B2%D0%BA%D0%B0%2C_%D0%A5%D0%B0%D1%80%D1%8C%D0%BA%D0%BE%D0%B2%D1%81%D0%BA%D0%B0%D1%8F_%D0%BE%D0%B1%D0%BB%D0%B0%D1%81%D1%82%D1%8C%29_-_%D0%A4%D0%9A_%22%D0%91%D0%B0%D0%BB%D0%BA%D0%B0%D0%BD%D1%8B%22_%28%D0%97%D0%B0%D1%80%D1%8F%2C_%D0%9E%D0%B4%D0%B5%D1%81%D1%81%D0%BA%D0%B0%D1%8F_%D0%BE%D0%B1%D0%BB%D0%B0%D1%81%D1%82%D1%8C%29_%2818790931100%29.jpg", // Imagen de una pelota de fútbol
+                questions: [
+                    {
+                        text: "¿Qué aparece en la imagen?",
+                        options: ["Una pelota de fútbol", "Una bicicleta", "Un coche"],
+                        answer: "Una pelota de fútbol"
                     },
                     {
-                        text: "¿Dónde está el perro?",
-                        options: ["Calle", "Parque", "Casa"],
-                        answer: "Calle"
+                        text: "¿Qué deporte utiliza este balón?",
+                        options: ["Fútbol", "Baloncesto", "Tenis"],
+                        answer: "Fútbol"
+                    }
+                ]
+            },
+            {
+                image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQE1qTkr-MLRN_tysFKjcYKz8QDypU5FYaBrA&s", // Imagen de un gato
+                questions: [
+                    {
+                        text: "¿Qué animal aparece en la imagen?",
+                        options: ["Un gato", "Un perro", "Un conejo"],
+                        answer: "Un gato"
+                    },
+                    {
+                        text: "¿Dónde suelen vivir los gatos?",
+                        options: ["En una casa", "En el océano", "En la selva"],
+                        answer: "En una casa"
                     }
                 ]
             }
         ];
-
-        let currentGame = {};
+    
+        let currentGameIndex = 0;
         let currentQuestionIndex = 0;
+    
         const mainImage = document.getElementById("mainImage");
         const question = document.getElementById("question");
         const optionsContainer = document.getElementById("options");
-        const result = document.getElementById("result");
-        const playAgainButton = document.getElementById("playAgain");
-
+    
         function startGame() {
-            currentGame = images[Math.floor(Math.random() * images.length)];
+            currentGameIndex = 0;
             currentQuestionIndex = 0;
-            mainImage.src = currentGame.composite;
-            mainImage.alt = "Imagen del juego actual";
-            result.textContent = "";
-            playAgainButton.style.display = "none";
-            showQuestion();
+            loadGame();
         }
-
-        function showQuestion() {
+    
+        function loadGame() {
+            const currentGame = games[currentGameIndex];
+            mainImage.src = currentGame.image;
+            mainImage.alt = "Imagen relacionada con el juego";
+            loadQuestion();
+        }
+    
+        function loadQuestion() {
+            const currentGame = games[currentGameIndex];
             const currentQuestion = currentGame.questions[currentQuestionIndex];
+    
             question.textContent = currentQuestion.text;
             optionsContainer.innerHTML = "";
-
+    
             currentQuestion.options.forEach(option => {
                 const button = document.createElement("button");
                 button.textContent = option;
@@ -270,38 +292,50 @@
                 optionsContainer.appendChild(button);
             });
         }
-
+    
         function checkAnswer(selectedOption) {
+            const currentGame = games[currentGameIndex];
             const currentQuestion = currentGame.questions[currentQuestionIndex];
+    
             if (selectedOption === currentQuestion.answer) {
-                result.textContent = "¡Correcto!";
-                result.style.color = "green";
                 currentQuestionIndex++;
-
+    
                 if (currentQuestionIndex < currentGame.questions.length) {
-                    setTimeout(showQuestion, 1000);
+                    // Si hay más preguntas para esta imagen
+                    loadQuestion();
                 } else {
-                    result.textContent = "¡Has completado el juego!";
-                    playAgainButton.style.display = "block";
+                    // Pasar a la siguiente imagen
+                    currentQuestionIndex = 0;
+                    currentGameIndex++;
+    
+                    if (currentGameIndex < games.length) {
+                        loadGame();
+                    } else {
+                        // Si no hay más imágenes, terminar el juego
+                        alert("¡Felicidades! Has completado todas las preguntas.");
+                        startGame();
+                    }
                 }
             } else {
-                result.textContent = "Incorrecto. Intenta nuevamente.";
-                result.style.color = "red";
+                alert("Respuesta incorrecta. Intenta nuevamente.");
             }
         }
-
-        playAgainButton.onclick = startGame;
-
-        // Iniciar el juego al cargar la página
+    
+        // Iniciar el juego
         startGame();
     </script>
+    
+    
+    
     <footer>
         <div class="container">
             <div class="row justify-content-center align-items-center">
                 <div class="col-md-6 text-center mb-3">
+                    <a href="https://fundacioncorazondown.org/">
                     <!-- Ruta de la imagen del logo en el pie de página -->
                     <img src="../../../../img/logofcd.png" class="rounded" alt="Logo FCD"
                         style="width: 40%; height: 70%;">
+                    </a>
                 </div>
                 <div class="col-md-6 text-center">
                     <div class="social-icons mb-3">
