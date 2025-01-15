@@ -11,70 +11,76 @@
             margin: 0;
             padding: 0;
             font-family: Arial, sans-serif;
+            box-sizing: border-box; /* Asegura que el padding y el borde se incluyan en el ancho total */
         }
-
+        
         /* Estilos para la barra de navegación */
         #navbar {
             background-color: #2d2b30;
             padding: 10px 0;
         }
-
+        
         #navbar ul {
             padding-left: 0;
             list-style: none;
             text-align: center;
             margin: 0;
         }
-
+        
         #navbar .navbar-brand img {
             max-width: 100%;
             height: auto;
         }
-
+        
         .navbar {
             position: sticky;
             top: 0;
             z-index: 1000;
         }
-
+        
         .logo {
             width: 40%;
-            height: 40%;
+            height: auto;
+            max-width: 150px;
         }
-
+        
         /* Estilos para botones */
         .btn-custom {
             text-align: center;
             width: 100%;
         }
-
+        
         .icon-size {
             width: 50px;
             height: 50px;
         }
-
+        
         /* Estilos para el pie de página */
         footer {
             max-width: 100%;
             height: auto;
             background-color: red;
             color: #fff;
+            text-align: center;
+            padding: 20px 10px;
+            font-size: 14px;
         }
-
+        
         .social-icons .social-icon {
             display: inline-block;
             margin-right: 10px;
             color: #333;
             font-size: 24px;
         }
-
+        
         .location p {
             color: white;
             font-style: italic;
             font-size: 14px;
             font-weight: bold;
         }
-
+        
+        /* Botón de retroceso */
         .back-button {
             display: inline-block;
             margin-bottom: 20px;
@@ -87,20 +93,13 @@
             text-decoration: none;
             transition: background-color 0.3s ease, transform 0.3s ease;
         }
-
+        
         .back-button:hover {
             background-color: transparent !important;
             transform: translateX(-5px);
         }
-
-        .container {
-            margin-top: 20px;
-        }
-
-        .blockquote p {
-            font-size: 24px;
-            font-weight: bold;
-        }
+        
+        /* Disposición de la tabla con tarjetas */
         .table-container {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
@@ -108,7 +107,7 @@
             margin: 20px auto;
             max-width: 600px;
         }
-
+        
         .button-card {
             display: flex;
             flex-direction: column;
@@ -121,12 +120,12 @@
             box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
             transition: transform 0.3s, box-shadow 0.3s;
         }
-
+        
         .button-card:hover {
             transform: translateY(-5px);
             box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.2);
         }
-
+        
         .button-card img {
             width: 100px;
             height: 100px;
@@ -134,11 +133,11 @@
             margin-bottom: 10px;
             transition: transform 0.3s;
         }
-
+        
         .button-card img:hover {
             transform: scale(1.1);
         }
-
+        
         .button-card button {
             background-color: #007bff;
             color: #fff;
@@ -149,10 +148,87 @@
             font-size: 16px;
             transition: background-color 0.3s;
         }
-
+        
         .button-card button:hover {
             background-color: #0056b3;
         }
+        
+        /* Media Queries para dispositivos móviles y pantallas más pequeñas */
+        
+        /* Pantallas medianas (hasta 768px) */
+        @media (max-width: 768px) {
+            .logo {
+                width: 50%;
+            }
+        
+            .table-container {
+                grid-template-columns: 1fr; /* Cambiar a una columna en dispositivos medianos */
+                gap: 15px;
+            }
+        
+            .button-card {
+                width: 100%;
+                padding: 12px;
+            }
+        
+            .button-card img {
+                width: 80px;
+                height: 80px;
+            }
+        
+            .button-card button {
+                width: 100%;
+                padding: 12px 0;
+                font-size: 14px;
+            }
+        
+            footer {
+                font-size: 12px;
+            }
+        
+            .back-button {
+                font-size: 14px;
+                padding: 8px 16px;
+            }
+        }
+        
+        /* Pantallas pequeñas (hasta 480px) */
+        @media (max-width: 480px) {
+            .logo {
+                width: 60%;
+            }
+        
+            .table-container {
+                grid-template-columns: 1fr; /* Cambiar a una sola columna en pantallas muy pequeñas */
+                gap: 10px;
+            }
+        
+            .button-card {
+                width: 100%;
+                padding: 10px;
+            }
+        
+            .button-card img {
+                width: 70px;
+                height: 70px;
+            }
+        
+            .button-card button {
+                width: 100%;
+                padding: 10px 0;
+                font-size: 14px;
+            }
+        
+            footer {
+                font-size: 10px;
+            }
+        
+            .back-button {
+                font-size: 12px;
+                padding: 6px 12px;
+            }
+        }
+        
     </style>
 
 

@@ -11,70 +11,76 @@
             margin: 0;
             padding: 0;
             font-family: Arial, sans-serif;
+            box-sizing: border-box; /* Asegura que el padding y el borde se incluyan en el ancho total */
         }
-
+        
         /* Estilos para la barra de navegación */
         #navbar {
             background-color: #2d2b30;
             padding: 10px 0;
         }
-
+        
         #navbar ul {
             padding-left: 0;
             list-style: none;
             text-align: center;
             margin: 0;
         }
-
+        
         #navbar .navbar-brand img {
             max-width: 100%;
             height: auto;
         }
-
+        
         .navbar {
             position: sticky;
             top: 0;
             z-index: 1000;
         }
-
+        
         .logo {
             width: 40%;
-            height: 40%;
+            height: auto;
+            max-width: 150px; /* Asegura que la imagen no se haga demasiado grande */
         }
-
+        
         /* Estilos para botones */
         .btn-custom {
             text-align: center;
             width: 100%;
         }
-
+        
         .icon-size {
             width: 50px;
             height: 50px;
         }
-
+        
         /* Estilos para el pie de página */
         footer {
             max-width: 100%;
             height: auto;
             background-color: red;
             color: #fff;
+            text-align: center;
+            padding: 20px 10px;
+            font-size: 14px;
         }
-
+        
         .social-icons .social-icon {
             display: inline-block;
             margin-right: 10px;
             color: #333;
             font-size: 24px;
         }
-
+        
         .location p {
             color: white;
             font-style: italic;
             font-size: 14px;
             font-weight: bold;
         }
-
+        
+        /* Botón de retroceso */
         .back-button {
             display: inline-block;
             margin-bottom: 20px;
@@ -87,18 +93,94 @@
             text-decoration: none;
             transition: background-color 0.3s ease, transform 0.3s ease;
         }
-
+        
         .back-button:hover {
             background-color: transparent !important;
             transform: translateX(-5px);
         }
+        
+        /* Estilos para las tarjetas */
+        .card {
+            height: 350px;
+            border: none;
+            transition: box-shadow 0.3s ease;
+        }
+        
         .card img {
             height: 200px; /* Tamaño fijo para las imágenes */
             object-fit: contain; /* Ajusta la imagen sin distorsionarla */
         }
-        .card {
-            height: 350px; /* Asegura que todas las tarjetas tengan la misma altura */
+        
+        .card:hover {
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
         }
+        
+        .card-text {
+            color: black;
+            font-weight: bold;
+            text-align: center;
+        }
+        
+        /* Media Queries para dispositivos móviles y pantallas más pequeñas */
+        @media (max-width: 768px) {
+            .logo {
+                width: 50%;
+            }
+        
+            .card-img-top {
+                height: 150px; /* Ajusta la altura para pantallas más pequeñas */
+            }
+        
+            .card-text {
+                font-size: 14px; /* Reducir tamaño de fuente en pantallas más pequeñas */
+            }
+        
+            footer {
+                font-size: 12px; /* Reduzco tamaño de fuente del pie de página */
+            }
+        
+            .back-button {
+                font-size: 14px;
+                padding: 8px 16px;
+            }
+        
+            .container {
+                margin-top: 15px;
+            }
+        }
+        
+        /* Media Query para pantallas extra pequeñas, como teléfonos móviles */
+        @media (max-width: 480px) {
+            .logo {
+                width: 60%;
+            }
+        
+            .card-img-top {
+                height: 120px; /* Ajustar aún más la altura para pantallas muy pequeñas */
+            }
+        
+            .card-text {
+                font-size: 12px; /* Reducir aún más tamaño de fuente */
+            }
+        
+            .zoom:hover {
+                transform: scale(1.05); /* Menor escala en dispositivos pequeños */
+            }
+        
+            footer {
+                font-size: 10px; /* Muy pequeño para adaptarse a móviles */
+            }
+        
+            .back-button {
+                font-size: 12px;
+                padding: 6px 12px;
+            }
+        
+            .card {
+                height: 300px; /* Ajustar la altura de la tarjeta en dispositivos más pequeños */
+            }
+        }
+        
         
     </style>
 

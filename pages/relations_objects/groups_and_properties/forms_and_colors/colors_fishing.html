@@ -13,34 +13,65 @@
             margin: 0;
             overflow: hidden;
             cursor: url('https://cdn.pixabay.com/photo/2017/08/30/22/55/fishing-2691140_960_720.png'), auto;
+            font-family: Arial, sans-serif;
         }
-
+        
         canvas {
             display: block;
+            width: 100vw; /* Ancho completo de la ventana */
+            height: 100vh; /* Alto completo de la ventana */
         }
-
+        
         #scoreboard {
             position: absolute;
-            top: 20px; /* Posición vertical ajustada a la parte superior */
+            top: 2%; /* Separación relativa desde la parte superior */
             left: 50%;
             transform: translateX(-50%);
             color: white;
-            font-size: 18px;
+            font-size: 1.2rem; /* Tamaño de fuente relativo */
             background-color: rgba(0, 0, 0, 0.5);
-            padding: 15px;
+            padding: 1rem; /* Espaciado relativo */
             border-radius: 8px;
             text-align: center;
+            width: 90%; /* Ancho adaptable */
+            max-width: 400px; /* Máximo ancho para pantallas grandes */
         }
-
+        
         #scoreboard p {
-            margin: 5px;
+            margin: 0.5rem 0; /* Espaciado relativo entre párrafos */
         }
-
+        
         #scoreboard img {
             width: 24px;
             height: 24px;
             vertical-align: middle;
         }
+        
+        /* Media queries para dispositivos más pequeños */
+        @media (max-width: 768px) {
+            #scoreboard {
+                font-size: 1rem; /* Reducir el tamaño de fuente */
+                padding: 0.8rem; /* Reducir el espacio interno */
+            }
+        
+            #scoreboard img {
+                width: 20px;
+                height: 20px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            #scoreboard {
+                font-size: 0.9rem; /* Fuente más pequeña para dispositivos muy pequeños */
+                padding: 0.5rem; /* Reducir aún más el espacio */
+            }
+        
+            #scoreboard img {
+                width: 18px;
+                height: 18px;
+            }
+        }
+        
     </style>
 </head>
 

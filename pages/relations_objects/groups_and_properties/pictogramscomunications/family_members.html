@@ -11,70 +11,76 @@
             margin: 0;
             padding: 0;
             font-family: Arial, sans-serif;
+            box-sizing: border-box;
         }
-
+        
         /* Estilos para la barra de navegación */
         #navbar {
             background-color: #2d2b30;
             padding: 10px 0;
         }
-
+        
         #navbar ul {
             padding-left: 0;
             list-style: none;
             text-align: center;
             margin: 0;
         }
-
+        
         #navbar .navbar-brand img {
             max-width: 100%;
             height: auto;
         }
-
+        
         .navbar {
             position: sticky;
             top: 0;
             z-index: 1000;
         }
-
+        
         .logo {
             width: 40%;
-            height: 40%;
+            height: auto;
+            max-width: 200px; /* Límite máximo */
         }
-
+        
         /* Estilos para botones */
         .btn-custom {
             text-align: center;
             width: 100%;
         }
-
+        
         .icon-size {
             width: 50px;
             height: 50px;
+            max-width: 10vw;
         }
-
+        
         /* Estilos para el pie de página */
         footer {
             max-width: 100%;
             height: auto;
             background-color: red;
             color: #fff;
+            text-align: center;
+            padding: 20px 10px;
         }
-
+        
         .social-icons .social-icon {
             display: inline-block;
             margin-right: 10px;
             color: #333;
-            font-size: 24px;
+            font-size: 5vw;
+            max-font-size: 24px;
         }
-
+        
         .location p {
             color: white;
             font-style: italic;
             font-size: 14px;
             font-weight: bold;
         }
-
+        
         .back-button {
             display: inline-block;
             margin-bottom: 20px;
@@ -87,38 +93,49 @@
             text-decoration: none;
             transition: background-color 0.3s ease, transform 0.3s ease;
         }
-
+        
         .back-button:hover {
             background-color: transparent !important;
             transform: translateX(-5px);
         }
-
+        
         .container {
             margin-top: 20px;
+            padding: 0 10px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
         }
-
+        
         .blockquote p {
-            font-size: 24px;
+            font-size: 18px;
             font-weight: bold;
+            text-align: center;
         }
-
-           
+        
+        /* Tarjetas de frutas */
         .fruit-card {
             border: 2px solid #ccc;
-            margin-bottom: 20px;
+            margin: 10px;
             transition: transform 0.2s;
+            width: calc(33.33% - 20px); /* Tres tarjetas por fila */
+            max-width: 300px;
+            box-sizing: border-box;
         }
+        
         .fruit-card img {
-            width: 100%; /* Asegura que la imagen ocupe todo el ancho de la tarjeta */
-            height: 200px; /* Altura fija para mantener uniformidad */
+            width: 100%; /* Imagen se ajusta al ancho */
+            height: auto; /* Escala proporcionalmente */
+            max-height: 200px; /* Limita la altura */
             object-fit: cover; /* Escala la imagen sin distorsión */
-            border-radius: 10px; /* Opcional: esquinas redondeadas */
+            border-radius: 10px; /* Esquinas redondeadas */
         }
         
         .fruit-card:hover {
             transform: scale(1.05);
         }
-
+        
+        /* Zona de arrastre */
         .drop-zone {
             height: 60px;
             line-height: 60px;
@@ -126,8 +143,10 @@
             border: 1px dashed #aaa;
             margin-top: 10px;
             text-align: center;
+            font-size: 14px;
         }
-
+        
+        /* Etiquetas de frutas */
         .fruit-label {
             display: inline-block;
             background-color: #007bff;
@@ -138,30 +157,79 @@
             cursor: grab;
             font-family: "Century Gothic", sans-serif;
         }
-
+        
         .fruit-label:active {
             cursor: grabbing;
         }
-
+        
+        /* Banner */
         .banner {
             background-color: #eee;
             padding: 15px;
             margin-bottom: 20px;
             border-radius: 10px;
             text-align: center;
+            font-size: 16px;
         }
-
+        
         .correct {
             font-family: "Century Gothic", sans-serif;
             font-weight: bold;
-            color: red;
+            color: green;
         }
-
+        
         .incorrect {
             font-family: "Century Gothic", sans-serif;
             font-weight: bold;
             color: red;
         }
+        
+        /* Media Queries */
+        @media (max-width: 768px) {
+            .fruit-card {
+                width: calc(50% - 20px); /* Dos tarjetas por fila */
+            }
+        
+            .banner {
+                font-size: 14px;
+                padding: 10px;
+            }
+        
+            .icon-size {
+                width: 30px;
+                height: 30px;
+            }
+        
+            footer {
+                font-size: 12px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .fruit-card {
+                width: calc(100% - 20px); /* Una tarjeta por fila */
+            }
+        
+            .banner {
+                font-size: 12px;
+            }
+        
+            .icon-size {
+                width: 20px;
+                height: 20px;
+            }
+        
+            .btn-custom {
+                font-size: 14px;
+            }
+        
+            .drop-zone {
+                font-size: 12px;
+                height: 50px;
+                line-height: 50px;
+            }
+        }
+        
     </style>
 
 

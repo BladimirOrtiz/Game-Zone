@@ -11,70 +11,76 @@
             margin: 0;
             padding: 0;
             font-family: Arial, sans-serif;
+            box-sizing: border-box;
         }
-
+        
         /* Estilos para la barra de navegación */
         #navbar {
             background-color: #2d2b30;
             padding: 10px 0;
         }
-
+        
         #navbar ul {
             padding-left: 0;
             list-style: none;
             text-align: center;
             margin: 0;
         }
-
+        
         #navbar .navbar-brand img {
             max-width: 100%;
             height: auto;
         }
-
+        
         .navbar {
             position: sticky;
             top: 0;
             z-index: 1000;
         }
-
+        
         .logo {
             width: 40%;
-            height: 40%;
+            max-width: 200px; /* Límite máximo para pantallas grandes */
+            height: auto;
         }
-
+        
         /* Estilos para botones */
         .btn-custom {
             text-align: center;
             width: 100%;
         }
-
+        
         .icon-size {
             width: 50px;
             height: 50px;
+            max-width: 10vw; /* Escala en pantallas pequeñas */
         }
-
+        
         /* Estilos para el pie de página */
         footer {
             max-width: 100%;
             height: auto;
             background-color: red;
             color: #fff;
+            text-align: center;
+            padding: 20px 10px;
         }
-
+        
         .social-icons .social-icon {
             display: inline-block;
             margin-right: 10px;
             color: #333;
-            font-size: 24px;
+            font-size: 5vw; /* Tamaño dinámico para pantallas pequeñas */
+            max-font-size: 24px;
         }
-
+        
         .location p {
             color: white;
             font-style: italic;
             font-size: 14px;
             font-weight: bold;
         }
-
+        
         .back-button {
             display: inline-block;
             margin-bottom: 20px;
@@ -87,29 +93,27 @@
             text-decoration: none;
             transition: background-color 0.3s ease, transform 0.3s ease;
         }
-
+        
         .back-button:hover {
             background-color: transparent !important;
             transform: translateX(-5px);
         }
-
-        .container {
-            margin-top: 20px;
-        }
-
-        .blockquote p {
-            font-size: 24px;
-            font-weight: bold;
-        }
-
+        
         .container {
             display: flex;
             justify-content: center;
             align-items: center;
             flex-wrap: wrap;
-            margin-top: 20px;
+            margin: 20px auto;
+            padding: 0 10px;
         }
-
+        
+        .blockquote p {
+            font-size: 18px;
+            font-weight: bold;
+            text-align: center;
+        }
+        
         /* Banner Styles */
         .banner {
             width: 90%;
@@ -123,7 +127,7 @@
             border-radius: 8px;
             box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.2);
         }
-
+        
         /* Image and Drop Container Styles */
         .image-container {
             width: 150px;
@@ -140,23 +144,21 @@
             flex-direction: column;
             box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
         }
-
-        /* Correct/Wrong Feedback */
+        
         .image-container.correct {
             background-color: #4CAF50;
             border-color: #3e8e41;
             color: white;
             box-shadow: 0px 4px 12px rgba(0, 128, 0, 0.3);
         }
-
+        
         .image-container.wrong {
             background-color: #ff4c4c;
             border-color: #d43f3f;
             color: white;
             box-shadow: 0px 4px 12px rgba(255, 0, 0, 0.3);
         }
-
-        /* Animal Name Styles */
+        
         .image-container .name {
             color: #333;
             font-family: 'Century Gothic', sans-serif;
@@ -165,21 +167,20 @@
             text-align: center;
             margin-top: 8px;
         }
-
-        /* Card Image Styles */
+        
         .card-image {
-            width: 100px;
-            height: 100px;
+            width: 80px;
+            height: 80px;
             margin: 10px;
             cursor: pointer;
             border-radius: 50%;
             transition: transform 0.3s;
         }
-
+        
         .card-image:hover {
             transform: scale(1.1);
         }
-
+        
         /* Button Styles */
         .btn-play {
             margin-top: 10px;
@@ -192,11 +193,11 @@
             transition: background-color 0.3s;
             box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.2);
         }
-
+        
         .btn-play:hover {
             background-color: #218838;
         }
-
+        
         .reset-button {
             padding: 10px 20px;
             background-color: #dc3545;
@@ -207,9 +208,56 @@
             margin-top: 20px;
             transition: background-color 0.3s;
         }
-
+        
         .reset-button:hover {
             background-color: #c82333;
+        }
+        
+        /* Media Queries */
+        @media (max-width: 768px) {
+            .logo {
+                width: 60%;
+            }
+        
+            .icon-size {
+                width: 30px;
+                height: 30px;
+            }
+        
+            .banner {
+                font-size: 16px;
+                padding: 10px;
+            }
+        
+            .card-image {
+                width: 60px;
+                height: 60px;
+            }
+        
+            footer {
+                font-size: 12px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .logo {
+                width: 80%;
+            }
+        
+            .image-container {
+                width: 100px;
+                height: 100px;
+            }
+        
+            .btn-play,
+            .reset-button {
+                width: 100%;
+                font-size: 14px;
+            }
+        
+            .banner {
+                font-size: 14px;
+            }
         }
     </style>
 
