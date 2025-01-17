@@ -24,8 +24,8 @@ h2 {
 }
 
 .game-container img {
-    width: 100%;
-    height: auto;
+    width: 600px;
+    height: 700px;
     border-radius: 10px;
 }
 
@@ -35,13 +35,14 @@ h2 {
     justify-content: center;
     margin-top: 20px;
     gap: 10px;
+    
 }
 
 /* Zonas de drop */
 .drop-zone {
     position: absolute;
     width: 100px;
-    height: 30px;
+    height: 80px;
     border: 2px dashed #6c757d;
     display: flex;
     justify-content: center;
@@ -62,7 +63,7 @@ h2 {
 /* Etiquetas para arrastrar */
 .label {
     width: 100px;
-    height: 30px;
+    height: 80px;
     background-color: #00bcd4;
     color: white;
     font-weight: bold;
