@@ -153,138 +153,80 @@
             background-color: #0056b3;
         }
         
-        /* Disposición del juego */
         .game-container {
             display: flex;
-            justify-content: space-evenly; /* Distribuye los elementos equitativamente */
-            align-items: center; /* Centra verticalmente los elementos */
-            width: 100%;
-            max-width: 1200px;
-            margin: 0 auto; /* Centra horizontalmente el contenedor */
+            justify-content: space-between; /* Distribuye uniformemente los elementos */
+            align-items: start; /* Alinea elementos desde la parte superior */
+            gap: 50px;
+            max-width: 900px;
+            margin: auto;
             position: relative;
-            height: calc(100vh - 200px); /* Ajusta la altura según el viewport */
-            box-sizing: border-box;
         }
         
-        /* Listas laterales */
         .list {
             display: flex;
             flex-direction: column;
-            gap: 10px; /* Espaciado más reducido para las imágenes y textos */
-            width: 20%; /* Las listas ocuparán un ancho fijo */
-            height: 100%; /* Ocupa toda la altura del contenedor */
-            overflow-y: auto; /* Permite scroll si los elementos exceden la altura */
-            align-items: center; /* Centra los elementos dentro de las listas */
+            align-items: center;
+            gap: 10px;
+            width: 250px;
         }
         
-        /* Asegura que las listas no se compriman demasiado */
-        #images, #texts {
-            flex-shrink: 0;
-        }
-        
-        /* Canvas */
-        canvas {
-            flex-grow: 1; /* Expande el canvas para ocupar el espacio sobrante */
-            width: 60%; /* El canvas ocupa la mayor parte del espacio */
-            height: 100%; /* Ocupa toda la altura disponible */
-            border: 1px solid #ccc;
-            border-radius: 8px;
-            box-sizing: border-box;
-        }
-        
-        /* Estilo para las imágenes en las listas */
-        .list img {
-            width: 80%; /* Imágenes adaptadas al ancho del contenedor */
-            height: auto; /* Mantiene la proporción de las imágenes */
-            max-width: 120px; /* Limita el tamaño máximo */
-            object-fit: contain; /* Ajusta las imágenes al espacio sin recortar */
-            border: 2px solid #ddd;
-            border-radius: 8px;
+        img {
+            width: 100px;
+            height: 100px;
             cursor: pointer;
+            border: 2px solid transparent;
+            transition: border 0.3s;
         }
         
-        /* Estilo para los textos en las listas */
-        .list .item {
-            padding: 10px;
-            width: 80%; /* Los textos ocupan el mismo ancho que las imágenes */
-            max-width: 120px; /* Limita el ancho máximo */
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            background-color: white;
-            cursor: pointer;
+        .item {
+            width: 100px; /* Hacerlo del mismo tamaño que la imagen */
+            height: 100px; /* Asegura que el texto tenga el mismo espacio */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 15px;
+            background-color: #f0f0f0;
             text-align: center;
+            border-radius: 5px;
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: border 0.3s;
         }
         
-        /* Media Queries para pantallas más pequeñas */
+        img.selected, .item.selected {
+            border: 2px solid blue;
+        }
         
-        /* Pantallas medianas (hasta 768px) */
+        canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+        }
+        
         @media (max-width: 768px) {
-            .logo {
-                width: 50%;
-            }
-        
-            .game-container {
-                flex-direction: column; /* Cambiar a columna en pantallas medianas */
-                height: auto; /* Ajustar altura automáticamente */
-            }
-        
-            .list {
-                width: 90%; /* Ampliar el ancho de las listas */
-            }
-        
-            canvas {
-                width: 90%; /* Canvas ocupa más espacio */
-            }
-        
-            .table-container {
-                grid-template-columns: 1fr; /* Cambiar a una columna */
-                gap: 10px;
-            }
-        
-            footer {
-                font-size: 12px;
-            }
-        
-            .back-button {
-                font-size: 14px;
-                padding: 8px 16px;
-            }
-        }
-        
-        /* Pantallas pequeñas (hasta 480px) */
-        @media (max-width: 480px) {
-            .logo {
-                width: 60%;
-            }
-        
             .game-container {
                 flex-direction: column;
-                height: auto;
+                align-items: center;
+                gap: 20px;
             }
         
             .list {
-                width: 100%;
-            }
-        
-            canvas {
-                width: 100%;
-            }
-        
-            .table-container {
-                grid-template-columns: 1fr; /* Cambiar a una sola columna */
-                gap: 5px;
-            }
-        
-            footer {
-                font-size: 10px;
-            }
-        
-            .back-button {
-                font-size: 12px;
-                padding: 6px 12px;
+                width: auto;
             }
         }
-       
+        
+        @media (max-width: 480px) {
+            .game-container {
+                flex-direction: column;
+                align-items: center;
+            }
+        
+            .list {
+                width: auto;
+            }
+        }
         
     </style>
 
@@ -320,10 +262,11 @@
     </nav>
     <br>
     <br>
-   
+    <h1 class="text-center">Haz un clic en la imagén y el verbo para crear una relación entre ellas</h1>
+<br>
+<br>
 <!-- Game Container -->
 <div class="game-container">
-    <!-- Left List (Images) -->
     <div class="list" id="images">
         <img src="../../../../img/pictograms/verbs/eat.jpg" alt="Image 1" data-id="1">
         <img src="../../../../img/pictograms/verbs/watch.jpg" alt="Image 2" data-id="2">
@@ -343,107 +286,122 @@
         <img src="../../../../img/pictograms/verbs/hug.jpg" alt="Image 16" data-id="16">
     </div>
 
-    <!-- Canvas for Connections -->
     <canvas id="connectionCanvas"></canvas>
 
-    <!-- Center List (Text Items) -->
     <div class="list" id="texts">
-        <div class="item" data-id="1">comer</div>
-        <div class="item" data-id="2">ver</div>
-        <div class="item" data-id="3">escuchar</div>
-        <div class="item" data-id="4">hablar</div>
-        <div class="item" data-id="5">caminar</div>
-        <div class="item" data-id="6">tomar</div>
-        <div class="item" data-id="7">cocinar</div>
-        <div class="item" data-id="8">tener</div>
-        <div class="item" data-id="9">poner</div>
-        <div class="item" data-id="10">escoger</div>
-        <div class="item" data-id="11">brincar</div>
-        <div class="item" data-id="12">escribir</div>
-        <div class="item" data-id="13">leer</div>
-        <div class="item" data-id="14">dormir</div>
-        <div class="item" data-id="15">buscar</div>
-        <div class="item" data-id="16">abrazar</div>
+        <div class="item" data-id="1">Comer</div>
+        <div class="item" data-id="2">Ver</div>
+        <div class="item" data-id="3">Escuchar</div>
+        <div class="item" data-id="4">Hablar</div>
+        <div class="item" data-id="5">Caminar</div>
+        <div class="item" data-id="6">Tomar</div>
+        <div class="item" data-id="7">Cocinar</div>
+        <div class="item" data-id="8">Tener</div>
+        <div class="item" data-id="9">Poner</div>
+        <div class="item" data-id="10">Escoger</div>
+        <div class="item" data-id="11">Brincar</div>
+        <div class="item" data-id="12">Escribir</div>
+        <div class="item" data-id="13">Leer</div>
+        <div class="item" data-id="14">Dormir</div>
+        <div class="item" data-id="15">Buscar</div>
+        <div class="item" data-id="16">Abrazar</div>
     </div>
 </div>
 
+<script>
+const images = document.querySelectorAll('#images img');
+const texts = document.querySelectorAll('#texts .item');
+const canvas = document.getElementById('connectionCanvas');
+const ctx = canvas.getContext('2d');
 
-    <script>
-        const images = document.querySelectorAll('#images img');
-        const texts = document.querySelectorAll('#texts .item');
-        const canvas = document.getElementById('connectionCanvas');
-        const ctx = canvas.getContext('2d');
-        const canvasRect = canvas.getBoundingClientRect();
+let selectedImage = null;
+let selectedText = null;
+let connections = [];
 
-        canvas.width = document.querySelector('.game-container').offsetWidth;
-        canvas.height = document.querySelector('.game-container').offsetHeight;
+function updateCanvasSize() {
+    const container = document.querySelector('.game-container');
+    canvas.width = container.offsetWidth;
+    canvas.height = container.offsetHeight;
+}
 
-        let selectedElement = null;
-        let connections = [];
+function resetCanvas() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    connections.forEach(connection => {
+        drawLine(connection.image, connection.text);
+    });
+}
 
-        function resetCanvas() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            connections.forEach(connection => {
-                const { from, to } = connection;
-                drawLine(from, to);
-            });
+function drawLine(image, text) {
+    const rect1 = image.getBoundingClientRect();
+    const rect2 = text.getBoundingClientRect();
+    const canvasRect = canvas.getBoundingClientRect();
+
+    const x1 = rect1.left + rect1.width / 2 - canvasRect.left;
+    const y1 = rect1.top + rect1.height / 2 - canvasRect.top;
+
+    const x2 = rect2.left + rect2.width / 2 - canvasRect.left;
+    const y2 = rect2.top + rect2.height / 2 - canvasRect.top;
+
+    ctx.beginPath();
+    ctx.moveTo(x1, y1);
+    ctx.lineTo(x2, y2);
+    ctx.strokeStyle = 'blue';
+    ctx.lineWidth = 2;
+    ctx.stroke();
+}
+
+function connect(image, text) {
+    const id1 = image.getAttribute('data-id');
+    const id2 = text.getAttribute('data-id');
+
+    const existingConnection = connections.find(conn => conn.image === image && conn.text === text);
+
+    if (existingConnection) {
+        connections = connections.filter(conn => conn !== existingConnection);
+        resetCanvas();
+        image.classList.remove('selected');
+        text.classList.remove('selected');
+    } else {
+        connections.push({ image, text });
+        resetCanvas();
+    }
+}
+
+images.forEach(image => {
+    image.addEventListener('click', () => {
+        if (selectedImage) selectedImage.classList.remove('selected');
+        selectedImage = image;
+        image.classList.add('selected');
+
+        if (selectedText) {
+            connect(selectedImage, selectedText);
+            selectedImage.classList.remove('selected');
+            selectedText.classList.remove('selected');
+            selectedImage = null;
+            selectedText = null;
         }
+    });
+});
 
-        function drawLine(from, to) {
-            const rect1 = from.getBoundingClientRect();
-            const rect2 = to.getBoundingClientRect();
+texts.forEach(text => {
+    text.addEventListener('click', () => {
+        if (selectedText) selectedText.classList.remove('selected');
+        selectedText = text;
+        text.classList.add('selected');
 
-            const x1 = rect1.left + rect1.width / 2 - canvasRect.left;
-            const y1 = rect1.top + rect1.height / 2 - canvasRect.top;
-
-            const x2 = rect2.left + rect2.width / 2 - canvasRect.left;
-            const y2 = rect2.top + rect2.height / 2 - canvasRect.top;
-
-            ctx.beginPath();
-            ctx.moveTo(x1, y1);
-            ctx.lineTo(x2, y2);
-            ctx.strokeStyle = 'blue';
-            ctx.lineWidth = 2;
-            ctx.stroke();
+        if (selectedImage) {
+            connect(selectedImage, selectedText);
+            selectedImage.classList.remove('selected');
+            selectedText.classList.remove('selected');
+            selectedImage = null;
+            selectedText = null;
         }
+    });
+});
 
-        images.forEach(image => {
-            image.addEventListener('mousedown', () => {
-                selectedElement = { element: image, type: 'image' };
-            });
-        });
-
-        texts.forEach(text => {
-            text.addEventListener('mousedown', () => {
-                selectedElement = { element: text, type: 'text' };
-            });
-        });
-
-        document.addEventListener('mouseup', (e) => {
-            if (selectedElement) {
-                const target = e.target;
-
-                if (selectedElement.type === 'image' && target.classList.contains('item')) {
-                    connect(selectedElement.element, target);
-                } else if (selectedElement.type === 'text' && target.tagName === 'IMG') {
-                    connect(target, selectedElement.element);
-                }
-            }
-
-            selectedElement = null;
-        });
-
-        function connect(el1, el2) {
-            const id1 = el1.getAttribute('data-id');
-            const id2 = el2.getAttribute('data-id');
-
-            // Prevent duplicate connections
-            if (!connections.some(conn => (conn.from === el1 && conn.to === el2) || (conn.from === el2 && conn.to === el1))) {
-                connections.push({ from: el1, to: el2 });
-                resetCanvas();
-            }
-        }
-    </script>
+window.addEventListener('resize', updateCanvasSize);
+updateCanvasSize();
+</script>
     <footer>
         <div class="container">
             <div class="row justify-content-center align-items-center">

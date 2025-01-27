@@ -11,7 +11,13 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <title>Operaciones Matemáticas</title>
+    <style>
+        
+
+       
+    </style>
 </head>
+<style></style>
 <body>
     <!-- Barra de navegación -->
     <nav id="navbar" class="navbar navbar-light sticky-top">
@@ -29,115 +35,235 @@
     </nav>   
     <br>
     <br>
-    <div class="container text-center mt-5">
-        <h2>Calculadora Interactiva</h2>
-        <p>Selecciona una operación y elige la cantidad de números:</p>
+    <style>
+        body {
+            background-color: #f0f8ff; /* Azul claro */
+        }
+        .btn-primary {
+            background-color: #1e90ff; /* Azul brillante */
+            border-color: #1e90ff;
+        }
+        .btn-primary:hover {
+            background-color: #1c86ee;
+            border-color: #1c86ee;
+        }
+        .btn-success {
+            background-color: #32cd32; /* Verde lima */
+            border-color: #32cd32;
+        }
+        .btn-success:hover {
+            background-color: #2eb82e;
+            border-color: #2eb82e;
+        }
+        .btn-secondary {
+            background-color: #4682b4; /* Azul acero */
+            border-color: #4682b4;
+        }
+        .btn-secondary:hover {
+            background-color: #3e76a1;
+            border-color: #3e76a1;
+        }
+        .btn-danger {
+            background-color: #ff4500; /* Rojo anaranjado */
+            border-color: #ff4500;
+        }
+        .btn-danger:hover {
+            background-color: #e03f00;
+            border-color: #e03f00;
+        }
+        #product-display img {
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+        }
+    </style>
+</head>
+<body>
+    <div class="container py-4">
+        <h1 class="text-center mb-4">Juego de la Caja Registradora</h1>
     
-        <!-- Selector para elegir la operación -->
-        <div class="mb-3">
-            <label for="operationSelector" class="form-label">Operación</label>
-            <select id="operationSelector" class="form-select w-50 mx-auto">
-                <option value="">--- Selecciona una operación ---</option>
-                <option value="suma">Suma</option>
-                <option value="resta">Resta</option>
-                <option value="multiplicacion">Multiplicación</option>
-                <option value="division">División</option>
-            </select>
+        <div id="product-display" class="product text-center mb-4">
+            <!-- Producto actual -->
         </div>
     
-        <!-- Selector para elegir la cantidad de números -->
-        <div class="mb-3">
-            <label for="quantitySelector" class="form-label">Cantidad de números</label>
-            <select id="quantitySelector" class="form-select w-50 mx-auto">
-                <option value="">--- Selecciona la cantidad ---</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
-            </select>
+        <div class="total text-center mb-4">
+            <h4><span id="current-total"></span></h4>
         </div>
     
-        <!-- Contenedor para los campos de entrada -->
-        <div id="numberInputs" class="mb-3">
-            <!-- Campos de entrada generados dinámicamente -->
+        <div class="controls text-center mb-4">
+            <input id="product-quantity" type="number" min="1" value="1" class="form-control d-inline-block w-25 me-2" placeholder="Cantidad">
+            <button id="add-price" class="btn btn-primary me-2">Agregar Producto</button>
+            <button id="finish" class="btn btn-success">Terminar Compra</button>
         </div>
     
-        <!-- Botón para calcular -->
-        <button id="calculateButton" class="btn btn-primary mb-3">Calcular</button>
-    
-        <!-- Campo de resultado -->
-        <div class="mt-3">
-            <h4>Resultado:</h4>
-            <p id="result" class="fw-bold"></p>
+        <div id="message" class="message text-center hidden">
+            <!-- Mensaje de resultado -->
         </div>
+    
+        <div id="added-products" class="added-products mt-5">
+            <h5>Productos Agregados:</h5>
+            <div id="product-list" class="row gy-3">
+                <!-- Listado de productos -->
+            </div>
+        </div>
+    
+        <div id="ticket" class="ticket mt-5 hidden">
+            <h5>Ticket de Compra:</h5>
+            <div id="ticket-details"></div>
+        </div>
+        <br>
+        <br>
+        <h5>Calculadora Básica</h5>
+        <input type="text" id="calculator-display" class="form-control text-end mb-3" readonly>
+        <div class="calculator-buttons d-grid gap-2">
+            <div class="row mb-2">
+                <div class="col"><button class="btn btn-secondary w-100" onclick="appendToDisplay('7')">7</button></div>
+                <div class="col"><button class="btn btn-secondary w-100" onclick="appendToDisplay('8')">8</button></div>
+                <div class="col"><button class="btn btn-secondary w-100" onclick="appendToDisplay('9')">9</button></div>
+                <div class="col"><button class="btn btn-danger w-100" onclick="clearDisplay()">C</button></div>
+            </div>
+            <div class="row mb-2">
+                <div class="col"><button class="btn btn-secondary w-100" onclick="appendToDisplay('4')">4</button></div>
+                <div class="col"><button class="btn btn-secondary w-100" onclick="appendToDisplay('5')">5</button></div>
+                <div class="col"><button class="btn btn-secondary w-100" onclick="appendToDisplay('6')">6</button></div>
+                <div class="col"><button class="btn btn-secondary w-100" onclick="appendToDisplay('*')">×</button></div>
+            </div>
+            <div class="row mb-2">
+                <div class="col"><button class="btn btn-secondary w-100" onclick="appendToDisplay('1')">1</button></div>
+                <div class="col"><button class="btn btn-secondary w-100" onclick="appendToDisplay('2')">2</button></div>
+                <div class="col"><button class="btn btn-secondary w-100" onclick="appendToDisplay('3')">3</button></div>
+                <div class="col"><button class="btn btn-secondary w-100" onclick="appendToDisplay('-')">−</button></div>
+            </div>
+            <div class="row">
+                <div class="col"><button class="btn btn-secondary w-100" onclick="appendToDisplay('0')">0</button></div>
+                <div class="col"><button class="btn btn-secondary w-100" onclick="appendToDisplay('.')">.</button></div>
+                <div class="col"><button class="btn btn-success w-100" onclick="calculateResult()">=</button></div>
+                <div class="col"><button class="btn btn-secondary w-100" onclick="appendToDisplay('+')">+</button></div>
+            </div>
+            <div class="row">
+                <div class="col"><button class="btn btn-secondary w-100" onclick="appendToDisplay('/')">÷</button></div>
+            </div>
+        </div>
+    </div>       
     </div>
     
     <script>
-        const operationSelector = document.getElementById('operationSelector');
-        const quantitySelector = document.getElementById('quantitySelector');
-        const numberInputs = document.getElementById('numberInputs');
-        const calculateButton = document.getElementById('calculateButton');
-        const resultField = document.getElementById('result');
+        const products = [
+            { name: 'Manzana', price: 4.50, image: 'https://i5.walmartimages.com.mx/gr/images/product-images/img_large/00000000004016L1.jpg?odnHeight=768&odnWidth=768&odnBg=FFFFFF' },
+            { name: 'Leche', price: 27.00, image: 'https://www.lala.com.mx/storage/app/media/7501020565935_00.png' },
+            { name: 'Huevo', price: 52.00, image: 'https://www.centralenlinea.com/images/thumbs/005/0052056_huevo-blanco-san-juan-cono-con-30-pzas_550.png' },
+            { name: 'Queso', price: 35.50, image: 'https://ingredienta.com/wp-content/uploads/2021/03/queso-panela.jpg' },
+            { name: 'Arroz', price: 48.00, image: 'https://d1zc67o3u1epb0.cloudfront.net/media/catalog/product/7/5/7501071301452.jpg?width=265&height=390&store=default&image-type=image'},
+            { name: 'frijol', price: 32.00, image: 'https://i5.walmartimages.com.mx/gr/images/product-images/img_large/00750107130149L.jpg' },
+            { name: 'Caja de Galletas', price: 12.50, image: 'https://res.cloudinary.com/riqra/image/upload/w_656,h_656,c_limit,q_auto,f_auto/v1694121780/sellers/3/jlf2ktmaphwpon2du9mb.webp' },
+        ];
     
-        // Escucha cambios en el selector de cantidad
-        quantitySelector.addEventListener('change', () => {
-            const quantity = parseInt(quantitySelector.value);
-            numberInputs.innerHTML = '';
+        let currentIndex = 0;
+        let total = 0;
+        let correctTotal = 0;
+        let ticketDetails = [];
     
-            // Genera campos de entrada según la cantidad seleccionada
-            for (let i = 1; i <= quantity; i++) {
-                const inputField = document.createElement('input');
-                inputField.type = 'number';
-                inputField.className = 'form-control mb-2 w-50 mx-auto';
-                inputField.placeholder = `Ingresa el número ${i}`;
-                inputField.id = `number${i}`;
-                numberInputs.appendChild(inputField);
-            }
-        });
+        const productDisplay = document.getElementById('product-display');
+        const currentTotalEl = document.getElementById('current-total');
+        const messageEl = document.getElementById('message');
+        const productList = document.getElementById('product-list');
+        const ticketEl = document.getElementById('ticket');
+        const ticketDetailsEl = document.getElementById('ticket-details');
     
-        // Calcula el resultado
-        calculateButton.addEventListener('click', () => {
-            const operation = operationSelector.value;
-            const quantity = parseInt(quantitySelector.value);
-            let numbers = [];
+        function showProduct() {
+            const product = products[currentIndex];
+            productDisplay.innerHTML = `
+                <img src="${product.image}" alt="${product.name}" class="img-fluid rounded mb-2">
+                <p>${product.name} - $${product.price.toFixed(2)}</p>
+            `;
+        }
     
-            // Obtiene los valores de los campos generados dinámicamente
-            for (let i = 1; i <= quantity; i++) {
-                const number = parseFloat(document.getElementById(`number${i}`).value);
-                if (isNaN(number)) {
-                    resultField.textContent = 'Por favor, ingresa todos los números correctamente';
-                    return;
+        function startGame() {
+            currentIndex = 0;
+            total = 0;
+            correctTotal = 0;
+            ticketDetails = [];
+            currentTotalEl.textContent = total.toFixed(2);
+            messageEl.classList.add('hidden');
+            productList.innerHTML = '';
+            ticketEl.classList.add('hidden');
+            showProduct();
+        }
+    
+        document.getElementById('add-price').addEventListener('click', () => {
+            const quantity = parseInt(document.getElementById('product-quantity').value) || 1;
+            if (currentIndex < products.length) {
+                const product = products[currentIndex];
+                const subtotal = product.price * quantity;
+                total += subtotal;
+                correctTotal += subtotal;
+    
+                ticketDetails.push({ name: product.name, price: product.price, quantity, subtotal });
+    
+                currentTotalEl.textContent = total.toFixed(2);
+    
+                productList.innerHTML += `
+                    <div class="col-12 col-md-6 col-lg-4">
+                        <div class="card">
+                            <img src="${product.image}" class="card-img-top" style="width: 100px; height: 100px; object-fit: cover;" alt="${product.name}">
+                            <div class="card-body">
+                                <h5 class="card-title">${product.name}</h5>
+                                <p class="card-text">Cantidad: ${quantity}</p>
+                                <p class="card-text">Subtotal: $${subtotal.toFixed(2)}</p>
+                            </div>
+                        </div>
+                    </div>
+                `;
+    
+                currentIndex++;
+                if (currentIndex < products.length) {
+                    showProduct();
+                } else {
+                    productDisplay.innerHTML = '<p>No hay más productos.</p>';
                 }
-                numbers.push(number);
             }
-    
-            let result;
-    
-            // Realiza la operación seleccionada
-            switch (operation) {
-                case 'suma':
-                    result = numbers.reduce((a, b) => a + b, 0);
-                    break;
-                case 'resta':
-                    result = numbers.reduce((a, b) => a - b);
-                    break;
-                case 'multiplicacion':
-                    result = numbers.reduce((a, b) => a * b, 1);
-                    break;
-                case 'division':
-                    result = numbers.reduce((a, b) => a / b);
-                    break;
-                default:
-                    resultField.textContent = 'Por favor, selecciona una operación';
-                    return;
-            }
-    
-            // Muestra el resultado
-            resultField.textContent = `El resultado es: ${result}`;
         });
+    
+        document.getElementById('finish').addEventListener('click', () => {
+            ticketDetailsEl.innerHTML = `
+                <ul>
+                    ${ticketDetails.map(item => `
+                        <li>${item.name} - $${item.price.toFixed(2)} x ${item.quantity} = $${item.subtotal.toFixed(2)}</li>
+                    `).join('')}
+                </ul>
+                <h4>Total: $${total.toFixed(2)}</h4>
+            `;
+            ticketEl.classList.remove('hidden');
+        });
+    
+        startGame();
+        const calculatorDisplay = document.getElementById('calculator-display');
+    
+        // Añade un valor al display de la calculadora
+        function appendToDisplay(value) {
+            calculatorDisplay.value += value;
+        }
+    
+        // Limpia el display de la calculadora
+        function clearDisplay() {
+            calculatorDisplay.value = '';
+        }
+    
+        // Calcula el resultado de la operación mostrada en el display
+        function calculateResult() {
+            try {
+                // Evalúa la expresión matemática ingresada
+                const result = eval(calculatorDisplay.value);
+                calculatorDisplay.value = result;
+            } catch (error) {
+                calculatorDisplay.value = 'Error';
+            }
+        }
     </script>
     
-       
+    
+    
+        
     <br>
     <br>
     <!-- Pie de página -->

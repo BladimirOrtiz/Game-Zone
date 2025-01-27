@@ -121,31 +121,40 @@
         }
         
         .dropzone {
+            width: 300px;
+            height: 400px;
+            margin: 20px;
             border: 2px dashed #ccc;
-            width: 45%;
-            height: 200px;
-            text-align: center;
-            line-height: 200px;
-            font-size: 18px;
-            color: #666;
+            border-radius: 10px;
+            position: relative;
+            background-size: cover;
+            background-position: center;
         }
-        
+    
+        #kitchen {
+            background-image: url('https://img.freepik.com/fotos-premium/sala-cocina-vacia-blanco_305343-25608.jpg');
+        }
+    
+        #bedroom {
+            background-image: url('https://blog.homedepot.com.mx/wp-content/uploads/2019/12/habitacion_vacia.jpg');
+        }
+    
         .objects-row {
             display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
             justify-content: center;
-            flex-wrap: wrap; /* Permite ajustar filas si no caben todos los objetos */
-            gap: 10px; /* Espaciado entre las imágenes */
-            margin-top: 20px;
         }
-        
-        .objects-row img {
-            width: 100px; /* Ancho uniforme */
-            height: 100px; /* Alto uniforme */
-            object-fit: cover; /* Ajuste de la imagen dentro del contenedor */
+    
+        .draggable {
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
             cursor: grab;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+        }
+    
+        .draggable:active {
+            cursor: grabbing;
         }
         
     </style>
@@ -181,26 +190,24 @@
     <p class="text-center">Arrastra los objetos al área correspondiente.</p>
 
     <!-- Zona de juego -->
-    <div class="game-area">
+    <div class="game-area" style="display: flex; gap: 20px;">
         <!-- Zona de Cocina -->
-        <div id="kitchen" class="dropzone">
-            <h2>Cocina</h2>
+        <div id="kitchen" class="dropzone" style="width: 50%; height: 500px; display: flex; flex-wrap: wrap; align-items: flex-start; justify-content: center; border: 2px dashed gray; padding: 10px;">
+            <h2 style="width: 100%; text-align: center;">Cocina</h2>
         </div>
         <!-- Zona de Cuarto -->
-        <div id="bedroom" class="dropzone">
-            <h2>Cuarto</h2>
+        <div id="bedroom" class="dropzone" style="width: 50%; height: 500px; display: flex; flex-wrap: wrap; align-items: flex-start; justify-content: center; border: 2px dashed gray; padding: 10px;">
+            <h2 style="width: 100%; text-align: center;">Cuarto</h2>
         </div>
     </div>
 
     <!-- Objetos para arrastrar -->
-    <div class="objects-row">
+    <div class="objects-row" style="display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin-top: 20px;">
         <img src="../../../../img/puzzle/objects_home/apron.jpg" id="apron" class="draggable" draggable="true" alt="Delantal" data-zone="kitchen">
         <img src="../../../../img/puzzle/objects_home/bead.avif" id="bead" class="draggable" draggable="true" alt="Cuentas" data-zone="bedroom">
         <img src="../../../../img/puzzle/objects_home/blender.jpg" id="blender" class="draggable" draggable="true" alt="Licuadora" data-zone="kitchen">
         <img src="../../../../img/puzzle/objects_home/chair.avif" id="chair" class="draggable" draggable="true" alt="Silla" data-zone="bedroom">
         <img src="../../../../img/puzzle/objects_home/chopping_board.png" id="chopping_board" class="draggable" draggable="true" alt="Tabla de picar" data-zone="kitchen">
-        <img src="../../../../img/puzzle/objects_home/cook_globe.jpg" id="cook_globe" class="draggable" draggable="true" alt="Globo de cocina" data-zone="kitchen">
-        <img src="../../../../img/puzzle/objects_home/couch.avif" id="couch" class="draggable" draggable="true" alt="Sofá" data-zone="bedroom">
         <img src="../../../../img/puzzle/objects_home/cups.jpg" id="cups" class="draggable" draggable="true" alt="Tazas" data-zone="kitchen">
         <img src="../../../../img/puzzle/objects_home/desktop.jpg" id="desktop" class="draggable" draggable="true" alt="Escritorio" data-zone="bedroom">
         <img src="../../../../img/puzzle/objects_home/fork.png" id="fork" class="draggable" draggable="true" alt="Tenedor" data-zone="kitchen">
@@ -212,8 +219,48 @@
         <img src="../../../../img/puzzle/objects_home/table.jpg" id="table" class="draggable" draggable="true" alt="Mesa" data-zone="bedroom">
     </div>
 </div>
+<script>
+    const draggables = document.querySelectorAll('.draggable');
+    const dropzones = document.querySelectorAll('.dropzone');
 
+    // Evento al iniciar arrastre
+    draggables.forEach(draggable => {
+        draggable.style.width = "100px"; // Tamaño uniforme
+        draggable.style.height = "100px";
+        draggable.style.objectFit = "cover";
+        
+        draggable.addEventListener('dragstart', () => {
+            draggable.classList.add('dragging');
+        });
 
+        draggable.addEventListener('dragend', () => {
+            draggable.classList.remove('dragging');
+        });
+    });
+
+    // Evento en las zonas de soltar
+    dropzones.forEach(dropzone => {
+        dropzone.addEventListener('dragover', e => {
+            e.preventDefault();
+        });
+
+        dropzone.addEventListener('drop', e => {
+            e.preventDefault();
+            const dragging = document.querySelector('.dragging');
+            const correctZone = dragging.getAttribute('data-zone');
+
+            if (dropzone.id === correctZone) {
+                dropzone.appendChild(dragging); // Coloca correctamente
+                dropzone.style.borderColor = 'green';
+                setTimeout(() => {
+                    dropzone.style.borderColor = ''; 
+                }, 500);
+            } else {
+                alert("Este objeto no pertenece a esta zona.");
+            }
+        });
+    });
+</script>
     <!-- Pie de página -->
     <footer>
         <div class="container">
@@ -253,41 +300,7 @@
     </footer>
 
     <!-- Script para funcionalidad de arrastrar y soltar -->
-    <script>
-        const draggables = document.querySelectorAll('.draggable');
-    const dropzones = document.querySelectorAll('.dropzone');
 
-    // Añade los eventos a los objetos
-    draggables.forEach(draggable => {
-        draggable.addEventListener('dragstart', () => {
-            draggable.classList.add('dragging');
-        });
-
-        draggable.addEventListener('dragend', () => {
-            draggable.classList.remove('dragging');
-        });
-    });
-
-    // Añade los eventos a las zonas
-    dropzones.forEach(dropzone => {
-        dropzone.addEventListener('dragover', e => {
-            e.preventDefault();
-            const dragging = document.querySelector('.dragging');
-            const correctZone = dragging.getAttribute('data-zone'); // Zona correcta del objeto
-
-            if (dropzone.id === correctZone) {
-                dropzone.appendChild(dragging); // Coloca en la zona
-                dropzone.style.borderColor = 'green'; // Destaca como correcta
-            } else {
-                dropzone.style.borderColor = 'red'; // Destaca como incorrecta
-                setTimeout(() => {
-                    dropzone.style.borderColor = ''; // Resetea el borde
-                }, 500);
-            }
-        });
-    });
-        
-    </script>
 </body>
 
 </html>

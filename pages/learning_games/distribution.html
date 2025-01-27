@@ -26,43 +26,69 @@
                 </a>
             </div>
         </ul>
-    </nav>   
+    </nav>  
+    <style>
+        .candy {
+            width: 20px;
+            height: 20px;
+            background-color: pink;
+            margin: 5px;
+            border-radius: 50%;
+            cursor: grab;
+        }
+    
+        .child-container {
+            display: inline-block;
+            margin: 20px;
+            text-align: center;
+        }
+    
+        .drop-zone {
+            width: 100px;
+            height: 100px;
+            border: 2px dashed #ccc;
+            margin-top: 10px;
+        }
+    
+        .candy-count {
+            font-size: 14px;
+            margin-top: 5px;
+        }
+    </style> 
     <br>
     <br>
-   
     <h1>Juego: Repartir Dulces</h1>
     <p>Selecciona cuántos niños participan y reparte los dulces arrastrándolos a cada uno.</p>
-
+    
     <!-- Controles -->
     <div id="controls">
         <label for="children-count">Cantidad de niños:</label>
         <select id="children-count">
             <option value="2">2</option>
+            <option value="3">3</option>
             <option value="4">4</option>
-            <option value="6">6</option>
-            <option value="8">8</option>
-            <option value="10">10</option>
+           
         </select>
         <button id="reset-button">Reiniciar</button>
     </div>
-
+    
     <!-- Contenedor del juego -->
     <div id="game-container"></div>
-
+    
     <!-- Contenedor de dulces -->
     <h3>Contenedor de Dulces</h3>
     <div id="candy-container"></div>
-
+    
     <!-- Script -->
     <script>
         const gameContainer = document.getElementById("game-container");
         const candyContainer = document.getElementById("candy-container");
         const childrenSelect = document.getElementById("children-count");
         const resetButton = document.getElementById("reset-button");
-
+    
         const CANDY_COUNT = 20; // Número total de dulces
         let candies = []; // Array para almacenar los dulces
-
+    
         // Crear dulces
         function createCandies() {
             candyContainer.innerHTML = ""; // Limpiar contenedor de dulces
@@ -82,53 +108,71 @@
                 candies.push(candy);
             }
         }
-
-        // Crear contenedor de niños con imagen
+    
+        // Crear contenedor de niños con imagen y contador
         function createChildren(count) {
             gameContainer.innerHTML = ""; // Limpiar niños anteriores
             for (let i = 1; i <= count; i++) {
                 const childContainer = document.createElement("div");
                 childContainer.classList.add("child-container");
-
+    
                 const childImg = document.createElement("img");
                 childImg.src = "../../img/relation_objets/distribution/boy.avif"; // Imagen de niño
                 childImg.alt = `Niño ${i}`;
-
+    
                 const dropZone = document.createElement("div");
                 dropZone.classList.add("drop-zone");
-                dropZone.textContent = "Arrastra aquí";
-
+    
+                const candyCount = document.createElement("p");
+                candyCount.classList.add("candy-count");
+                candyCount.textContent = "Dulces: 0"; // Inicializar contador
+    
                 dropZone.addEventListener("dragover", (e) => e.preventDefault());
                 dropZone.addEventListener("drop", (e) => {
                     e.preventDefault();
                     const candy = document.querySelector(".dragging");
                     if (candy) {
                         dropZone.appendChild(candy);
+                        updateCandyCount(dropZone);
                     }
                 });
-
+    
+                dropZone.addEventListener("DOMNodeRemoved", (e) => {
+                    updateCandyCount(dropZone);
+                });
+    
                 childContainer.appendChild(childImg);
                 childContainer.appendChild(dropZone);
+                childContainer.appendChild(candyCount);
                 gameContainer.appendChild(childContainer);
             }
         }
-
+    
+        // Actualizar el contador de dulces en un contenedor
+        function updateCandyCount(dropZone) {
+            const candyCount = dropZone.parentElement.querySelector(".candy-count");
+            const count = dropZone.children.length; // Número de dulces en el contenedor
+            candyCount.textContent = `Dulces: ${count}`;
+        }
+    
         // Inicializar el juego
         function initGame() {
             const count = parseInt(childrenSelect.value);
             createCandies();
             createChildren(count);
         }
-
+    
         // Evento para cambiar cantidad de niños
         childrenSelect.addEventListener("change", initGame);
-
+    
         // Evento para reiniciar el juego
         resetButton.addEventListener("click", initGame);
-
+    
         // Iniciar juego al cargar la página
         window.onload = initGame;
     </script>
+    
+   
     
     <br>
     <br>
