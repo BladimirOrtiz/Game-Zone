@@ -199,11 +199,15 @@
         }
         
         canvas {
+            width: 100%;
+            height: 100%;
             position: absolute;
             top: 0;
             left: 0;
             pointer-events: none;
+            z-index: -1; /* Colocar detrás de los elementos */
         }
+        
         
         @media (max-width: 768px) {
             .game-container {
@@ -262,7 +266,7 @@
     </nav>
     <br>
     <br>
-    <h1 class="text-center">Haz un clic en la imagén y el verbo para crear una relación entre ellas</h1>
+    <h1 class="text-center">Haz un clic en la imagén y el verbo para crear una relación entre ellas.</h1>
 <br>
 <br>
 <!-- Game Container -->
@@ -334,19 +338,19 @@ function resetCanvas() {
 function drawLine(image, text) {
     const rect1 = image.getBoundingClientRect();
     const rect2 = text.getBoundingClientRect();
-    const canvasRect = canvas.getBoundingClientRect();
+    const containerRect = document.querySelector('.game-container').getBoundingClientRect();
 
-    const x1 = rect1.left + rect1.width / 2 - canvasRect.left;
-    const y1 = rect1.top + rect1.height / 2 - canvasRect.top;
+    const x1 = rect1.left + rect1.width / 2 - containerRect.left;
+    const y1 = rect1.top + rect1.height / 2 - containerRect.top;
 
-    const x2 = rect2.left + rect2.width / 2 - canvasRect.left;
-    const y2 = rect2.top + rect2.height / 2 - canvasRect.top;
+    const x2 = rect2.left + rect2.width / 2 - containerRect.left;
+    const y2 = rect2.top + rect2.height / 2 - containerRect.top;
 
     ctx.beginPath();
     ctx.moveTo(x1, y1);
     ctx.lineTo(x2, y2);
     ctx.strokeStyle = 'blue';
-    ctx.lineWidth = 2;
+    ctx.lineWidth = 3;
     ctx.stroke();
 }
 
